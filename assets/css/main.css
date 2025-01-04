@@ -157,8 +157,8 @@ input, select, textarea {
 		}
 
 	body {
-		background-color: #ffffff;
-		color: #000000;
+		background-color: #edf5e1; /* Light neutral green */
+    color: #05386b; /* Dark navy text */
 	}
 
 	body, input, select, textarea {
