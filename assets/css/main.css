@@ -3907,3 +3907,21 @@ input, select, textarea {
 			}
 
 		}
+		.tools-container {
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: center;
+			gap: 20px; /* Adds space between the tool items */
+		}
+		
+		.tool-item {
+			text-align: center;
+			max-width: 150px; /* Adjust the size of each tool container if needed */
+		}
+		
+		.tool-item img {
+			max-width: 100px; /* Adjust this value for smaller or larger icons */
+			height: auto;
+			margin-bottom: 10px; /* Adds spacing below the icon */
+		}
+		
