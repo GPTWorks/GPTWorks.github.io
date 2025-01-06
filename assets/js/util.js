@@ -585,3 +585,75 @@
 	};
 
 })(jQuery);
+
+// God's Profound Truth Tool Logic
+function loadGodsProfoundTruth(apiKey) {
+    const chatContainer = document.getElementById("chat-container");
+    const inputField = document.getElementById("chat-input");
+    const sendButton = document.getElementById("send-button");
+
+    sendButton.addEventListener("click", async () => {
+        const userMessage = inputField.value;
+        if (!userMessage.trim()) return;
+
+        // Display user message
+        const userBubble = document.createElement("div");
+        userBubble.className = "chat-bubble user";
+        userBubble.textContent = userMessage;
+        chatContainer.appendChild(userBubble);
+
+        inputField.value = "";
+
+        // Call GPT API
+        const responseBubble = document.createElement("div");
+        responseBubble.className = "chat-bubble ai";
+        responseBubble.textContent = "Thinking...";
+        chatContainer.appendChild(responseBubble);
+
+        try {
+            const response = await fetch("https://api.openai.com/v1/chat/completions", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${apiKey}`,
+                },
+                body: JSON.stringify({
+                    model: "gpt-4",
+                    messages: [{ role: "user", content: userMessage }],
+                }),
+            });
+
+            const data = await response.json();
+            if (data.choices && data.choices.length > 0) {
+                responseBubble.textContent = data.choices[0].message.content.trim();
+            } else {
+                responseBubble.textContent = "Sorry, I didn't understand that. Please try again.";
+            }
+        } catch (error) {
+            responseBubble.textContent = "Error communicating with the server. Please try again later.";
+            console.error("Error:", error);
+        }
+
+        // Scroll to the latest message
+        chatContainer.scrollTop = chatContainer.scrollHeight;
+    });
+}
+
+// Initialize God's Profound Truth Tool
+document.addEventListener("DOMContentLoaded", () => {
+    if (window.location.pathname.includes("gods-profound-truth.html")) {
+        fetch("/tools/config.js")
+            .then((response) => response.text())
+            .then((configText) => {
+                const config = new Function(configText)(); // Parse config.js
+                if (config.apiKey) {
+                    loadGodsProfoundTruth(config.apiKey);
+                } else {
+                    console.error("API key not found in config.js");
+                }
+            })
+            .catch((error) => {
+                console.error("Error loading config.js:", error);
+            });
+    }
+});
