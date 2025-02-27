@@ -198,10 +198,10 @@ input, select, textarea {
 		}
 
 			h1.major:after {
-				background-image: -moz-linear-gradient(to right, #000000, #b74e91);
-				background-image: -webkit-linear-gradient(to right, #000000, #b74e91);
-				background-image: -ms-linear-gradient(to right, #000000, #b74e91);
-				background-image: linear-gradient(to right, #010102, #b74e91);
+				background-image: -moz-linear-gradient(to right, #000000, #989898);
+				background-image: -webkit-linear-gradient(to right, #000000, #ffffff);
+				background-image: -ms-linear-gradient(to right, #000000, #ffffff);
+				background-image: linear-gradient(to right, #010102, #ffffff);
 				-moz-transition: max-width 0.2s ease;
 				-webkit-transition: max-width 0.2s ease;
 				-ms-transition: max-width 0.2s ease;
@@ -3025,7 +3025,7 @@ input, select, textarea {
 		}
 
 		table thead {
-			border-bottom: solid 2px rgba(255, 255, 255, 0.15);
+			border-bottom: solid 2px rgba(0, 0, 0, 0.15);
 		}
 
 		table tfoot {
@@ -3111,15 +3111,15 @@ input, select, textarea {
 		}
 
 		.wrapper.style2-alt {
-			background-color: #9c9c9c;
+			background-color: #000000;
 		}
 
 		.wrapper.style3 {
-			background-color: #9d9d9d;
+			background-color: #000000;
 		}
 
 		.wrapper.style3-alt {
-			background-color: #8b8b8b;
+			background-color: #000000;
 		}
 
 		.wrapper.fullscreen {
