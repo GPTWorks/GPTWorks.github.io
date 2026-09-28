@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Orrery | GPTWorks</title>
+  <meta name="description" content="A solar system you can fly through. Walk on the planets. Visit a black hole.">
+  <style>
+    :root { color-scheme: dark; }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; height: 100%; background: #07080c; color: #e8e4d8; font-family: "Segoe UI", sans-serif; }
+    #view { position: fixed; inset: 0; }
+    canvas { display: block; width: 100%; height: 100%; touch-action: none; }
+    .hud { position: fixed; inset: 0; z-index: 2; display: flex; flex-direction: column; justify-content: space-between; padding: 12px; pointer-events: none; }
+    header, .dock, .panel, button, .stick { pointer-events: auto; }
+    header { display: flex; justify-content: space-between; gap: 12px; align-items: flex-start; }
+    h1 { margin: 0; font-family: Georgia, serif; font-size: 28px; font-weight: 500; }
+    p { margin: 4px 0 0; color: #9a958a; font-size: 14px; max-width: 28rem; }
+    a { color: #e4b15a; }
+    .row { display: flex; gap: 8px; flex-wrap: wrap; }
+    button {
+      height: 44px; border-radius: 12px; border: 1px solid #2c3040; background: #14161ee6; color: #e8e4d8;
+      padding: 0 14px; font: inherit; cursor: pointer;
+    }
+    button.primary { background: #e4b15a; color: #07080c; border-color: #e4b15a; }
+    button.on { background: #e4b15a; color: #07080c; border-color: #e4b15a; }
+    .bottom { display: flex; flex-direction: column; gap: 10px; }
+    @media (min-width: 900px) { .bottom { flex-direction: row; align-items: flex-end; justify-content: space-between; } }
+    .panel { max-width: 24rem; max-height: 42vh; overflow: auto; background: #14161eeb; border: 1px solid #2c3040; border-radius: 16px; padding: 16px; }
+    .panel h2 { margin: 0; font-family: Georgia, serif; font-size: 28px; font-weight: 500; }
+    .kicker { letter-spacing: 0.14em; text-transform: uppercase; color: #e4b15a; font-size: 12px; }
+    .dock { margin-left: auto; width: min(100%, 40rem); background: #14161eeb; border: 1px solid #2c3040; border-radius: 16px; padding: 10px; }
+    .chips { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 8px; }
+    .chips button { border-radius: 999px; flex: 0 0 auto; }
+    .speed { display: flex; align-items: center; gap: 8px; }
+    .speed input { flex: 1; accent-color: #e4b15a; height: 44px; }
+    .stick { width: 112px; height: 112px; border-radius: 999px; border: 1px solid #2c3040; background: #14161ed9; touch-action: none; }
+    .hidden { display: none !important; }
+  </style>
+</head>
+<body>
+  <div id="view"></div>
+  <div class="hud" id="orbitHud">
+    <header>
+      <div>
+        <h1>Orrery</h1>
+        <p>Tap a world, or start the tour. Distances are squeezed so it all fits. <a href="https://gptworks.github.io/#tools">Back to GPTWorks</a></p>
+      </div>
+      <div class="row">
+        <button class="primary" id="tourBtn" type="button">Tour</button>
+        <button id="systemBtn" type="button">System</button>
+      </div>
+    </header>
+    <div class="bottom">
+      <article class="panel hidden" id="panel"></article>
+      <div class="dock">
+        <div class="chips" id="chips"></div>
+        <div class="speed">
+          <button id="pauseBtn" type="button" aria-label="Pause">Pause</button>
+          <button id="slower" type="button" aria-label="Slower">−</button>
+          <label style="flex:1;font-size:12px;color:#9a958a">Speed <span id="speedLabel">1×</span>
+            <input id="speed" type="range" min="0" max="5" step="1" value="2">
+          </label>
+          <button id="faster" type="button" aria-label="Faster">+</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="hud hidden" id="walkHud">
+    <header>
+      <div>
+        <h1 id="walkTitle">On Earth</h1>
+        <p>W walks forward. A turns left. D turns right. Drag the stick on a phone.</p>
+      </div>
+      <button class="primary" id="leaveBtn" type="button">Back to space</button>
+    </header>
+    <div class="bottom" style="flex-direction:row;align-items:flex-end">
+      <div class="stick" id="stick" role="application" aria-label="Walk stick. Up walks forward. Left turns left."></div>
+      <p id="walkNote"></p>
+    </div>
+  </div>
+  <script type="module">
+    import * as THREE from "https://unpkg.com/three@0.170.0/build/three.module.js";
+
+    const SPEEDS = [0.25, 0.5, 1, 2, 5, 12];
+    const BODIES = [
+      { id: "sun", name: "Sun", kind: "Star", au: "Center", year: "—", diameter: "1.39 million km", fact: "A star holding 99.8% of the solar system's mass. Light from here reaches Earth in about 8 minutes.", radius: 2.15 },
+      { id: "mercury", name: "Mercury", kind: "Terrestrial", orbit: 6.2, radius: 0.28, loop: 8, spin: 0.45, incline: 0.12, phase: 0.4, tilt: 0.01, color: "#b7b1a6", au: "0.39 AU", year: "88 Earth days", diameter: "4,879 km", fact: "Smallest planet. One orbit takes 88 Earth days." },
+      { id: "venus", name: "Venus", kind: "Terrestrial", orbit: 8.6, radius: 0.46, loop: 14, spin: -0.12, incline: 0.06, phase: 1.7, tilt: 3.09, color: "#e2c98a", au: "0.72 AU", year: "225 Earth days", diameter: "12,104 km", fact: "Hottest planet. A thick atmosphere spins the other way from most worlds." },
+      { id: "earth", name: "Earth", kind: "Terrestrial", orbit: 11.4, radius: 0.5, loop: 20, spin: 1.1, incline: 0.02, phase: 2.4, tilt: 0.41, color: "#3d7ea6", au: "1.00 AU", year: "365.25 days", diameter: "12,742 km", fact: "The only known world with stable liquid water on the surface. One moon rides with it." },
+      { id: "mars", name: "Mars", kind: "Terrestrial", orbit: 14.6, radius: 0.36, loop: 30, spin: 1.05, incline: 0.08, phase: 4.1, tilt: 0.44, color: "#c1683d", au: "1.52 AU", year: "687 Earth days", diameter: "6,779 km", fact: "Iron-oxide dust colors the surface." },
+      { id: "jupiter", name: "Jupiter", kind: "Gas giant", orbit: 21.5, radius: 1.22, loop: 48, spin: 2.1, incline: 0.03, phase: 0.9, tilt: 0.05, color: "#d4b48a", au: "5.20 AU", year: "11.9 Earth years", diameter: "139,820 km", fact: "Largest planet. The Great Red Spot is a storm wider than Earth." },
+      { id: "saturn", name: "Saturn", kind: "Gas giant", orbit: 28.2, radius: 1.02, loop: 64, spin: 1.9, incline: 0.05, phase: 2.8, tilt: 0.47, color: "#e6d2a2", au: "9.58 AU", year: "29.4 Earth years", diameter: "116,460 km", fact: "The rings are ice and rock, only tens of meters thick." },
+      { id: "uranus", name: "Uranus", kind: "Ice giant", orbit: 34.4, radius: 0.72, loop: 82, spin: 1.3, incline: 0.04, phase: 5.2, tilt: 1.71, color: "#9fd6d2", au: "19.2 AU", year: "84 Earth years", diameter: "50,724 km", fact: "It rolls on its side. Seasons last a couple of decades." },
+      { id: "neptune", name: "Neptune", kind: "Ice giant", orbit: 40.2, radius: 0.7, loop: 100, spin: 1.4, incline: 0.035, phase: 1.2, tilt: 0.49, color: "#3f6fbf", au: "30.1 AU", year: "165 Earth years", diameter: "49,244 km", fact: "The farthest planet. Winds can pass 2,000 kilometers per hour." },
+      { id: "blackhole", name: "Black hole", kind: "Collapsed star", au: "26,000 light-years", year: "No surface", diameter: "Horizon ~24 million km", fact: "This glow is a model you can fly up to. It does not orbit the Sun. Gravity here is so strong that light cannot get out. The black ball is the event horizon. The orange swirl is hot gas. The real one at the center of our galaxy is Sagittarius A*.", radius: 0.55 }
+    ];
+    const PLANETS = BODIES.filter((b) => b.orbit);
+    const TOUR = ["sun", "mercury", "venus", "earth", "mars", "jupiter", "saturn", "uranus", "neptune", "blackhole"];
+    const HOLE = new THREE.Vector3(-46, 9, -28);
+
+    const state = { paused: false, speed: 1, focus: null, touring: false, tourIndex: 0, walking: null };
+    const keys = new Set();
+    let injected = null;
+    const stick = { x: 0, y: 0 };
+    const live = new Map();
+
+    const renderer = new THREE.WebGLRenderer({ antialias: true });
+    renderer.setPixelRatio(Math.min(devicePixelRatio, 1.75));
+    renderer.setSize(innerWidth, innerHeight);
+    renderer.setClearColor(0x07080c);
+    document.getElementById("view").appendChild(renderer.domElement);
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(42, innerWidth / innerHeight, 0.02, 500);
+    camera.position.set(28, 24, 48);
+    scene.add(new THREE.AmbientLight(0xffffff, 0.12));
+    const sunLight = new THREE.PointLight(0xfff1d6, 140, 220, 2);
+    scene.add(sunLight);
+
+    function tex(draw, w = 512, h = 256) {
+      const c = document.createElement("canvas");
+      c.width = w; c.height = h;
+      draw(c.getContext("2d"), w, h);
+      const t = new THREE.CanvasTexture(c);
+      t.colorSpace = THREE.SRGBColorSpace;
+      return t;
+    }
+    function noise(i, j) { const n = Math.sin(i * 12.9898 + j * 78.233) * 43758.5453; return n - Math.floor(n); }
+    function planetMap(id) {
+      if (id === "earth") return tex((g, w, h) => { g.fillStyle = "#1f5f8a"; g.fillRect(0, 0, w, h); g.fillStyle = "#3e8f56"; for (let i = 0; i < 16; i++) { g.beginPath(); g.ellipse(noise(i, 2) * w, 40 + noise(i, 3) * (h - 80), 30 + noise(i, 4) * 40, 16, 0, 0, Math.PI * 2); g.fill(); } g.fillStyle = "#e8eef2"; g.fillRect(0, 0, w, 16); g.fillRect(0, h - 16, w, 16); });
+      if (id === "jupiter") return tex((g, w, h) => { ["#e6d2b0", "#c4956a", "#f0e2c4", "#a86b45", "#d8b48a", "#8d4e32", "#efe6d4", "#c47a4a"].forEach((c, i, a) => { g.fillStyle = c; g.fillRect(0, (h / a.length) * i, w, h / a.length + 1); }); g.fillStyle = "#a33b32"; g.beginPath(); g.ellipse(w * 0.62, h * 0.58, 36, 18, 0, 0, Math.PI * 2); g.fill(); });
+      if (id === "mars") return tex((g, w, h) => { g.fillStyle = "#b85a32"; g.fillRect(0, 0, w, h); g.fillStyle = "#e7d2b0"; g.fillRect(0, 0, w, 14); g.fillRect(0, h - 14, w, 14); });
+      if (id === "venus") return tex((g, w, h) => { g.fillStyle = "#e2c27a"; g.fillRect(0, 0, w, h); });
+      if (id === "mercury") return tex((g, w, h) => { g.fillStyle = "#9a948b"; g.fillRect(0, 0, w, h); });
+      if (id === "saturn") return tex((g, w, h) => { g.fillStyle = "#e6d2a2"; g.fillRect(0, 0, w, h); });
+      if (id === "uranus") return tex((g, w, h) => { g.fillStyle = "#7ecfc8"; g.fillRect(0, 0, w, h); });
+      return tex((g, w, h) => { g.fillStyle = "#2d5cb0"; g.fillRect(0, 0, w, h); });
+    }
+    const ringMap = tex((g, w, h) => { for (let x = 0; x < w; x++) { const t = x / w; const a = t < 0.15 || t > 0.92 ? 0 : 0.35 + Math.sin(t * 80) * 0.2; g.fillStyle = `rgba(236,220,180,${a})`; g.fillRect(x, 0, 1, h); } }, 512, 32);
+    const diskMap = tex((g, w, h) => {
+      const img = g.createImageData(w, h); const cx = w / 2, cy = h / 2;
+      for (let y = 0; y < h; y++) for (let x = 0; x < w; x++) {
+        const dx = x - cx, dy = y - cy, r = Math.hypot(dx, dy) / (w / 2), i = (y * w + x) * 4;
+        if (r < 0.3 || r > 0.98) continue;
+        const heat = 1 - (r - 0.3) / 0.68, streak = 0.6 + 0.4 * Math.sin(Math.atan2(dy, dx) * 12);
+        img.data[i] = Math.min(255, 255 * heat * streak); img.data[i + 1] = Math.min(160, 120 * heat); img.data[i + 2] = 30 * heat; img.data[i + 3] = 80 + heat * 160;
+      }
+      g.putImageData(img, 0, 0);
+    }, 256, 256);
+
+    const starGeo = new THREE.BufferGeometry();
+    const starArr = new Float32Array(1600 * 3);
+    for (let i = 0; i < 1600; i++) {
+      const r = 90 + Math.random() * 160, th = Math.random() * Math.PI * 2, ph = Math.acos(2 * Math.random() - 1);
+      starArr[i * 3] = r * Math.sin(ph) * Math.cos(th); starArr[i * 3 + 1] = r * Math.sin(ph) * Math.sin(th); starArr[i * 3 + 2] = r * Math.cos(ph);
+    }
+    starGeo.setAttribute("position", new THREE.BufferAttribute(starArr, 3));
+    scene.add(new THREE.Points(starGeo, new THREE.PointsMaterial({ color: 0xf4f0e6, size: 0.18, sizeAttenuation: true })));
+
+    const belt = new THREE.Group();
+    for (let i = 0; i < 180; i++) {
+      const m = new THREE.Mesh(new THREE.IcosahedronGeometry(0.045, 0), new THREE.MeshStandardMaterial({ color: 0x8a8174, roughness: 1 }));
+      const a = Math.random() * Math.PI * 2, r = 17.2 + Math.random() * 2.4;
+      m.position.set(Math.cos(a) * r, (Math.random() - 0.5) * 0.4, Math.sin(a) * r);
+      belt.add(m);
+    }
+    scene.add(belt);
+
+    const sun = new THREE.Mesh(new THREE.SphereGeometry(2.15, 48, 48), new THREE.MeshBasicMaterial({ color: 0xffd9a0 }));
+    sun.userData.id = "sun";
+    scene.add(sun);
+    const glow = tex((g, w, h) => { const grd = g.createRadialGradient(w / 2, h / 2, 8, w / 2, h / 2, w / 2); grd.addColorStop(0, "rgba(255,244,214,.95)"); grd.addColorStop(0.4, "rgba(255,186,84,.35)"); grd.addColorStop(1, "rgba(255,160,40,0)"); g.fillStyle = grd; g.fillRect(0, 0, w, h); }, 256, 256);
+    const sprite = new THREE.Sprite(new THREE.SpriteMaterial({ map: glow, transparent: true, blending: THREE.AdditiveBlending, depthWrite: false }));
+    sprite.scale.set(10, 10, 1); scene.add(sprite);
+
+    const planetObjs = [];
+    for (const p of PLANETS) {
+      const tilt = new THREE.Group();
+      tilt.rotation.x = p.incline;
+      const pivot = new THREE.Group();
+      const spin = new THREE.Group();
+      spin.rotation.z = p.tilt;
+      const mesh = new THREE.Mesh(new THREE.SphereGeometry(p.radius, 40, 40), new THREE.MeshStandardMaterial({ map: planetMap(p.id), roughness: 0.72 }));
+      mesh.userData.id = p.id;
+      spin.add(mesh);
+      if (p.id === "saturn") {
+        const ring = new THREE.Mesh(new THREE.RingGeometry(p.radius * 1.4, p.radius * 2.25, 80), new THREE.MeshBasicMaterial({ map: ringMap, side: THREE.DoubleSide, transparent: true, depthWrite: false }));
+        ring.rotation.x = Math.PI / 2.4;
+        spin.add(ring);
+      }
+      if (p.id === "earth") {
+        const moon = new THREE.Mesh(new THREE.SphereGeometry(0.12, 16, 16), new THREE.MeshStandardMaterial({ color: 0xd5d0c6, roughness: 1 }));
+        spin.add(moon);
+        planetObjs.push({ moon, moonA: 1.2 });
+      }
+      const pts = [];
+      for (let i = 0; i <= 128; i++) { const a = (i / 128) * Math.PI * 2; pts.push(new THREE.Vector3(Math.cos(a) * p.orbit, 0, Math.sin(a) * p.orbit)); }
+      tilt.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts), new THREE.LineBasicMaterial({ color: p.color, transparent: true, opacity: 0.35 })));
+      pivot.add(spin); tilt.add(pivot); scene.add(tilt);
+      planetObjs.push({ p, pivot, spin, mesh, angle: p.phase });
+    }
+
+    const hole = new THREE.Group();
+    hole.position.copy(HOLE);
+    const diskPivot = new THREE.Group();
+    diskPivot.rotation.set(1.15, 0.35, 0.2);
+    const disk = new THREE.Mesh(new THREE.RingGeometry(0.83, 2.35, 80), new THREE.MeshBasicMaterial({ map: diskMap, side: THREE.DoubleSide, transparent: true, depthWrite: false }));
+    diskPivot.add(disk);
+    const horizon = new THREE.Mesh(new THREE.SphereGeometry(0.55, 32, 32), new THREE.MeshBasicMaterial({ color: 0x000000 }));
+    horizon.userData.id = "blackhole";
+    disk.userData.id = "blackhole";
+    hole.add(diskPivot, horizon);
+    scene.add(hole);
+    live.set("blackhole", HOLE);
+    live.set("sun", new THREE.Vector3());
+
+    const raycaster = new THREE.Raycaster();
+    const pointer = new THREE.Vector2();
+    let downX = 0, downY = 0, dragging = false, moved = false;
+    const sph = { theta: 0.72, phi: 1.02, radius: 62 };
+    let zoomLock = false;
+    const focusPt = new THREE.Vector3();
+    const dest = new THREE.Vector3();
+
+    const walker = {
+      group: null, radius: 1, heading: 0.2, blend: 0, armed: false,
+      pos: new THREE.Vector3(), camFrom: new THREE.Vector3()
+    };
+    const _up = new THREE.Vector3(), _pole = new THREE.Vector3(), _east = new THREE.Vector3(), _north = new THREE.Vector3(), _fwd = new THREE.Vector3();
+    const _wpos = new THREE.Vector3(), _wup = new THREE.Vector3(), _wfwd = new THREE.Vector3(), _look = new THREE.Vector3(), _desired = new THREE.Vector3();
+
+    function body(id) { return BODIES.find((b) => b.id === id); }
+
+    function startWalk(id) {
+      const b = body(id);
+      if (!b || !b.orbit) return;
+      state.walking = id;
+      state.touring = false;
+      state.focus = id;
+      const entry = planetObjs.find((o) => o.p && o.p.id === id);
+      walker.radius = b.radius;
+      walker.heading = 0.2;
+      walker.blend = 0;
+      walker.armed = false;
+      walker.pos.set(0.22, 0.9, 0.28).normalize().multiplyScalar(b.radius);
+      if (walker.group) walker.group.parent.remove(walker.group);
+      const g = new THREE.Group();
+      const person = Math.max(0.055, b.radius * 0.2);
+      const suit = new THREE.Mesh(new THREE.CapsuleGeometry(person * 0.2, person * 0.46, 4, 8), new THREE.MeshStandardMaterial({ color: 0xd7d0c4 }));
+      suit.position.y = person * 0.62;
+      const head = new THREE.Mesh(new THREE.SphereGeometry(person * 0.24, 16, 16), new THREE.MeshStandardMaterial({ color: 0xf3efe6 }));
+      head.position.y = person * 1.22;
+      const visor = new THREE.Mesh(new THREE.SphereGeometry(person * 0.1, 12, 12), new THREE.MeshBasicMaterial({ color: 0x1c2836 }));
+      visor.position.set(0, person * 1.24, -person * 0.18);
+      g.add(suit, head, visor, new THREE.PointLight(0xfff6e8, 1.4, person * 18, 2));
+      entry.spin.add(g);
+      walker.group = g;
+      walker.person = person;
+      showWalk(b);
+    }
+    function stopWalk() {
+      if (walker.group) walker.group.parent.remove(walker.group);
+      walker.group = null;
+      state.walking = null;
+      camera.up.set(0, 1, 0);
+      document.getElementById("walkHud").classList.add("hidden");
+      document.getElementById("orbitHud").classList.remove("hidden");
+      renderPanel();
+    }
+
+    function renderPanel() {
+      const el = document.getElementById("panel");
+      const b = state.focus ? body(state.focus) : null;
+      if (!b) { el.classList.add("hidden"); el.innerHTML = ""; return; }
+      el.classList.remove("hidden");
+      const walk = b.orbit ? `<button class="primary" id="walkBtn" type="button">Walk on ${b.name}</button>` : "";
+      el.innerHTML = `<div class="kicker">${b.kind}</div><h2>${b.name}</h2><p><b>Distance</b> ${b.au}<br><b>Year</b> ${b.year}<br><b>Diameter</b> ${b.diameter}</p><p>${b.fact}</p>${walk}`;
+      const btn = document.getElementById("walkBtn");
+      if (btn) btn.onclick = () => startWalk(b.id);
+    }
+    function showWalk(b) {
+      document.getElementById("orbitHud").classList.add("hidden");
+      document.getElementById("walkHud").classList.remove("hidden");
+      document.getElementById("walkTitle").textContent = "On " + b.name;
+      document.getElementById("walkNote").textContent = b.kind.toLowerCase().includes("giant") ? "You are on the cloud tops, not solid ground." : "The ground curves because this model planet is small.";
+    }
+    function setFocus(id) {
+      if (state.walking) stopWalk();
+      state.focus = id;
+      state.touring = false;
+      zoomLock = false;
+      document.getElementById("tourBtn").textContent = "Tour";
+      renderPanel();
+      paintChips();
+    }
+    function paintChips() {
+      const box = document.getElementById("chips");
+      box.innerHTML = "";
+      for (const b of BODIES) {
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.textContent = b.name === "Black hole" ? "Black hole" : b.name;
+        if (state.focus === b.id) btn.className = "on";
+        btn.onclick = () => setFocus(b.id);
+        box.appendChild(btn);
+      }
+    }
+    paintChips();
+
+    const speedInput = document.getElementById("speed");
+    function syncSpeed() { document.getElementById("speedLabel").textContent = state.speed + "×" + (state.paused ? " · paused" : ""); speedInput.value = String(Math.max(0, SPEEDS.indexOf(state.speed))); }
+    document.getElementById("pauseBtn").onclick = () => { state.paused = !state.paused; document.getElementById("pauseBtn").textContent = state.paused ? "Play" : "Pause"; syncSpeed(); };
+    document.getElementById("slower").onclick = () => { const i = Math.max(0, SPEEDS.indexOf(state.speed) - 1); state.speed = SPEEDS[i]; syncSpeed(); };
+    document.getElementById("faster").onclick = () => { const i = Math.min(SPEEDS.length - 1, SPEEDS.indexOf(state.speed) + 1); state.speed = SPEEDS[i]; syncSpeed(); };
+    speedInput.oninput = () => { state.speed = SPEEDS[Number(speedInput.value)] || 1; syncSpeed(); };
+    document.getElementById("systemBtn").onclick = () => { stopWalk(); state.focus = null; state.touring = false; zoomLock = false; sph.theta = 0.72; sph.phi = 1.02; document.getElementById("tourBtn").textContent = "Tour"; renderPanel(); paintChips(); };
+    document.getElementById("tourBtn").onclick = () => {
+      if (state.touring) { state.touring = false; document.getElementById("tourBtn").textContent = "Tour"; return; }
+      if (state.walking) stopWalk();
+      state.touring = true; state.tourIndex = 0; state.focus = TOUR[0]; zoomLock = false;
+      document.getElementById("tourBtn").textContent = "Stop tour";
+      renderPanel(); paintChips();
+    };
+    setInterval(() => {
+      if (!state.touring) return;
+      state.tourIndex = (state.tourIndex + 1) % TOUR.length;
+      state.focus = TOUR[state.tourIndex];
+      zoomLock = false; renderPanel(); paintChips();
+    }, 8000);
+    document.getElementById("leaveBtn").onclick = () => { const id = state.walking; stopWalk(); state.focus = id; renderPanel(); paintChips(); };
+
+    addEventListener("keydown", (e) => {
+      keys.add(e.code);
+      if (state.walking && (e.code.startsWith("Arrow") || ["KeyW", "KeyA", "KeyS", "KeyD"].includes(e.code))) e.preventDefault();
+      if (e.code === "Space") { state.paused = !state.paused; document.getElementById("pauseBtn").textContent = state.paused ? "Play" : "Pause"; syncSpeed(); }
+      if (e.key === "Escape") document.getElementById("systemBtn").click();
+    });
+    addEventListener("keyup", (e) => keys.delete(e.code));
+    addEventListener("blur", () => keys.clear());
+
+    const stickEl = document.getElementById("stick");
+    let stickOn = false;
+    function aimStick(e) {
+      const r = stickEl.getBoundingClientRect();
+      const x = ((e.clientX - r.left) / r.width) * 2 - 1;
+      const y = -(((e.clientY - r.top) / r.height) * 2 - 1);
+      const len = Math.hypot(x, y) || 1;
+      const c = Math.min(1, len);
+      stick.x = (x / len) * c; stick.y = (y / len) * c;
+    }
+    stickEl.addEventListener("pointerdown", (e) => { stickOn = true; stickEl.setPointerCapture(e.pointerId); aimStick(e); });
+    stickEl.addEventListener("pointermove", (e) => { if (stickOn) aimStick(e); });
+    const stickEnd = () => { stickOn = false; stick.x = 0; stick.y = 0; };
+    stickEl.addEventListener("pointerup", stickEnd);
+    stickEl.addEventListener("pointercancel", stickEnd);
+
+    renderer.domElement.addEventListener("pointerdown", (e) => { if (state.walking || e.button !== 0) return; dragging = true; moved = false; downX = e.clientX; downY = e.clientY; });
+    addEventListener("pointermove", (e) => {
+      if (!dragging || state.walking) return;
+      const dx = e.clientX - downX, dy = e.clientY - downY;
+      if (Math.abs(dx) + Math.abs(dy) > 4) moved = true;
+      downX = e.clientX; downY = e.clientY;
+      sph.theta -= dx * 0.005;
+      sph.phi = Math.max(0.28, Math.min(1.42, sph.phi + dy * 0.004));
+    });
+    addEventListener("pointerup", (e) => {
+      if (!dragging) return;
+      dragging = false;
+      if (moved || state.walking) return;
+      const rect = renderer.domElement.getBoundingClientRect();
+      pointer.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+      pointer.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
+      raycaster.setFromCamera(pointer, camera);
+      const hit = raycaster.intersectObjects(scene.children, true).find((h) => h.object.userData.id);
+      if (hit) setFocus(hit.object.userData.id);
+      else setFocus(null);
+    });
+    renderer.domElement.addEventListener("wheel", (e) => { if (state.walking) return; e.preventDefault(); zoomLock = true; sph.radius = Math.max(2.4, Math.min(130, sph.radius * (e.deltaY > 0 ? 1.08 : 0.92))); }, { passive: false });
+    addEventListener("resize", () => { camera.aspect = innerWidth / innerHeight; camera.updateProjectionMatrix(); renderer.setSize(innerWidth, innerHeight); });
+
+    const clock = new THREE.Clock();
+    function frame() {
+      const d = Math.min(clock.getDelta(), 0.05);
+      const sp = state.paused ? 0 : state.speed;
+      belt.rotation.y += d * sp * 0.04;
+      disk.rotation.z += d * (0.35 + state.speed * 0.25);
+      for (const o of planetObjs) {
+        if (o.moon) { o.moonA += d * sp * 1.6; o.moon.position.set(Math.cos(o.moonA) * 1.15, 0.08, Math.sin(o.moonA) * 1.15); continue; }
+        const hold = state.walking === o.p.id;
+        if (!hold) { o.angle += (d * sp * Math.PI * 2) / o.p.loop; o.spin.rotation.y += d * sp * o.p.spin; }
+        o.pivot.position.set(Math.cos(o.angle) * o.p.orbit, 0, Math.sin(o.angle) * o.p.orbit);
+        if (!live.has(o.p.id)) live.set(o.p.id, new THREE.Vector3());
+        o.pivot.getWorldPosition(live.get(o.p.id));
+      }
+      if (state.walking && walker.group) {
+        const held = injected || keys;
+        let steer = 0, throttle = 0;
+        if (held.has("KeyA") || held.has("ArrowLeft")) steer += 1;
+        if (held.has("KeyD") || held.has("ArrowRight")) steer -= 1;
+        steer = Math.max(-1, Math.min(1, steer - stick.x));
+        if (held.has("KeyW") || held.has("ArrowUp")) throttle += 1;
+        if (held.has("KeyS") || held.has("ArrowDown")) throttle -= 1;
+        throttle = Math.max(-1, Math.min(1, throttle + stick.y));
+        walker.heading += steer * 2.4 * d;
+        _up.copy(walker.pos).normalize();
+        if (Math.abs(_up.y) > 0.92) _pole.set(1, 0, 0); else _pole.set(0, 1, 0);
+        _east.crossVectors(_pole, _up).normalize();
+        _north.crossVectors(_up, _east).normalize();
+        const h = walker.heading;
+        _fwd.copy(_north).multiplyScalar(Math.cos(h)).addScaledVector(_east, -Math.sin(h)).normalize();
+        walker.pos.addScaledVector(_fwd, walker.person * 3.4 * throttle * d).normalize().multiplyScalar(walker.radius);
+        const g = walker.group;
+        g.position.copy(walker.pos);
+        g.updateWorldMatrix(true, false);
+        g.getWorldPosition(_wpos);
+        _wup.copy(_up).transformDirection(g.parent.matrixWorld).normalize();
+        _wfwd.copy(_fwd).transformDirection(g.parent.matrixWorld).normalize();
+        g.up.copy(_wup);
+        _look.copy(_wpos).add(_wfwd);
+        g.lookAt(_look);
+        _desired.copy(_wpos).addScaledVector(_wup, walker.person * 2.6).addScaledVector(_wfwd, -walker.person * 5);
+        if (!walker.armed) { walker.camFrom.copy(camera.position); walker.armed = true; }
+        walker.blend = Math.min(1, walker.blend + d / 0.9);
+        const k = 1 - (1 - walker.blend) ** 2;
+        camera.position.lerpVectors(walker.camFrom, _desired, k);
+        camera.up.copy(_wup);
+        _look.copy(_wpos).addScaledVector(_wup, walker.person * 1.15);
+        camera.lookAt(_look);
+      } else {
+        dest.copy(state.focus ? live.get(state.focus) || _look.set(0, 0, 0) : _look.set(0, 0, 0));
+        focusPt.lerp(dest, 1 - Math.exp(-3.4 * d));
+        if (!zoomLock) {
+          const ideal = !state.focus ? 62 : state.focus === "blackhole" ? 9 : state.focus === "sun" ? 14 : (body(state.focus).radius * 11 + (state.focus === "saturn" ? 4.5 : 2.8));
+          sph.radius += (ideal - sph.radius) * (1 - Math.exp(-2.6 * d));
+        }
+        const sinPhi = Math.sin(sph.phi);
+        camera.up.set(0, 1, 0);
+        camera.position.set(focusPt.x + sph.radius * sinPhi * Math.sin(sph.theta), focusPt.y + sph.radius * Math.cos(sph.phi), focusPt.z + sph.radius * sinPhi * Math.cos(sph.theta));
+        camera.lookAt(focusPt);
+      }
+      renderer.render(scene, camera);
+      requestAnimationFrame(frame);
+    }
+    requestAnimationFrame(frame);
+  </script>
+</body>
+</html>
