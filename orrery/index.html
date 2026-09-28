@@ -85,7 +85,7 @@
     const SPEEDS = [0.25, 0.5, 1, 2, 5, 12];
     const BODIES = [
       { id: "sun", name: "Sun", kind: "Star", au: "Center", year: "—", diameter: "1.39 million km", fact: "A star holding 99.8% of the solar system's mass. Light from here reaches Earth in about 8 minutes. One picture shows a flare. Another stacks Mercury crossing the face of the Sun.", radius: 2.15 },
-      { id: "mercury", name: "Mercury", kind: "Terrestrial", orbit: 6.2, radius: 0.28, loop: 8, spin: 0.45, incline: 0.12, phase: 0.4, tilt: 0.01, color: "#b7b1a6", au: "0.39 AU", year: "88 Earth days", diameter: "4,879 km", fact: "Smallest planet, and the most cratered. The rainbow picture is enhanced color. Mercury itself is gray." },
+      { id: "mercury", name: "Mercury", kind: "Terrestrial", orbit: 6.2, radius: 0.28, loop: 8, spin: 0.45, incline: 0.12, phase: 0.4, tilt: 0.01, color: "#b7b1a6", au: "0.39 AU", year: "88 Earth days", diameter: "4,879 km", fact: "Smallest planet, and the most cratered. The globe is NASA's enhanced-color map from MESSENGER. Those colors are not what your eyes would see. Mercury itself is gray." },
       { id: "venus", name: "Venus", kind: "Terrestrial", orbit: 8.6, radius: 0.46, loop: 14, spin: -0.12, incline: 0.06, phase: 1.7, tilt: 3.09, color: "#e2c98a", au: "0.72 AU", year: "225 Earth days", diameter: "12,104 km", fact: "Hottest planet. A thick atmosphere spins the other way from most worlds." },
       { id: "earth", name: "Earth", kind: "Terrestrial", orbit: 11.4, radius: 0.5, loop: 20, spin: 1.1, incline: 0.02, phase: 2.4, tilt: 0.41, color: "#3d7ea6", au: "1.00 AU", year: "365.25 days", diameter: "12,742 km", fact: "The only known world with stable liquid water on the surface. One moon rides with it." },
       { id: "mars", name: "Mars", kind: "Terrestrial", orbit: 14.6, radius: 0.36, loop: 30, spin: 1.05, incline: 0.08, phase: 4.1, tilt: 0.44, color: "#c1683d", au: "1.52 AU", year: "687 Earth days", diameter: "6,779 km", fact: "Iron-oxide dust colors the surface." },
@@ -182,11 +182,27 @@
     const sprite = new THREE.Sprite(new THREE.SpriteMaterial({ map: glow, transparent: true, blending: THREE.AdditiveBlending, depthWrite: false }));
     sprite.scale.set(10, 10, 1); scene.add(sprite);
 
-    const nasaMaps = {
-      jupiter: new THREE.TextureLoader().load("textures/jupiter.jpg"),
-      saturn: new THREE.TextureLoader().load("textures/saturn.jpg"),
+    const mapFiles = {
+      mercury: "maps/mercury.jpg",
+      venus: "maps/venus.jpg",
+      earth: "maps/earth.jpg",
+      mars: "maps/mars.jpg",
+      jupiter: "maps/jupiter.jpg",
+      saturn: "maps/saturn.jpg",
+      neptune: "maps/neptune.jpg",
+      pluto: "maps/pluto.jpg",
+      io: "maps/io.jpg",
+      europa: "maps/europa.jpg",
+      ganymede: "maps/ganymede.jpg",
+      callisto: "maps/callisto.jpg"
     };
-    for (const t of Object.values(nasaMaps)) t.colorSpace = THREE.SRGBColorSpace;
+    const wrapMaps = {};
+    const mapLoader = new THREE.TextureLoader();
+    for (const [id, file] of Object.entries(mapFiles)) {
+      const t = mapLoader.load("textures/" + file);
+      t.colorSpace = THREE.SRGBColorSpace;
+      wrapMaps[id] = t;
+    }
     const planetObjs = [];
     for (const p of PLANETS) {
       const tilt = new THREE.Group();
@@ -194,7 +210,7 @@
       const pivot = new THREE.Group();
       const spin = new THREE.Group();
       spin.rotation.z = p.tilt;
-      const mesh = new THREE.Mesh(new THREE.SphereGeometry(p.radius, 40, 40), new THREE.MeshStandardMaterial({ map: nasaMaps[p.id] || planetMap(p.id), roughness: 0.72 }));
+      const mesh = new THREE.Mesh(new THREE.SphereGeometry(p.radius, 40, 40), new THREE.MeshStandardMaterial({ map: wrapMaps[p.id] || planetMap(p.id), roughness: 0.72 }));
       mesh.userData.id = p.id;
       spin.add(mesh);
       if (p.id === "saturn") {
@@ -210,7 +226,8 @@
         { id: "callisto", parent: "jupiter", name: "Callisto", kind: "Moon", au: "Around Jupiter", year: "16.7 days", diameter: "4,821 km", fact: "The most cratered of Jupiter's big moons.", radius: 0.12, distance: 3.35, speed: 0.7, phase: 4.2, color: 0x8d847c }
       ].filter((m) => m.parent === p.id);
       for (const m of moonsHere) {
-        const meshMoon = new THREE.Mesh(new THREE.SphereGeometry(m.radius, 20, 20), new THREE.MeshStandardMaterial({ color: m.color, roughness: 0.9 }));
+        const moonMap = wrapMaps[m.id] || null;
+        const meshMoon = new THREE.Mesh(new THREE.SphereGeometry(m.radius, 24, 24), new THREE.MeshStandardMaterial({ color: moonMap ? 0xffffff : m.color, map: moonMap, roughness: 0.9 }));
         meshMoon.userData.id = m.id;
         const holder = new THREE.Group();
         holder.add(meshMoon);
