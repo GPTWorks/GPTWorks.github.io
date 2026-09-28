@@ -48,10 +48,11 @@
     <header>
       <div>
         <h1>Orrery</h1>
-        <p>Tap a world or a galaxy. Distances are squeezed so the neighborhood fits. <a href="https://gptworks.github.io/#tools">Back to GPTWorks</a></p>
+        <p>We live in the Milky Way. Zoom out to see home from the outside, then the universe. <a href="https://gptworks.github.io/#tools">Back to GPTWorks</a></p>
       </div>
       <div class="row">
         <button class="primary" id="tourBtn" type="button">Tour</button>
+        <button id="zoomBtn" type="button">Zoom out</button>
         <button id="systemBtn" type="button">System</button>
       </div>
     </header>
@@ -112,7 +113,7 @@
       { id: "neptune", name: "Neptune", kind: "Ice giant", orbit: 40.2, radius: 0.7, loop: 100, spin: 1.4, incline: 0.035, phase: 1.2, tilt: 0.49, color: "#3f6fbf", au: "30.1 AU", year: "165 Earth years", diameter: "49,244 km", fact: "The farthest planet. Winds can pass 2,000 kilometers per hour." },
       { id: "pluto", name: "Pluto", kind: "Dwarf planet", orbit: 47, radius: 0.24, loop: 130, spin: 0.7, incline: 0.28, phase: 3.4, tilt: 2.1, color: "#d7c4a8", au: "39.5 AU", year: "248 Earth years", diameter: "2,376 km", fact: "It was called the ninth planet until 2006. It is still out there. A bright heart-shaped ice field sits on the side that faces its largest moon." },
       { id: "blackhole", name: "Black hole", kind: "Collapsed star", au: "26,000 light-years", year: "No surface", diameter: "Horizon ~24 million km", fact: "This glow is a model you can fly into. It does not orbit the Sun. Gravity here is so strong that light cannot get out. The black ball is the event horizon. The orange swirl is hot gas. The picture is an artist's idea, not a photograph. The real one at the center of our galaxy is Sagittarius A*.", radius: 0.55 },
-      { id: "milkyway", name: "Milky Way", kind: "Barred spiral galaxy", au: "We live inside it", year: "Hundreds of billions", diameter: "About 100,000 light-years", fact: "This is a model of our galaxy from the outside. The Sun and every planet sit in one spiral arm, about 26,000 light-years from the center. The real sky looks like a pale band because you are looking through the disk from the inside.", radius: 13, view: 40, pos: [78, 22, -86], tilt: [0.7, 0.35, 0.15], style: "barred", core: "#fff1c9", arm: "#c9b7ff" },
+      { id: "milkyway", name: "Milky Way", kind: "Our home galaxy", au: "We live inside it", year: "Hundreds of billions of stars", diameter: "About 100,000 light-years", fact: "We are inside the Milky Way. You only see it off to the side here because this is a model of home, drawn as if you had flown outside it. The Sun sits in one spiral arm, about 26,000 light-years from the center. In the real night sky it looks like a pale band, because you are looking through the disk from the inside.", radius: 13, view: 40, pos: [78, 22, -86], tilt: [0.7, 0.35, 0.15], style: "barred", core: "#fff1c9", arm: "#c9b7ff" },
       { id: "andromeda", name: "Andromeda", kind: "Spiral galaxy", au: "2.5 million light-years", year: "About a trillion", diameter: "About 220,000 light-years", fact: "The nearest big galaxy, and the largest in our neighborhood. It is wider than the Milky Way and is moving toward us. In about 4.5 billion years the two galaxies will pass through each other. Stars are so far apart they almost never hit.", radius: 12, view: 36, pos: [-96, 14, 74], tilt: [0.45, 0.9, 0.1], style: "spiral", core: "#ffe7c2", arm: "#9ecbff" },
       { id: "triangulum", name: "Triangulum", kind: "Spiral galaxy", au: "2.7 million light-years", year: "About 40 billion", diameter: "About 60,000 light-years", fact: "The third large member of the Local Group, with the Milky Way and Andromeda. On a very dark night some people can see it without a telescope.", radius: 7, view: 24, pos: [48, -26, 108], tilt: [0.9, 0.2, 0.4], style: "spiral", core: "#ffe9d2", arm: "#d7e7ff" },
       { id: "magellanic", name: "Magellanic Cloud", kind: "Dwarf galaxy", au: "160,000 light-years", year: "About 30 billion", diameter: "About 14,000 light-years", fact: "A small, messy galaxy that orbits the Milky Way. It has no neat spiral. From Earth's southern half it looks like a torn piece of cloud. This model is the Large Magellanic Cloud.", radius: 6, view: 20, pos: [-36, 34, 62], tilt: [0.3, 0.5, 0.8], style: "cloud", core: "#fff6e8", arm: "#f0c8ff" },
@@ -120,12 +121,14 @@
       { id: "sombrero", name: "Sombrero", kind: "Edge-on spiral galaxy", au: "31 million light-years", year: "Billions", diameter: "About 50,000 light-years", fact: "A spiral seen from the side. The dark line is dust blocking starlight, and it makes the galaxy look like a wide-brimmed hat. Astronomers call it Messier 104.", radius: 9, view: 28, pos: [-88, -18, -78], tilt: [0.15, 0.55, 0.05], style: "edge", core: "#fff3d4", arm: "#f2e2b8" },
       { id: "pillars", name: "Pillars", kind: "Nebula", au: "7,000 light-years", year: "Eagle Nebula", diameter: "About 5 light-years tall", view: 26, fact: "Towers of gas and dust where new stars are forming. The card shows Hubble on the left and James Webb on the right. The shape in space is a 3D model of those towers. You can fly around it. It is not a world you can walk on." },
       { id: "crab", name: "Crab", kind: "Supernova", au: "6,500 light-years", year: "Seen in 1054", diameter: "About 11 light-years across", view: 32, fact: "A star blew apart, and people on Earth saw the flash in the year 1054. The round part is the cloud. The two spikes are jets. Colors are painted on so you can tell the pieces apart. You can fly around it. It is not a world you can walk on." },
-      { id: "casa", name: "Cas A", kind: "Supernova", au: "11,000 light-years", year: "About 350 years ago", diameter: "About 15 light-years across", view: 28, fact: "The wreckage of a star in the constellation Cassiopeia. The light from the explosion reached Earth about 350 years ago. This shape is the 2025 model. That file had no color, so blue is toward the inside and orange is toward the outside. You can fly around it." }
+      { id: "casa", name: "Cas A", kind: "Supernova", au: "11,000 light-years", year: "About 350 years ago", diameter: "About 15 light-years across", view: 28, fact: "The wreckage of a star in the constellation Cassiopeia. The light from the explosion reached Earth about 350 years ago. This shape is the 2025 model. That file had no color, so blue is toward the inside and orange is toward the outside. You can fly around it." },
+      { id: "ced214", name: "Ced 214", kind: "Nebula", au: "About 3,000 light-years", year: "Cepheus", diameter: "A wide cloud of gas", view: 18, fact: "A cloud of gas and dust in the constellation Cepheus, also called NGC 7822. New stars are lighting it up. The red is mostly hydrogen. The dark towers are thicker gas. This is a photograph, hung in the model so you can fly up to it." },
+      { id: "universe", name: "Universe", kind: "Everything light can reach", au: "About 93 billion light-years across", year: "A drawing, not a photo", diameter: "The orange web is the far edge", view: 80, fact: "Zoom out and the order is: planets, then the Milky Way, then other galaxies, then this. The Sun is in the middle of the drawing. The orange web at the edge is as far as light has had time to travel. It is a map by Pablo Carlos Budassi, not a photograph." }
     ];
     const PLANETS = BODIES.filter((b) => b.orbit);
     const TOUR = ["sun", "mercury", "venus", "earth", "mars", "jupiter", "saturn", "uranus", "neptune", "pluto", "blackhole", "milkyway", "andromeda", "triangulum", "magellanic", "whirlpool", "sombrero"];
     const HOLE = new THREE.Vector3(-46, 9, -28);
-    const state = { paused: false, speed: 1, focus: null, touring: false, tourIndex: 0, walking: null, suit: "astronaut", panelPinned: false };
+    const state = { paused: false, speed: 1, focus: null, touring: false, tourIndex: 0, walking: null, suit: "astronaut", panelPinned: false, wide: false };
 
     let saturnSeat = null;
     let saturnRing = null;
@@ -365,6 +368,19 @@
     placeModel("models/pillars.glb", "pillars", 24, -30, -92);
     placeModel("models/crab.glb", "crab", -78, 22, -108);
     placeModel("models/casa.glb", "casa", 72, 16, -118);
+    function poster(url, id, x, y, z, w, h) {
+      const loader = new THREE.TextureLoader();
+      loader.load("textures/" + url, (tex) => {
+        tex.colorSpace = THREE.SRGBColorSpace;
+        const mesh = new THREE.Mesh(new THREE.PlaneGeometry(w, h), new THREE.MeshBasicMaterial({ map: tex, side: THREE.DoubleSide, toneMapped: false }));
+        mesh.position.set(x, y, z);
+        mesh.userData.id = id;
+        scene.add(mesh);
+        live.set(id, mesh.position);
+      });
+    }
+    poster("ced214.jpg", "ced214", -36, 6, -70, 22, 13.7);
+    poster("universe.jpg", "universe", 0, 18, -240, 72, 72);
     live.set("blackhole", HOLE);
     live.set("sun", new THREE.Vector3());
 
@@ -469,7 +485,9 @@
         jupiter: ["jupiter-exotic.jpg", "jupiter-photo.jpg"],
         saturn: ["saturn-hubble.jpg", "saturn-photo.jpg"],
         blackhole: ["hole-concept.jpg"],
-        pillars: ["pillars-card.jpg"]
+        pillars: ["pillars-card.jpg"],
+        pluto: ["pluto-heart.jpg"],
+        ced214: ["ced214.jpg"]
       };
       const photo = (shots[b.id] || []).map((file) => `<img alt="" src="textures/${file}" style="height:112px;width:auto;border-radius:10px;margin-right:8px">`).join("");
       const photoWrap = photo ? `<div style="display:flex;overflow-x:auto;margin-top:10px">${photo}</div>` : "";
@@ -504,9 +522,12 @@
       if (state.walking) stopWalk();
       if (fly.mode) stopFly();
       state.focus = id;
+      state.wide = false;
       state.touring = false;
       zoomLock = false;
       document.getElementById("tourBtn").textContent = "Tour";
+      const zoomBtn = document.getElementById("zoomBtn");
+      if (zoomBtn) zoomBtn.textContent = id === "universe" ? "Back in" : "Zoom out";
       renderPanel();
       paintChips();
     }
@@ -530,7 +551,20 @@
     document.getElementById("slower").onclick = () => { const i = Math.max(0, SPEEDS.indexOf(state.speed) - 1); state.speed = SPEEDS[i]; syncSpeed(); };
     document.getElementById("faster").onclick = () => { const i = Math.min(SPEEDS.length - 1, SPEEDS.indexOf(state.speed) + 1); state.speed = SPEEDS[i]; syncSpeed(); };
     speedInput.oninput = () => { state.speed = SPEEDS[Number(speedInput.value)] || 1; syncSpeed(); };
-    document.getElementById("systemBtn").onclick = () => { stopWalk(); state.focus = null; state.touring = false; zoomLock = false; sph.theta = 0.72; sph.phi = 1.02; document.getElementById("tourBtn").textContent = "Tour"; renderPanel(); paintChips(); };
+    document.getElementById("systemBtn").onclick = () => { stopWalk(); if (fly.mode) stopFly(); state.focus = null; state.wide = false; state.touring = false; zoomLock = false; sph.theta = 0.72; sph.phi = 1.02; document.getElementById("tourBtn").textContent = "Tour"; document.getElementById("zoomBtn").textContent = "Zoom out"; renderPanel(); paintChips(); };
+    document.getElementById("zoomBtn").onclick = () => {
+      if (state.walking) stopWalk();
+      if (fly.mode) stopFly();
+      state.touring = false;
+      zoomLock = false;
+      if (state.focus && state.focus !== "universe") state.focus = null, state.wide = true;
+      else if (!state.wide && state.focus !== "universe") state.wide = true, state.focus = null;
+      else if (state.wide) state.wide = false, state.focus = "universe";
+      else state.focus = null, state.wide = false;
+      document.getElementById("zoomBtn").textContent = state.focus === "universe" ? "Back in" : state.wide ? "Universe" : "Zoom out";
+      renderPanel();
+      paintChips();
+    };
     document.getElementById("tourBtn").onclick = () => {
       if (state.touring) { state.touring = false; document.getElementById("tourBtn").textContent = "Tour"; return; }
       if (state.walking) stopWalk();
@@ -718,7 +752,7 @@
         focusPt.lerp(dest, 1 - Math.exp(-3.4 * d));
         if (!zoomLock) {
           const focused = state.focus ? body(state.focus) : null;
-          const ideal = !focused ? 62 : focused.view ? focused.view : focused.kind === "Moon" ? 2.8 : focused.id === "blackhole" ? 9 : focused.id === "sun" ? 14 : focused.radius * 11 + (focused.id === "saturn" ? 4.5 : 2.8);
+          const ideal = state.wide && !state.focus ? 160 : !focused ? 62 : focused.view ? focused.view : focused.kind === "Moon" ? 2.8 : focused.id === "blackhole" ? 9 : focused.id === "sun" ? 14 : focused.radius * 11 + (focused.id === "saturn" ? 4.5 : 2.8);
           sph.radius += (ideal - sph.radius) * (1 - Math.exp(-2.6 * d));
         }
         const sinPhi = Math.sin(sph.phi);
