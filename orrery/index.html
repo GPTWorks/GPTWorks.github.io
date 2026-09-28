@@ -74,10 +74,13 @@
       </div>
       <button class="primary" id="leaveBtn" type="button">Back to space</button>
     </header>
-    <div class="bottom" style="flex-direction:row;align-items:flex-end">
-      <div class="stick" id="stick" role="application" aria-label="Walk stick. Up walks forward. Left turns left."></div>
-      <p id="walkNote"></p>
-    </div>
+      <div class="bottom" style="flex-direction:column;align-items:stretch;gap:8px">
+        <div id="suitRow" style="display:flex;gap:8px;overflow-x:auto"></div>
+        <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:12px">
+          <div class="stick" id="stick" role="application" aria-label="Walk stick. Up walks forward. Left turns left."></div>
+          <p id="walkNote"></p>
+        </div>
+      </div>
   </div>
   <script type="module">
     import * as THREE from "https://unpkg.com/three@0.170.0/build/three.module.js";
@@ -102,13 +105,15 @@
       { id: "magellanic", name: "Magellanic Cloud", kind: "Dwarf galaxy", au: "160,000 light-years", year: "About 30 billion", diameter: "About 14,000 light-years", fact: "A small, messy galaxy that orbits the Milky Way. It has no neat spiral. From Earth's southern half it looks like a torn piece of cloud. This model is the Large Magellanic Cloud.", radius: 6, view: 20, pos: [-36, 34, 62], tilt: [0.3, 0.5, 0.8], style: "cloud", core: "#fff6e8", arm: "#f0c8ff" },
       { id: "whirlpool", name: "Whirlpool", kind: "Spiral galaxy", au: "23 million light-years", year: "Billions", diameter: "About 76,000 light-years", fact: "A spiral seen almost face-on, so the arms are easy to trace. A smaller galaxy is pulling on one arm. Astronomers call the pair Messier 51.", radius: 8, view: 26, pos: [108, 6, 36], tilt: [0.25, 0.15, 0.05], style: "spiral", core: "#fff4d8", arm: "#b7d4ff" },
       { id: "sombrero", name: "Sombrero", kind: "Edge-on spiral galaxy", au: "31 million light-years", year: "Billions", diameter: "About 50,000 light-years", fact: "A spiral seen from the side. The dark line is dust blocking starlight, and it makes the galaxy look like a wide-brimmed hat. Astronomers call it Messier 104.", radius: 9, view: 28, pos: [-88, -18, -78], tilt: [0.15, 0.55, 0.05], style: "edge", core: "#fff3d4", arm: "#f2e2b8" },
-      { id: "pillars", name: "Pillars", kind: "Nebula", au: "7,000 light-years", year: "Eagle Nebula", diameter: "About 5 light-years tall", view: 26, fact: "Towers of gas and dust where new stars are forming. The card shows Hubble on the left and James Webb on the right. The shape in space is a 3D model of those towers. You can fly around it. It is not a world you can walk on." }
+      { id: "pillars", name: "Pillars", kind: "Nebula", au: "7,000 light-years", year: "Eagle Nebula", diameter: "About 5 light-years tall", view: 26, fact: "Towers of gas and dust where new stars are forming. The card shows Hubble on the left and James Webb on the right. The shape in space is a 3D model of those towers. You can fly around it. It is not a world you can walk on." },
+      { id: "crab", name: "Crab", kind: "Supernova", au: "6,500 light-years", year: "Seen in 1054", diameter: "About 11 light-years across", view: 32, fact: "A star blew apart, and people on Earth saw the flash in the year 1054. The round part is the cloud. The two spikes are jets. Colors are painted on so you can tell the pieces apart. You can fly around it. It is not a world you can walk on." },
+      { id: "casa", name: "Cas A", kind: "Supernova", au: "11,000 light-years", year: "About 350 years ago", diameter: "About 15 light-years across", view: 28, fact: "The wreckage of a star in the constellation Cassiopeia. The light from the explosion reached Earth about 350 years ago. This shape is the 2025 model. That file had no color, so blue is toward the inside and orange is toward the outside. You can fly around it." }
     ];
     const PLANETS = BODIES.filter((b) => b.orbit);
     const TOUR = ["sun", "mercury", "venus", "earth", "mars", "jupiter", "saturn", "uranus", "neptune", "pluto", "blackhole", "milkyway", "andromeda", "triangulum", "magellanic", "whirlpool", "sombrero"];
     const HOLE = new THREE.Vector3(-46, 9, -28);
 
-    const state = { paused: false, speed: 1, focus: null, touring: false, tourIndex: 0, walking: null };
+    const state = { paused: false, speed: 1, focus: null, touring: false, tourIndex: 0, walking: null, suit: "astronaut" };
     const keys = new Set();
     let injected = null;
     const stick = { x: 0, y: 0 };
@@ -303,21 +308,26 @@
       galaxySpins.push(spin);
     }
     const loader3d = new GLTFLoader();
-    loader3d.load("models/pillars.glb", (gltf) => {
-      gltf.scene.traverse((obj) => {
-        if (obj.isMesh) {
-          obj.userData.id = "pillars";
-          if (obj.material) {
-            obj.material.vertexColors = true;
-            obj.material.side = THREE.DoubleSide;
-            obj.material.needsUpdate = true;
+    function placeModel(url, id, x, y, z) {
+      loader3d.load(url, (gltf) => {
+        gltf.scene.traverse((obj) => {
+          if (obj.isMesh) {
+            obj.userData.id = id;
+            if (obj.material) {
+              obj.material.vertexColors = true;
+              obj.material.side = THREE.DoubleSide;
+              obj.material.needsUpdate = true;
+            }
           }
-        }
+        });
+        gltf.scene.position.set(x, y, z);
+        scene.add(gltf.scene);
+        live.set(id, gltf.scene.position);
       });
-      gltf.scene.position.set(24, -30, -92);
-      scene.add(gltf.scene);
-      live.set("pillars", gltf.scene.position);
-    });
+    }
+    placeModel("models/pillars.glb", "pillars", 24, -30, -92);
+    placeModel("models/crab.glb", "crab", -78, 22, -108);
+    placeModel("models/casa.glb", "casa", 72, 16, -118);
     live.set("blackhole", HOLE);
     live.set("sun", new THREE.Vector3());
 
@@ -340,6 +350,41 @@
       return BODIES.find((b) => b.id === id) || planetObjs.find((o) => o.moonId === id)?.moonInfo;
     }
 
+    const SUITS = [
+      ["astronaut", "Astronaut", "models/astronaut.glb"],
+      ["mercury", "Mercury", "models/mercury-suit.glb"],
+      ["aces", "Orange", "models/aces.glb"],
+      ["mark3", "Mark III", "models/mark3.glb"],
+      ["gemini", "Gemini", "models/gemini.glb"]
+    ];
+    function suitFor(id) {
+      if (id === "mercury") return "mercury";
+      if (id === "mars") return "mark3";
+      if (id === "moon") return "gemini";
+      if (id === "earth") return "aces";
+      return "astronaut";
+    }
+    function attachSuit(group, suitId, person) {
+      const url = SUITS.find((s) => s[0] === suitId)[2];
+      const old = group.getObjectByName("suit");
+      if (old) group.remove(old);
+      state.suit = suitId;
+      new GLTFLoader().load(url, (gltf) => {
+        if (state.suit !== suitId) return;
+        const model = gltf.scene;
+        model.name = "suit";
+        const box = new THREE.Box3().setFromObject(model);
+        const s = (person * 1.55) / Math.max(box.max.y - box.min.y, 1e-6);
+        model.scale.setScalar(s);
+        const fitted = new THREE.Box3().setFromObject(model);
+        model.position.set(-(fitted.min.x + fitted.max.x) / 2, -fitted.min.y, -(fitted.min.z + fitted.max.z) / 2);
+        group.add(model);
+      });
+      document.querySelectorAll("#suitRow button").forEach((node) => {
+        node.style.background = node.dataset.suit === suitId ? "#e7c98a" : "transparent";
+        node.style.color = node.dataset.suit === suitId ? "#140d09" : "#f4efe6";
+      });
+    }
     function startWalk(id) {
       const b = body(id);
       if (!b || !b.orbit) return;
@@ -356,19 +401,11 @@
       const g = new THREE.Group();
       const person = Math.max(0.055, b.radius * 0.2);
       g.add(new THREE.PointLight(0xfff6e8, 1.4, person * 18, 2));
-      new GLTFLoader().load(id === "mercury" ? "models/mercury-suit.glb" : "models/astronaut.glb", (gltf) => {
-        const model = gltf.scene;
-        const box = new THREE.Box3().setFromObject(model);
-        const s = (person * 1.55) / Math.max(box.max.y - box.min.y, 1e-6);
-        model.scale.setScalar(s);
-        const fitted = new THREE.Box3().setFromObject(model);
-        model.position.set(-(fitted.min.x + fitted.max.x) / 2, -fitted.min.y, -(fitted.min.z + fitted.max.z) / 2);
-        g.add(model);
-      });
       entry.spin.add(g);
       walker.group = g;
       walker.person = person;
       showWalk(b);
+      attachSuit(g, suitFor(id), person);
     }
     function stopWalk() {
       if (walker.group) walker.group.parent.remove(walker.group);
@@ -409,6 +446,11 @@
       document.getElementById("walkHud").classList.remove("hidden");
       document.getElementById("walkTitle").textContent = "On " + b.name;
       document.getElementById("walkNote").textContent = b.kind.toLowerCase().includes("giant") ? "You are on the cloud tops, not solid ground." : "The ground curves because this model planet is small.";
+      const row = document.getElementById("suitRow");
+      row.innerHTML = SUITS.map((s) => `<button type="button" data-suit="${s[0]}" style="height:44px;border-radius:999px;border:1px solid #3a342c;padding:0 12px;white-space:nowrap">${s[1]}</button>`).join("");
+      row.querySelectorAll("button").forEach((node) => {
+        node.onclick = () => attachSuit(walker.group, node.dataset.suit, walker.person);
+      });
     }
     function setFocus(id) {
       if (state.walking) stopWalk();
