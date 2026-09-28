@@ -26,7 +26,11 @@
     button.on { background: #e4b15a; color: #07080c; border-color: #e4b15a; }
     .bottom { display: flex; flex-direction: column; gap: 10px; }
     @media (min-width: 900px) { .bottom { flex-direction: row; align-items: flex-end; justify-content: space-between; } }
-    .panel { max-width: 24rem; max-height: 42vh; overflow: auto; background: #14161eeb; border: 1px solid #2c3040; border-radius: 16px; padding: 16px; }
+    .panel { max-width: 18rem; background: #14161e66; border: 1px solid #2c3040; border-radius: 16px; padding: 8px 12px; }
+    .panel .details { display: none; }
+    .panel.open, .panel:hover { max-width: 24rem; max-height: 46vh; overflow: auto; background: #14161eb8; padding: 16px; }
+    .panel.open .details, .panel:hover .details { display: block; }
+    .panel .bar { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
     .panel h2 { margin: 0; font-family: Georgia, serif; font-size: 28px; font-weight: 500; }
     .kicker { letter-spacing: 0.14em; text-transform: uppercase; color: #e4b15a; font-size: 12px; }
     .dock { margin-left: auto; width: min(100%, 40rem); background: #14161eeb; border: 1px solid #2c3040; border-radius: 16px; padding: 10px; }
@@ -113,7 +117,7 @@
     const TOUR = ["sun", "mercury", "venus", "earth", "mars", "jupiter", "saturn", "uranus", "neptune", "pluto", "blackhole", "milkyway", "andromeda", "triangulum", "magellanic", "whirlpool", "sombrero"];
     const HOLE = new THREE.Vector3(-46, 9, -28);
 
-    const state = { paused: false, speed: 1, focus: null, touring: false, tourIndex: 0, walking: null, suit: "astronaut" };
+    const state = { paused: false, speed: 1, focus: null, touring: false, tourIndex: 0, walking: null, suit: "astronaut", panelPinned: false };
     const keys = new Set();
     let injected = null;
     const stick = { x: 0, y: 0 };
@@ -127,9 +131,9 @@
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(42, innerWidth / innerHeight, 0.02, 500);
     camera.position.set(28, 24, 48);
-    scene.add(new THREE.AmbientLight(0xffffff, 0.12));
-    const sunLight = new THREE.PointLight(0xfff1d6, 140, 220, 2);
-    scene.add(sunLight);
+    scene.add(new THREE.AmbientLight(0xffffff, 0.45));
+    scene.add(new THREE.HemisphereLight(0xd7e4ff, 0x2a2118, 0.35));
+    scene.add(new THREE.PointLight(0xfff4dc, 4, 0, 0));
 
     function tex(draw, w = 512, h = 256) {
       const c = document.createElement("canvas");
@@ -216,7 +220,8 @@
       const pivot = new THREE.Group();
       const spin = new THREE.Group();
       spin.rotation.z = p.tilt;
-      const mesh = new THREE.Mesh(new THREE.SphereGeometry(p.radius, 40, 40), new THREE.MeshStandardMaterial({ map: wrapMaps[p.id] || planetMap(p.id), roughness: 0.72 }));
+      const surface = wrapMaps[p.id] || planetMap(p.id);
+      const mesh = new THREE.Mesh(new THREE.SphereGeometry(p.radius, 40, 40), new THREE.MeshStandardMaterial({ map: surface, roughness: 0.72, metalness: 0, emissive: 0xffffff, emissiveMap: surface, emissiveIntensity: 0.42 }));
       mesh.userData.id = p.id;
       spin.add(mesh);
       if (p.id === "saturn") {
@@ -233,7 +238,7 @@
       ].filter((m) => m.parent === p.id);
       for (const m of moonsHere) {
         const moonMap = wrapMaps[m.id] || null;
-        const meshMoon = new THREE.Mesh(new THREE.SphereGeometry(m.radius, 24, 24), new THREE.MeshStandardMaterial({ color: moonMap ? 0xffffff : m.color, map: moonMap, roughness: 0.9 }));
+        const meshMoon = new THREE.Mesh(new THREE.SphereGeometry(m.radius, 24, 24), new THREE.MeshStandardMaterial({ color: moonMap ? 0xffffff : m.color, map: moonMap, emissive: moonMap ? 0xffffff : m.color, emissiveMap: moonMap, emissiveIntensity: moonMap ? 0.4 : 0.25, roughness: 0.9 }));
         meshMoon.userData.id = m.id;
         const holder = new THREE.Group();
         holder.add(meshMoon);
@@ -313,11 +318,10 @@
         gltf.scene.traverse((obj) => {
           if (obj.isMesh) {
             obj.userData.id = id;
-            if (obj.material) {
-              obj.material.vertexColors = true;
-              obj.material.side = THREE.DoubleSide;
-              obj.material.needsUpdate = true;
-            }
+            const color = obj.geometry.getAttribute("color");
+            const prev = Array.isArray(obj.material) ? obj.material : [obj.material];
+            const map = prev.find((mat) => mat && mat.map)?.map || null;
+            obj.material = new THREE.MeshBasicMaterial({ color: 0xffffff, map, vertexColors: !!color, side: THREE.DoubleSide, toneMapped: false });
           }
         });
         gltf.scene.position.set(x, y, z);
@@ -422,7 +426,7 @@
       const b = state.focus ? body(state.focus) : null;
       if (!b) { el.classList.add("hidden"); el.innerHTML = ""; return; }
       el.classList.remove("hidden");
-      const walk = b.orbit ? `<button class="primary" id="walkBtn" type="button">Walk on ${b.name}</button>` : "";
+      const walk = b.orbit ? `<button class="primary" id="walkBtn" type="button">Walk</button>` : "";
       const yearLabel = b.kind.toLowerCase().includes("galaxy") ? "Stars" : b.kind.toLowerCase().includes("nebula") ? "Where" : "Year";
       const shots = {
         mercury: ["mercury-colors.jpg", "mercury-basin.jpg", "mercury-globe.jpg", "mercury-limb.jpg", "mercury-crater.jpg"],
@@ -436,7 +440,13 @@
       const parent = (b.id === "earth" || b.id === "jupiter") ? b.id : planetObjs.find((o) => o.moonId === b.id)?.moonInfo.parent;
       const family = parent ? planetObjs.filter((o) => o.moonInfo && o.moonInfo.parent === parent) : [];
       const moonBtns = family.map((o) => `<button type="button" class="moonbtn" data-id="${o.moonId}" style="height:44px;border-radius:999px;margin:4px 6px 0 0">${o.moonInfo.name}</button>`).join("");
-      el.innerHTML = `<div class="kicker">${b.kind}</div><h2>${b.name}</h2><p><b>Distance</b> ${b.au}<br><b>${yearLabel}</b> ${b.year}<br><b>Diameter</b> ${b.diameter}</p><p>${b.fact}</p>${photoWrap}<div>${moonBtns}</div>${walk}`;
+      el.classList.toggle("open", state.panelPinned);
+      el.classList.toggle("pinned", state.panelPinned);
+      el.innerHTML = `<div class="bar"><div><div class="kicker">${b.kind}</div><h2>${b.name}</h2></div><div class="row">${walk}<button id="factsBtn" type="button">${state.panelPinned ? "Hide" : "Facts"}</button></div></div><div class="details"><p><b>Distance</b> ${b.au}<br><b>${yearLabel}</b> ${b.year}<br><b>Diameter</b> ${b.diameter}</p><p>${b.fact}</p>${photoWrap}<div>${moonBtns}</div></div>`;
+      el.onmouseenter = () => el.classList.add("open");
+      el.onmouseleave = () => { if (!state.panelPinned) el.classList.remove("open"); };
+      const factsBtn = document.getElementById("factsBtn");
+      if (factsBtn) factsBtn.onclick = () => { state.panelPinned = !state.panelPinned; renderPanel(); };
       const btn = document.getElementById("walkBtn");
       if (btn) btn.onclick = () => startWalk(b.id);
       el.querySelectorAll(".moonbtn").forEach((node) => { node.onclick = () => setFocus(node.getAttribute("data-id")); });
