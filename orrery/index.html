@@ -181,6 +181,11 @@
     const sprite = new THREE.Sprite(new THREE.SpriteMaterial({ map: glow, transparent: true, blending: THREE.AdditiveBlending, depthWrite: false }));
     sprite.scale.set(10, 10, 1); scene.add(sprite);
 
+    const nasaMaps = {
+      jupiter: new THREE.TextureLoader().load("textures/jupiter.jpg"),
+      saturn: new THREE.TextureLoader().load("textures/saturn.jpg"),
+    };
+    for (const t of Object.values(nasaMaps)) t.colorSpace = THREE.SRGBColorSpace;
     const planetObjs = [];
     for (const p of PLANETS) {
       const tilt = new THREE.Group();
@@ -188,7 +193,7 @@
       const pivot = new THREE.Group();
       const spin = new THREE.Group();
       spin.rotation.z = p.tilt;
-      const mesh = new THREE.Mesh(new THREE.SphereGeometry(p.radius, 40, 40), new THREE.MeshStandardMaterial({ map: planetMap(p.id), roughness: 0.72 }));
+      const mesh = new THREE.Mesh(new THREE.SphereGeometry(p.radius, 40, 40), new THREE.MeshStandardMaterial({ map: nasaMaps[p.id] || planetMap(p.id), roughness: 0.72 }));
       mesh.userData.id = p.id;
       spin.add(mesh);
       if (p.id === "saturn") {
@@ -347,7 +352,8 @@
       const parent = (b.id === "earth" || b.id === "jupiter") ? b.id : planetObjs.find((o) => o.moonId === b.id)?.moonInfo.parent;
       const family = parent ? planetObjs.filter((o) => o.moonInfo && o.moonInfo.parent === parent) : [];
       const moonBtns = family.map((o) => `<button type="button" class="moonbtn" data-id="${o.moonId}" style="height:44px;border-radius:999px;margin:4px 6px 0 0">${o.moonInfo.name}</button>`).join("");
-      el.innerHTML = `<div class="kicker">${b.kind}</div><h2>${b.name}</h2><p><b>Distance</b> ${b.au}<br><b>${yearLabel}</b> ${b.year}<br><b>Diameter</b> ${b.diameter}</p><p>${b.fact}</p><div>${moonBtns}</div>${walk}`;
+      const photo = b.id === "jupiter" || b.id === "saturn" ? `<img alt="${b.name} from NASA" src="textures/${b.id}-photo.jpg" style="width:100%;border-radius:12px;margin-top:10px">` : "";
+      el.innerHTML = `<div class="kicker">${b.kind}</div><h2>${b.name}</h2><p><b>Distance</b> ${b.au}<br><b>${yearLabel}</b> ${b.year}<br><b>Diameter</b> ${b.diameter}</p><p>${b.fact}</p>${photo}<div>${moonBtns}</div>${walk}`;
       const btn = document.getElementById("walkBtn");
       if (btn) btn.onclick = () => startWalk(b.id);
       el.querySelectorAll(".moonbtn").forEach((node) => { node.onclick = () => setFocus(node.getAttribute("data-id")); });
