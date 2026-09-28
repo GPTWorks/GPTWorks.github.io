@@ -81,6 +81,7 @@
   </div>
   <script type="module">
     import * as THREE from "https://unpkg.com/three@0.170.0/build/three.module.js";
+    import { GLTFLoader } from "https://unpkg.com/three@0.170.0/examples/jsm/loaders/GLTFLoader.js";
 
     const SPEEDS = [0.25, 0.5, 1, 2, 5, 12];
     const BODIES = [
@@ -101,7 +102,7 @@
       { id: "magellanic", name: "Magellanic Cloud", kind: "Dwarf galaxy", au: "160,000 light-years", year: "About 30 billion", diameter: "About 14,000 light-years", fact: "A small, messy galaxy that orbits the Milky Way. It has no neat spiral. From Earth's southern half it looks like a torn piece of cloud. This model is the Large Magellanic Cloud.", radius: 6, view: 20, pos: [-36, 34, 62], tilt: [0.3, 0.5, 0.8], style: "cloud", core: "#fff6e8", arm: "#f0c8ff" },
       { id: "whirlpool", name: "Whirlpool", kind: "Spiral galaxy", au: "23 million light-years", year: "Billions", diameter: "About 76,000 light-years", fact: "A spiral seen almost face-on, so the arms are easy to trace. A smaller galaxy is pulling on one arm. Astronomers call the pair Messier 51.", radius: 8, view: 26, pos: [108, 6, 36], tilt: [0.25, 0.15, 0.05], style: "spiral", core: "#fff4d8", arm: "#b7d4ff" },
       { id: "sombrero", name: "Sombrero", kind: "Edge-on spiral galaxy", au: "31 million light-years", year: "Billions", diameter: "About 50,000 light-years", fact: "A spiral seen from the side. The dark line is dust blocking starlight, and it makes the galaxy look like a wide-brimmed hat. Astronomers call it Messier 104.", radius: 9, view: 28, pos: [-88, -18, -78], tilt: [0.15, 0.55, 0.05], style: "edge", core: "#fff3d4", arm: "#f2e2b8" },
-      { id: "pillars", name: "Pillars", kind: "Nebula", au: "7,000 light-years", year: "Eagle Nebula", diameter: "About 5 light-years tall", view: 26, fact: "Towers of gas and dust where new stars are forming. The picture on the left is from Hubble. The one on the right is from the James Webb Space Telescope. This is a flat picture you can fly up to, not a solid place." }
+      { id: "pillars", name: "Pillars", kind: "Nebula", au: "7,000 light-years", year: "Eagle Nebula", diameter: "About 5 light-years tall", view: 26, fact: "Towers of gas and dust where new stars are forming. The card shows Hubble on the left and James Webb on the right. The shape in space is a 3D model of those towers. You can fly around it. It is not a world you can walk on." }
     ];
     const PLANETS = BODIES.filter((b) => b.orbit);
     const TOUR = ["sun", "mercury", "venus", "earth", "mars", "jupiter", "saturn", "uranus", "neptune", "pluto", "blackhole", "milkyway", "andromeda", "triangulum", "magellanic", "whirlpool", "sombrero"];
@@ -301,13 +302,22 @@
       live.set(g.id, group.position);
       galaxySpins.push(spin);
     }
-    const pillarTex = new THREE.TextureLoader().load("textures/pillars.jpg");
-    pillarTex.colorSpace = THREE.SRGBColorSpace;
-    const pillar = new THREE.Mesh(new THREE.PlaneGeometry(14, 13.5), new THREE.MeshBasicMaterial({ map: pillarTex, side: THREE.DoubleSide }));
-    pillar.position.set(24, -30, -92);
-    pillar.userData.id = "pillars";
-    scene.add(pillar);
-    live.set("pillars", pillar.position);
+    const loader3d = new GLTFLoader();
+    loader3d.load("models/pillars.glb", (gltf) => {
+      gltf.scene.traverse((obj) => {
+        if (obj.isMesh) {
+          obj.userData.id = "pillars";
+          if (obj.material) {
+            obj.material.vertexColors = true;
+            obj.material.side = THREE.DoubleSide;
+            obj.material.needsUpdate = true;
+          }
+        }
+      });
+      gltf.scene.position.set(24, -30, -92);
+      scene.add(gltf.scene);
+      live.set("pillars", gltf.scene.position);
+    });
     live.set("blackhole", HOLE);
     live.set("sun", new THREE.Vector3());
 
@@ -345,13 +355,16 @@
       if (walker.group) walker.group.parent.remove(walker.group);
       const g = new THREE.Group();
       const person = Math.max(0.055, b.radius * 0.2);
-      const suit = new THREE.Mesh(new THREE.CapsuleGeometry(person * 0.2, person * 0.46, 4, 8), new THREE.MeshStandardMaterial({ color: 0xd7d0c4 }));
-      suit.position.y = person * 0.62;
-      const head = new THREE.Mesh(new THREE.SphereGeometry(person * 0.24, 16, 16), new THREE.MeshStandardMaterial({ color: 0xf3efe6 }));
-      head.position.y = person * 1.22;
-      const visor = new THREE.Mesh(new THREE.SphereGeometry(person * 0.1, 12, 12), new THREE.MeshBasicMaterial({ color: 0x1c2836 }));
-      visor.position.set(0, person * 1.24, -person * 0.18);
-      g.add(suit, head, visor, new THREE.PointLight(0xfff6e8, 1.4, person * 18, 2));
+      g.add(new THREE.PointLight(0xfff6e8, 1.4, person * 18, 2));
+      new GLTFLoader().load(id === "mercury" ? "models/mercury-suit.glb" : "models/astronaut.glb", (gltf) => {
+        const model = gltf.scene;
+        const box = new THREE.Box3().setFromObject(model);
+        const s = (person * 1.55) / Math.max(box.max.y - box.min.y, 1e-6);
+        model.scale.setScalar(s);
+        const fitted = new THREE.Box3().setFromObject(model);
+        model.position.set(-(fitted.min.x + fitted.max.x) / 2, -fitted.min.y, -(fitted.min.z + fitted.max.z) / 2);
+        g.add(model);
+      });
       entry.spin.add(g);
       walker.group = g;
       walker.person = person;
