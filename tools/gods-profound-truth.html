@@ -61,52 +61,41 @@
     <script src="../assets/js/breakpoints.min.js"></script>
     <script src="../assets/js/util.js"></script>
     <script src="../assets/js/main.js"></script>
-    <script src="config.js"></script>
+    <script src="../config.js"></script>
     <script>
-        const apiKey = OPENAI_API_KEY;
-    
         async function fetchResponse(prompt) {
-    try {
-        const response = await fetch("https://api.openai.com/v1/chat/completions", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": `Bearer ${OPENAI_API_KEY}`,
-            },
-            body: JSON.stringify({
-                model: "gpt-4",
-                messages: [{ role: "user", content: prompt }],
-                max_tokens: 150,
-            }),
-        });
+            try {
+                if (typeof OPENAI_API_KEY !== "string" || !OPENAI_API_KEY.trim()) {
+                    throw new Error("OpenAI API key is not configured.");
+                }
 
-        if (!response.ok) {
-            throw new Error(`API Error: ${response.status}`);
-        }
+                const response = await fetch("https://api.openai.com/v1/chat/completions", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: `Bearer ${OPENAI_API_KEY}`,
+                    },
+                    body: JSON.stringify({
+                        model: "gpt-4",
+                        messages: [{ role: "user", content: prompt }],
+                        max_tokens: 150,
+                    }),
+                });
 
-        const data = await response.json();
-        return data.choices[0].message.content;
-    } catch (error) {
-        console.error("Error:", error);
-        return "Error fetching response. Check console for details.";
-    }
-}
-async function fetchResponse(prompt) {
-            const response = await fetch("https://api.openai.com/v1/completions", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    Authorization: `Bearer ${apiKey}`,
-                },
-                body: JSON.stringify({
-                    model: "gpt-4",
-                    prompt: prompt,
-                    max_tokens: 100,
-                }),
-            });
-    
-            const data = await response.json();
-            return data.choices[0].text;
+                if (!response.ok) {
+                    throw new Error(`API Error: ${response.status}`);
+                }
+
+                const data = await response.json();
+                const content = data.choices?.[0]?.message?.content;
+                if (typeof content !== "string" || !content.trim()) {
+                    throw new Error("API returned no response text.");
+                }
+                return content;
+            } catch (error) {
+                console.error("Error:", error);
+                return "Error fetching response. Check console for details.";
+            }
         }
         document.querySelector("#submit").addEventListener("click", async () => {
     const inputField = document.querySelector("#input");
@@ -121,7 +110,7 @@ async function fetchResponse(prompt) {
     outputDiv.innerHTML = "<p>Loading response...</p>"; // Show loading state
 
     const output = await fetchResponse(prompt);
-    outputDiv.innerHTML = `<p>${output}</p>`; // Display response
+    outputDiv.textContent = output; // Display response as plain text
 });
     </script>   
 </body>
