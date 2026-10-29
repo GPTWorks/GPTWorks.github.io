@@ -10,6 +10,7 @@
         textarea, button { margin: 0.3em 0; padding: 0.5em; width: 100%; max-width: 500px; }
         button { background: #4a90e2; color: white; border: none; cursor: pointer; }
         #response { margin-top: 1em; padding: 1em; background: white; border-left: 3px solid #4a90e2; min-height: 60px; }
+        .views { margin: 1em 0; font-size: 0.95em; color: #555; }
     </style>
 </head>
 <body class="is-preload">
@@ -18,6 +19,7 @@
             <div class="inner">
                 <h1>Nova</h1>
                 <p>AI-powered tool (in development).</p>
+                <p class="views">Views: <span id="viewCount">...</span></p>
 
                 <div class="demo">
                     <h2>Try the Demo</h2>
@@ -28,17 +30,6 @@
                 </div>
 
                 <p><small>Simulated responses only. Real AI integration coming later.</small></p>
-
-                <h2>Comments</h2>
-                <div id="comments"></div>
-                <script src="https://utteranc.es/client.js"
-                        repo="GPTWorks/GPTWorks.github.io"
-                        issue-term="pathname"
-                        label="comments"
-                        theme="github-light"
-                        crossorigin="anonymous"
-                        async>
-                </script>
 
                 <ul class="actions">
                     <li><a href="../" class="button">Back to GPTWorks</a></li>
@@ -59,6 +50,11 @@
             ];
             response.innerHTML = '<strong>Nova:</strong> ' + replies[Math.floor(Math.random() * replies.length)] + '<br><br><em>(Demo response)</em>';
         }
+
+        fetch('https://countapi.mileshilliard.com/api/v1/hit/gptworks-nova')
+            .then(r => r.json())
+            .then(d => { document.getElementById('viewCount').textContent = d.value || '0'; })
+            .catch(() => { document.getElementById('viewCount').textContent = '—'; });
     </script>
 </body>
 </html>
