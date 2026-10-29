@@ -15,6 +15,11 @@
     <noscript><link rel="stylesheet" href="assets/css/noscript.css"></noscript>
     <style>
         .views { margin: 0.5em 0 1em; font-size: 0.95em; color: #555; }
+        form .fields { display: flex; flex-wrap: wrap; gap: 1em; }
+        form .field { flex: 1 1 200px; }
+        form .field.half { flex: 1 1 45%; }
+        form input, form textarea { width: 100%; padding: 0.6em; }
+        form button { margin-top: 0.5em; }
     </style>
 </head>
 <body class="is-preload">
@@ -114,7 +119,27 @@
         <section id="contact" class="wrapper style1 fade-up">
             <div class="inner">
                 <h2>Get in touch</h2>
-                <p>Have a question or want to share feedback? Email <a href="mailto:gptworks1@gmail.com">gptworks1@gmail.com</a>.</p>
+                <p>Have a question or feedback? Send a message below.</p>
+                <form action="https://formspree.io/f/your-form-id" method="POST">
+                    <div class="fields">
+                        <div class="field half">
+                            <label for="name">Name</label>
+                            <input type="text" name="name" id="name" required>
+                        </div>
+                        <div class="field half">
+                            <label for="email">Email</label>
+                            <input type="email" name="email" id="email" required>
+                        </div>
+                        <div class="field">
+                            <label for="message">Message</label>
+                            <textarea name="message" id="message" rows="4" required></textarea>
+                        </div>
+                    </div>
+                    <ul class="actions">
+                        <li><button type="submit" class="button submit">Send Message</button></li>
+                    </ul>
+                </form>
+                <p><small>Messages are sent via a form service. Replace the form action with your own free Formspree endpoint to activate it.</small></p>
             </div>
         </section>
     </div>
