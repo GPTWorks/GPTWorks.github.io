@@ -5,6 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Helioscape | GPTWorks</title>
     <link rel="stylesheet" href="../assets/css/main.css">
+    <style>
+        .demo { background: #f8f9fa; padding: 1.5em; border-radius: 8px; margin: 1em 0; text-align: center; }
+        .planet { display: inline-block; margin: 1em; cursor: pointer; padding: 1em; background: white; border-radius: 50%; width: 80px; height: 80px; line-height: 80px; border: 2px solid #4a90e2; }
+        .planet:hover { background: #e8f0fe; }
+        #info { margin-top: 1em; padding: 1em; background: white; border-left: 3px solid #4a90e2; text-align: left; }
+    </style>
 </head>
 <body class="is-preload">
     <div id="wrapper">
@@ -12,12 +18,48 @@
             <div class="inner">
                 <h1>Helioscape</h1>
                 <p>Solar system and space visualization experience.</p>
-                <p>Project page in development. More details coming soon.</p>
+
+                <div class="demo">
+                    <h2>Try the Demo</h2>
+                    <p>Click a planet:</p>
+                    <div class="planet" onclick="showInfo('Mercury')">Mercury</div>
+                    <div class="planet" onclick="showInfo('Venus')">Venus</div>
+                    <div class="planet" onclick="showInfo('Earth')">Earth</div>
+                    <div class="planet" onclick="showInfo('Mars')">Mars</div>
+                    <div class="planet" onclick="showInfo('Jupiter')">Jupiter</div>
+                    <div id="info">Select a planet to see basic info.</div>
+                </div>
+
+                <p><small>Simple interactive selector. Full visualization coming later.</small></p>
+
+                <h2>Comments</h2>
+                <div id="comments"></div>
+                <script src="https://utteranc.es/client.js"
+                        repo="GPTWorks/GPTWorks.github.io"
+                        issue-term="pathname"
+                        label="comments"
+                        theme="github-light"
+                        crossorigin="anonymous"
+                        async>
+                </script>
+
                 <ul class="actions">
                     <li><a href="../" class="button">Back to GPTWorks</a></li>
                 </ul>
             </div>
         </section>
     </div>
+    <script>
+        const facts = {
+            Mercury: 'Closest planet to the Sun. Very small and has extreme temperature swings.',
+            Venus: 'Hottest planet. Thick toxic atmosphere.',
+            Earth: 'Only known planet with life. Has liquid water on the surface.',
+            Mars: 'The Red Planet. Has the tallest volcano and deepest canyon in the solar system.',
+            Jupiter: 'Largest planet. A gas giant with a famous storm bigger than Earth.'
+        };
+        function showInfo(planet) {
+            document.getElementById('info').innerHTML = '<strong>' + planet + ':</strong> ' + facts[planet];
+        }
+    </script>
 </body>
 </html>
