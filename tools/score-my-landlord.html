@@ -10,6 +10,7 @@
         .review { border-left: 3px solid #4a90e2; padding: 0.5em 1em; margin: 0.5em 0; background: white; }
         input, select, textarea, button { margin: 0.3em 0; padding: 0.5em; width: 100%; max-width: 400px; }
         button { background: #4a90e2; color: white; border: none; cursor: pointer; }
+        .views { margin: 1em 0; font-size: 0.95em; color: #555; }
     </style>
 </head>
 <body class="is-preload">
@@ -18,6 +19,7 @@
             <div class="inner">
                 <h1>Score My Landlord</h1>
                 <p>Tenant-facing landlord review and reference system so renters can know who will hold their home.</p>
+                <p class="views">Views: <span id="viewCount">...</span></p>
 
                 <div class="demo">
                     <h2>Try the Demo</h2>
@@ -45,17 +47,6 @@
 
                 <p><small>This is a simple demo. Reviews are stored only in your browser for this session.</small></p>
 
-                <h2>Comments</h2>
-                <div id="comments"></div>
-                <script src="https://utteranc.es/client.js"
-                        repo="GPTWorks/GPTWorks.github.io"
-                        issue-term="pathname"
-                        label="comments"
-                        theme="github-light"
-                        crossorigin="anonymous"
-                        async>
-                </script>
-
                 <ul class="actions">
                     <li><a href="../" class="button">Back to GPTWorks</a></li>
                 </ul>
@@ -74,6 +65,11 @@
             document.getElementById('reviews').appendChild(div);
             this.reset();
         });
+
+        fetch('https://countapi.mileshilliard.com/api/v1/hit/gptworks-score-my-landlord')
+            .then(r => r.json())
+            .then(d => { document.getElementById('viewCount').textContent = d.value || '0'; })
+            .catch(() => { document.getElementById('viewCount').textContent = '—'; });
     </script>
 </body>
 </html>
