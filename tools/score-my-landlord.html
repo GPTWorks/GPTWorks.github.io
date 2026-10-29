@@ -5,6 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Score My Landlord | GPTWorks</title>
     <link rel="stylesheet" href="../assets/css/main.css">
+    <style>
+        .demo { background: #f8f9fa; padding: 1.5em; border-radius: 8px; margin: 1em 0; }
+        .review { border-left: 3px solid #4a90e2; padding: 0.5em 1em; margin: 0.5em 0; background: white; }
+        input, select, textarea, button { margin: 0.3em 0; padding: 0.5em; width: 100%; max-width: 400px; }
+        button { background: #4a90e2; color: white; border: none; cursor: pointer; }
+    </style>
 </head>
 <body class="is-preload">
     <div id="wrapper">
@@ -12,12 +18,62 @@
             <div class="inner">
                 <h1>Score My Landlord</h1>
                 <p>Tenant-facing landlord review and reference system so renters can know who will hold their home.</p>
-                <p>Project page in development. More details and tools coming soon.</p>
+
+                <div class="demo">
+                    <h2>Try the Demo</h2>
+                    <form id="reviewForm">
+                        <label>Landlord / Property Name</label>
+                        <input type="text" id="landlordName" placeholder="e.g. Oak Street Apartments" required>
+                        <label>Score (1-5)</label>
+                        <select id="score">
+                            <option value="5">5 - Excellent</option>
+                            <option value="4">4 - Good</option>
+                            <option value="3">3 - Average</option>
+                            <option value="2">2 - Poor</option>
+                            <option value="1">1 - Terrible</option>
+                        </select>
+                        <label>Your experience</label>
+                        <textarea id="comment" rows="3" placeholder="What was it like renting from them?"></textarea>
+                        <button type="submit">Add Review</button>
+                    </form>
+                    <div id="reviews">
+                        <h3>Sample Reviews</h3>
+                        <div class="review"><strong>Maple Court Apts</strong> — 4/5<br>Responsive to maintenance requests. Deposit returned on time.</div>
+                        <div class="review"><strong>River View Rentals</strong> — 2/5<br>Hard to reach. Took months to fix a leak.</div>
+                    </div>
+                </div>
+
+                <p><small>This is a simple demo. Reviews are stored only in your browser for this session.</small></p>
+
+                <h2>Comments</h2>
+                <div id="comments"></div>
+                <script src="https://utteranc.es/client.js"
+                        repo="GPTWorks/GPTWorks.github.io"
+                        issue-term="pathname"
+                        label="comments"
+                        theme="github-light"
+                        crossorigin="anonymous"
+                        async>
+                </script>
+
                 <ul class="actions">
                     <li><a href="../" class="button">Back to GPTWorks</a></li>
                 </ul>
             </div>
         </section>
     </div>
+    <script>
+        document.getElementById('reviewForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const name = document.getElementById('landlordName').value;
+            const score = document.getElementById('score').value;
+            const comment = document.getElementById('comment').value || 'No additional comment.';
+            const div = document.createElement('div');
+            div.className = 'review';
+            div.innerHTML = `<strong>${name}</strong> — ${score}/5<br>${comment}`;
+            document.getElementById('reviews').appendChild(div);
+            this.reset();
+        });
+    </script>
 </body>
 </html>
