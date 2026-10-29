@@ -5,6 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Nova | GPTWorks</title>
     <link rel="stylesheet" href="../assets/css/main.css">
+    <style>
+        .demo { background: #f8f9fa; padding: 1.5em; border-radius: 8px; margin: 1em 0; }
+        textarea, button { margin: 0.3em 0; padding: 0.5em; width: 100%; max-width: 500px; }
+        button { background: #4a90e2; color: white; border: none; cursor: pointer; }
+        #response { margin-top: 1em; padding: 1em; background: white; border-left: 3px solid #4a90e2; min-height: 60px; }
+    </style>
 </head>
 <body class="is-preload">
     <div id="wrapper">
@@ -12,12 +18,47 @@
             <div class="inner">
                 <h1>Nova</h1>
                 <p>AI-powered tool (in development).</p>
-                <p>Project page in development. More details coming soon.</p>
+
+                <div class="demo">
+                    <h2>Try the Demo</h2>
+                    <label>Ask Nova something</label>
+                    <textarea id="prompt" rows="3" placeholder="e.g. Help me plan a simple budget"></textarea>
+                    <button onclick="askNova()">Ask</button>
+                    <div id="response"></div>
+                </div>
+
+                <p><small>Simulated responses only. Real AI integration coming later.</small></p>
+
+                <h2>Comments</h2>
+                <div id="comments"></div>
+                <script src="https://utteranc.es/client.js"
+                        repo="GPTWorks/GPTWorks.github.io"
+                        issue-term="pathname"
+                        label="comments"
+                        theme="github-light"
+                        crossorigin="anonymous"
+                        async>
+                </script>
+
                 <ul class="actions">
                     <li><a href="../" class="button">Back to GPTWorks</a></li>
                 </ul>
             </div>
         </section>
     </div>
+    <script>
+        function askNova() {
+            const prompt = document.getElementById('prompt').value.trim();
+            const response = document.getElementById('response');
+            if (!prompt) { response.innerHTML = 'Enter a question or request.'; return; }
+            const replies = [
+                'I can help break that down into smaller steps.',
+                'Here is a simple starting point based on what you asked.',
+                'That sounds useful. A practical approach would be...',
+                'I can outline options for you.'
+            ];
+            response.innerHTML = '<strong>Nova:</strong> ' + replies[Math.floor(Math.random() * replies.length)] + '<br><br><em>(Demo response)</em>';
+        }
+    </script>
 </body>
 </html>
