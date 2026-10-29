@@ -10,6 +10,7 @@
         #canvas { border: 1px solid #ccc; background: #111; margin: 1em auto; display: block; }
         button { margin: 0.5em; padding: 0.5em 1em; background: #4a90e2; color: white; border: none; cursor: pointer; }
         #score { font-size: 1.2em; margin: 0.5em; }
+        .views { margin: 1em 0; font-size: 0.95em; color: #555; text-align: left; }
     </style>
 </head>
 <body class="is-preload">
@@ -18,6 +19,7 @@
             <div class="inner">
                 <h1>Cosmic Drift</h1>
                 <p>Space exploration game and experience.</p>
+                <p class="views">Views: <span id="viewCount">...</span></p>
 
                 <div class="demo">
                     <h2>Try the Demo</h2>
@@ -28,17 +30,6 @@
                 </div>
 
                 <p><small>Very simple click-to-score demo. Full game coming later.</small></p>
-
-                <h2>Comments</h2>
-                <div id="comments"></div>
-                <script src="https://utteranc.es/client.js"
-                        repo="GPTWorks/GPTWorks.github.io"
-                        issue-term="pathname"
-                        label="comments"
-                        theme="github-light"
-                        crossorigin="anonymous"
-                        async>
-                </script>
 
                 <ul class="actions">
                     <li><a href="../" class="button">Back to GPTWorks</a></li>
@@ -72,6 +63,11 @@
         });
         function reset() { score = 0; x = 200; y = 100; document.getElementById('score').textContent = 'Score: 0'; draw(); }
         draw();
+
+        fetch('https://countapi.mileshilliard.com/api/v1/hit/gptworks-cosmic-drift')
+            .then(r => r.json())
+            .then(d => { document.getElementById('viewCount').textContent = d.value || '0'; })
+            .catch(() => { document.getElementById('viewCount').textContent = '—'; });
     </script>
 </body>
 </html>
