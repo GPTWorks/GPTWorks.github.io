@@ -13,6 +13,9 @@
     <title>GPTWorks | Projects</title>
     <link rel="stylesheet" href="assets/css/main.css">
     <noscript><link rel="stylesheet" href="assets/css/noscript.css"></noscript>
+    <style>
+        .views { margin: 0.5em 0 1em; font-size: 0.95em; color: #555; }
+    </style>
 </head>
 <body class="is-preload">
 
@@ -38,6 +41,7 @@
             <div class="inner">
                 <h1>Welcome to GPTWorks</h1>
                 <p>A collection of little projects I make and share for free. Have a look around.</p>
+                <p class="views">Views: <span id="viewCount">...</span></p>
                 <ul class="actions">
                     <li><a href="#tools" class="button scrolly">Explore projects</a></li>
                 </ul>
@@ -133,6 +137,12 @@
     <script src="assets/js/breakpoints.min.js" defer></script>
     <script src="assets/js/util.js" defer></script>
     <script src="assets/js/main.js" defer></script>
+    <script>
+        fetch('https://countapi.mileshilliard.com/api/v1/hit/gptworks-main')
+            .then(r => r.json())
+            .then(d => { document.getElementById('viewCount').textContent = d.value || '0'; })
+            .catch(() => { document.getElementById('viewCount').textContent = '—'; });
+    </script>
 
 </body>
 </html>
