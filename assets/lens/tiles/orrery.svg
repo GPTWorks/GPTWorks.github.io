@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" role="img" aria-label="Orrery">
+  <rect width="800" height="1000" fill="#F7F7F7"/>
+  <svg x="230" y="280" width="340" height="340" viewBox="0 0 24 24"><circle cx="12" cy="12" r="1.8" fill="#1A1A1A" stroke="none"/><circle cx="12" cy="12" r="5" fill="none" stroke="#1A1A1A" stroke-width="1.5"/><circle cx="12" cy="12" r="8.5" fill="none" stroke="#1A1A1A" stroke-width="1.5"/><circle cx="17" cy="12" r="1.15" fill="#1A1A1A"/><circle cx="8.7" cy="8.5" r="0.9" fill="#1A1A1A"/></svg>
+  <text x="400" y="860" text-anchor="middle" font-family="Roboto, Helvetica, Arial, sans-serif" font-size="44" font-weight="700" fill="#1A1A1A">Orrery</text>
+</svg>

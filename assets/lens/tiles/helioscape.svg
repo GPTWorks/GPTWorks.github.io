@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" role="img" aria-label="Helioscape">
+  <rect width="800" height="1000" fill="#F7F7F7"/>
+  <svg x="230" y="280" width="340" height="340" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.3" fill="none" stroke="#1A1A1A" stroke-width="1.5"/><path d="M12 3v2.3M12 18.7V21M3 12h2.3M18.7 12H21M5.6 5.6l1.6 1.6M16.8 16.8l1.6 1.6M18.4 5.6l-1.6 1.6M7.2 16.8 5.6 18.4" fill="none" stroke="#1A1A1A" stroke-width="1.5" stroke-linecap="round"/></svg>
+  <text x="400" y="860" text-anchor="middle" font-family="Roboto, Helvetica, Arial, sans-serif" font-size="44" font-weight="700" fill="#1A1A1A">Helioscape</text>
+</svg>

@@ -1,270 +1,119 @@
 <!DOCTYPE HTML>
 <!--
-    GPTWorks
-    gptworks.github.io
-    Custom site powered by HTML5 UP's Hyperspace template and tailored for innovative GPT tools.
-    Created and maintained by GPTWorks.
+	GPTWorks homepage.
+	Design: Lens by HTML5 UP (html5up.net | @ajlkn)
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+	Lens assets live in assets/lens/ so the site's other pages keep their own theme.
 -->
 <html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    <meta name="description" content="A collection of little projects I make and share for free.">
-    <title>GPTWorks | Projects</title>
-    <link rel="stylesheet" href="assets/css/main.css">
-    <noscript><link rel="stylesheet" href="assets/css/noscript.css"></noscript>
-    <style>
-        .views { margin: 0.5em 0 1em; font-size: 0.95em; color: #555; }
+	<head>
+		<title>GPTWorks | Projects</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<meta name="description" content="A collection of little projects I make and share for free." />
+		<link rel="stylesheet" href="assets/lens/css/main.css" />
+		<link rel="stylesheet" href="assets/lens/css/gptworks.css" />
+		<noscript><link rel="stylesheet" href="assets/lens/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload-0 is-preload-1 is-preload-2">
+		<div id="main" tabindex="-1">
+			<header id="header">
+				<p class="logo"><img src="images/about.jpg" alt="GPTWorks"></p>
+				<h1>Welcome to GPTWorks</h1>
+				<p>A collection of little projects I make and share for free. Have a look around.</p>
+				<p class="views">Views: <span id="viewCount">...</span></p>
+				<p><a href="#thumbnails">Explore projects</a></p>
+			</header>
 
-        /* The document itself scrolls. Later sections stay visible instead of
-           waiting for the template's scroll-in animation, and the intro is not
-           locked to the viewport height. */
-        html, body {
-            height: auto;
-            overflow-x: hidden;
-            overflow-y: auto;
-        }
-        #intro {
-            background-attachment: scroll;
-            min-height: 0 !important;
-            height: auto !important;
-        }
-        #intro .inner,
-        #about .content .inner,
-        #tools .inner,
-        #contact .inner,
-        body.is-preload #intro .inner,
-        body.is-preload #about .content .inner,
-        body.is-preload #tools .inner,
-        body.is-preload #contact .inner,
-        #intro.inactive > .inner,
-        #tools.inactive > .inner,
-        #contact.inactive > .inner,
-        #about section.inactive > .content > .inner {
-            opacity: 1 !important;
-            transform: none !important;
-        }
-        #about section.inactive > .image:before,
-        body.is-preload #about section > .image:before {
-            opacity: 0 !important;
-        }
+			<section id="about">
+				<h2>About GPTWorks</h2>
+				<p>Some projects are practical tools, some are experiments, and some are still taking shape. Everything available here is free to use.</p>
+				<p><a href="generic.html">Learn more</a></p>
+			</section>
 
-        /* Compact project cards only. Colors come from the page theme.
-           Icons are simple interface marks, not product logos. */
-        .project-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(min(100%, 16.5rem), 1fr));
-            gap: 0.7rem;
-            margin: 0;
-        }
-        .project-card {
-            display: grid;
-            grid-template-columns: 1.7rem minmax(0, 1fr);
-            column-gap: 0.7rem;
-            align-items: start;
-            margin: 0;
-            padding: 0.75rem 0.85rem 0.7rem;
-            border: 1px solid color-mix(in srgb, currentColor 22%, transparent);
-            border-radius: 0.25rem;
-        }
-        .project-icon {
-            width: 1.7rem;
-            height: 1.7rem;
-            margin-top: 0.1rem;
-            color: inherit;
-        }
-        .project-icon svg {
-            display: block;
-            width: 100%;
-            height: 100%;
-        }
-        .project-card h3 {
-            margin: 0 0 0.2rem;
-            font-size: 1.02rem;
-            line-height: 1.3;
-        }
-        .project-card p {
-            margin: 0 0 0.45rem;
-            font-size: 0.86rem;
-            line-height: 1.4;
-        }
-        .project-link {
-            font-size: 0.85rem;
-            line-height: 1.3;
-        }
-        #contact fieldset {
-            border: 0;
-            margin: 0;
-            padding: 0;
-            min-inline-size: 0;
-        }
-        #contact-form .fields { display: flex; flex-wrap: wrap; gap: 1em; }
-        #contact-form .field { flex: 1 1 200px; }
-        #contact-form .field.half { flex: 1 1 45%; }
-        #contact-form input, #contact-form textarea { width: 100%; padding: 0.6em; }
-        #contact-form :disabled { cursor: not-allowed; }
-        #contact-form button { margin-top: 0.5em; }
-    </style>
-</head>
-<body class="is-preload">
+			<section id="projects">
+				<h2>Projects</h2>
+				<p>Little projects I'm building and sharing for free. More links will be added as they're ready.</p>
+			</section>
 
-    <!-- Sidebar -->
-    <section id="sidebar">
-        <div class="inner">
-            <nav>
-                <ul>
-                    <li><a href="#intro">Welcome</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#tools">Projects</a></li>
-                    <li><a href="#contact">Get in touch</a></li>
-                </ul>					
-            </nav>
-        </div>
-    </section>
+			<section id="thumbnails">
+				<article>
+					<a class="thumbnail" href="assets/lens/tiles/orrery.svg"><img src="assets/lens/tiles/orrery.svg" alt="Orrery"></a>
+					<h2>Orrery</h2>
+					<p>Explore the solar system, moons, galaxies, and a black hole.</p>
+					<p><a href="orrery/">Explore Orrery</a></p>
+				</article>
+				<article>
+					<a class="thumbnail" href="assets/lens/tiles/landlord.svg"><img src="assets/lens/tiles/landlord.svg" alt="Score My Landlord"></a>
+					<h2>Score My Landlord</h2>
+					<p>Tenant-facing landlord review and reference system so renters can know who will hold their home.</p>
+					<p><a href="tools/score-my-landlord.html">View Project</a></p>
+				</article>
+				<article>
+					<a class="thumbnail" href="assets/lens/tiles/afternumber.svg"><img src="assets/lens/tiles/afternumber.svg" alt="Afternumber"></a>
+					<h2>Afternumber</h2>
+					<p>Forensic switchboard for analyzing spoofed texts and numbers.</p>
+					<p><a href="https://afternumber.grok.me">View Project</a></p>
+				</article>
+				<article>
+					<a class="thumbnail" href="assets/lens/tiles/nova.svg"><img src="assets/lens/tiles/nova.svg" alt="Nova"></a>
+					<h2>Nova</h2>
+					<p>AI-powered tool (in development).</p>
+					<p><a href="tools/nova.html">View Project</a></p>
+				</article>
+				<article>
+					<a class="thumbnail" href="assets/lens/tiles/helioscape.svg"><img src="assets/lens/tiles/helioscape.svg" alt="Helioscape"></a>
+					<h2>Helioscape</h2>
+					<p>Solar system and space visualization experience.</p>
+					<p><a href="https://helioscape.grok.me">View Project</a></p>
+				</article>
+				<article>
+					<a class="thumbnail" href="assets/lens/tiles/cosmic.svg"><img src="assets/lens/tiles/cosmic.svg" alt="Cosmic Drift"></a>
+					<h2>Cosmic Drift</h2>
+					<p>Space exploration game and experience.</p>
+					<p><a href="https://cosmic-drift.grok.me">View Project</a></p>
+				</article>
+			</section>
 
-    <!-- Wrapper -->
-    <div id="wrapper">
+			<section id="contact">
+				<h2>Get in touch</h2>
+				<p id="contact-status">This contact form is unavailable. It is not connected to a delivery service, so a message cannot be sent from this page.</p>
+				<form id="contact-form" method="post" action="#contact" onsubmit="return false" novalidate aria-describedby="contact-status">
+					<fieldset disabled>
+						<div class="fields">
+							<label for="name">Name</label>
+							<input type="text" name="name" id="name" autocomplete="name">
+							<label for="email">Email</label>
+							<input type="email" name="email" id="email" autocomplete="email">
+							<label for="message">Message</label>
+							<textarea name="message" id="message" rows="4"></textarea>
+						</div>
+						<ul class="actions">
+							<li><button type="button" class="button" disabled>Send Message</button></li>
+						</ul>
+					</fieldset>
+				</form>
+			</section>
 
-        <!-- Intro Section -->
-        <section id="intro" class="wrapper style1 fade-up">
-            <div class="inner">
-                <h1>Welcome to GPTWorks</h1>
-                <p>A collection of little projects I make and share for free. Have a look around.</p>
-                <p class="views">Views: <span id="viewCount">...</span></p>
-                <ul class="actions">
-                    <li><a href="#tools" class="button scrolly">Explore projects</a></li>
-                </ul>
-            </div>
-        </section>
+			<footer id="footer">
+				<ul class="copyright">
+					<li>&copy; GPTWorks. All rights reserved.</li>
+					<li><a href="privacy-policy.html">Privacy Policy</a></li>
+					<li>Design: <a href="https://html5up.net/lens">Lens by HTML5 UP</a>.</li>
+				</ul>
+			</footer>
+		</div>
 
-        <!-- About -->
-        <section id="about" class="wrapper style2 spotlights">
-            <section>
-                <span class="image"><img src="images/about.jpg" alt="" data-position="center center"></span>
-                <div class="content">
-                    <div class="inner">
-                        <h2>About GPTWorks</h2>
-                        <p>Some projects are practical tools, some are experiments, and some are still taking shape. Everything available here is free to use.</p>
-                        <ul class="actions">
-                            <li><a href="generic.html" class="button">Learn more</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </section>
-        </section>
-
-        <!-- Projects -->
-        <section id="tools" class="wrapper style3 fade-up">
-            <div class="inner">
-                <h2>Projects</h2>
-                <p>Little projects I'm building and sharing for free. More links will be added as they're ready.</p>
-                <div class="project-grid">
-                    <article class="project-card">
-                        <span class="project-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="1.8" fill="currentColor" stroke="none"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="8.5"/><circle cx="17" cy="12" r="1.15" fill="currentColor" stroke="none"/><circle cx="8.7" cy="8.5" r="0.9" fill="currentColor" stroke="none"/></svg></span>
-                        <div>
-                            <h3>Orrery</h3>
-                            <p>Explore the solar system, moons, galaxies, and a black hole.</p>
-                            <a class="project-link" href="orrery/">Explore Orrery</a>
-                        </div>
-                    </article>
-                    <article class="project-card">
-                        <span class="project-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"><path d="M4 11 12 4.5 20 11"/><path d="M6.5 10.2V19h11v-8.8"/><path d="M12 14.2l.55 1.15 1.25.15-.9.9.25 1.25L12 17.05l-1.15.6.25-1.25-.9-.9 1.25-.15z" fill="currentColor" stroke="none"/></svg></span>
-                        <div>
-                            <h3>Score My Landlord</h3>
-                            <p>Tenant-facing landlord review and reference system so renters can know who will hold their home.</p>
-                            <a class="project-link" href="tools/score-my-landlord.html">View Project</a>
-                        </div>
-                    </article>
-                    <article class="project-card">
-                        <span class="project-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8.2 5h2l.9 2.2-1.3 1a8.2 8.2 0 0 0 3.9 3.9l1-1.3 2.2.9v1.7A1.4 1.4 0 0 1 15.5 15 11.2 11.2 0 0 1 7 6.5 1.4 1.4 0 0 1 8.2 5z"/><path d="M16.2 4.8l3.6 3.6M19.8 4.8l-3.6 3.6"/></svg></span>
-                        <div>
-                            <h3>Afternumber</h3>
-                            <p>Forensic switchboard for analyzing spoofed texts and numbers.</p>
-                            <a class="project-link" href="https://afternumber.grok.me">View Project</a>
-                        </div>
-                    </article>
-                    <article class="project-card">
-                        <span class="project-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M12 3v3.2M12 17.8V21M3 12h3.2M17.8 12H21M5.8 5.8l2.3 2.3M15.9 15.9l2.3 2.3M18.2 5.8l-2.3 2.3M8.1 15.9l-2.3 2.3"/><circle cx="12" cy="12" r="1.7" fill="currentColor" stroke="none"/></svg></span>
-                        <div>
-                            <h3>Nova</h3>
-                            <p>AI-powered tool (in development).</p>
-                            <a class="project-link" href="tools/nova.html">View Project</a>
-                        </div>
-                    </article>
-                    <article class="project-card">
-                        <span class="project-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="3.3"/><path d="M12 3v2.3M12 18.7V21M3 12h2.3M18.7 12H21M5.6 5.6l1.6 1.6M16.8 16.8l1.6 1.6M18.4 5.6l-1.6 1.6M7.2 16.8 5.6 18.4"/></svg></span>
-                        <div>
-                            <h3>Helioscape</h3>
-                            <p>Solar system and space visualization experience.</p>
-                            <a class="project-link" href="https://helioscape.grok.me">View Project</a>
-                        </div>
-                    </article>
-                    <article class="project-card">
-                        <span class="project-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"><path d="M12 3.2c2 2.3 3 5 3 7.8 0 2-.5 3.7-1.3 4.9h-3.4C9.5 14.7 9 13 9 11c0-2.8 1-5.5 3-7.8z"/><path d="M10.2 16.2 8.4 20M13.8 16.2 15.6 20"/><path d="M8.8 12H6.4c.5 1.5 1.3 2.6 2.3 3.3M15.2 12h2.4c-.5 1.5-1.3 2.6-2.3 3.3"/><circle cx="12" cy="10.4" r="1" fill="currentColor" stroke="none"/></svg></span>
-                        <div>
-                            <h3>Cosmic Drift</h3>
-                            <p>Space exploration game and experience.</p>
-                            <a class="project-link" href="https://cosmic-drift.grok.me">View Project</a>
-                        </div>
-                    </article>
-                </div>
-            </div>
-        </section>
-
-        <!-- Contact -->
-        <section id="contact" class="wrapper style1 fade-up">
-            <div class="inner">
-                <h2>Get in touch</h2>
-                <p id="contact-status">This contact form is unavailable. It is not connected to a delivery service, so a message cannot be sent from this page.</p>
-                <form id="contact-form" method="post" action="#contact" onsubmit="return false" novalidate aria-describedby="contact-status">
-                    <fieldset disabled>
-                        <div class="fields">
-                            <div class="field half">
-                                <label for="name">Name</label>
-                                <input type="text" name="name" id="name" autocomplete="name">
-                            </div>
-                            <div class="field half">
-                                <label for="email">Email</label>
-                                <input type="email" name="email" id="email" autocomplete="email">
-                            </div>
-                            <div class="field">
-                                <label for="message">Message</label>
-                                <textarea name="message" id="message" rows="4"></textarea>
-                            </div>
-                        </div>
-                        <ul class="actions">
-                            <li><button type="button" class="button" disabled>Send Message</button></li>
-                        </ul>
-                    </fieldset>
-                </form>
-            </div>
-        </section>
-    </div>
-
-    <!-- Footer -->
-    <footer id="footer" class="wrapper style1-alt">
-        <div class="inner">
-            <ul class="menu">
-  <li>&copy; GPTWorks. All rights reserved.</li>
-  <li><a href="privacy-policy.html">Privacy Policy</a></li>
-</ul>
-        </div>
-    </footer>
-
-    <!-- Scripts -->
-    <script src="assets/js/jquery.min.js" defer></script>
-    <script src="assets/js/jquery.scrollex.min.js" defer></script>
-    <script src="assets/js/jquery.scrolly.min.js" defer></script>
-    <script src="assets/js/browser.min.js" defer></script>
-    <script src="assets/js/breakpoints.min.js" defer></script>
-    <script src="assets/js/util.js" defer></script>
-    <script src="assets/js/main.js" defer></script>
-    <script>
-        fetch('https://countapi.mileshilliard.com/api/v1/hit/gptworks-main')
-            .then(r => r.json())
-            .then(d => { document.getElementById('viewCount').textContent = d.value || '0'; })
-            .catch(() => { document.getElementById('viewCount').textContent = '—'; });
-    </script>
-
-</body>
+		<script src="assets/lens/js/jquery.min.js"></script>
+		<script src="assets/lens/js/browser.min.js"></script>
+		<script src="assets/lens/js/breakpoints.min.js"></script>
+		<script src="assets/lens/js/main.js"></script>
+		<script src="assets/lens/js/gptworks.js"></script>
+		<script>
+			fetch('https://countapi.mileshilliard.com/api/v1/hit/gptworks-main')
+				.then(function (r) { return r.json(); })
+				.then(function (d) { document.getElementById('viewCount').textContent = d.value || '0'; })
+				.catch(function () { document.getElementById('viewCount').textContent = '—'; });
+		</script>
+	</body>
 </html>
