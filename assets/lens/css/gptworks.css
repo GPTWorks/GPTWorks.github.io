@@ -1,0 +1,48 @@
+/* GPTWorks adjustments layered on Lens. Layout, viewer, and teal accent stay Lens.
+   The field is soft white rather than the template's near-black surround. */
+html, body {
+	background-color: #F7F7F7;
+}
+
+#thumbnails article {
+	background: #F7F7F7;
+}
+
+#header .logo {
+	margin: 0 0 1em 0;
+}
+
+#header .logo img {
+	display: block;
+	width: 100%;
+	height: auto;
+}
+
+#about,
+#projects {
+	padding: 0 2.25em 0.5em 2.25em;
+}
+
+#contact {
+	text-align: left;
+	padding: 0.5em 2.25em 0.25em 2.25em;
+}
+
+#contact fieldset {
+	border: 0;
+	margin: 0;
+	padding: 0;
+	min-inline-size: 0;
+}
+
+#contact-status {
+	color: #555;
+}
+
+#contact :disabled {
+	cursor: not-allowed;
+}
+
+#footer {
+	text-align: left;
+}

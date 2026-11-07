@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" role="img" aria-label="Nova">
+  <rect width="800" height="1000" fill="#F7F7F7"/>
+  <svg x="230" y="280" width="340" height="340" viewBox="0 0 24 24"><path d="M12 3v3.2M12 17.8V21M3 12h3.2M17.8 12H21M5.8 5.8l2.3 2.3M15.9 15.9l2.3 2.3M18.2 5.8l-2.3 2.3M8.1 15.9l-2.3 2.3" fill="none" stroke="#1A1A1A" stroke-width="1.5" stroke-linecap="round"/><circle cx="12" cy="12" r="1.7" fill="#1A1A1A"/></svg>
+  <text x="400" y="860" text-anchor="middle" font-family="Roboto, Helvetica, Arial, sans-serif" font-size="44" font-weight="700" fill="#1A1A1A">Nova</text>
+</svg>
