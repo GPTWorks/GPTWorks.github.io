@@ -1,0 +1,339 @@
+window.SC_DATA=window.SC_DATA||{};window.SC_DATA["greenville.json"]={
+  "source": {
+    "title": "Local Rules for Thirteenth Judicial Circuit Courts of Common Pleas",
+    "approved": "2026-02-13",
+    "filename": "2026-02-13-03.pdf",
+    "url": "/greenville-order.pdf"
+  },
+  "topics": [
+    {
+      "number": "local-1",
+      "ordinal": 1,
+      "title": "Approval Order — February 13, 2026",
+      "kind": "order",
+      "pdfPage": 1,
+      "paragraphs": [
+        {
+          "text": "The Supreme Court of South Carolina Re: Local Rules for Thirteenth Judicial Circuit Courts of Common Pleas ORDER",
+          "pdfPage": 1,
+          "id": "local-1-section-1"
+        },
+        {
+          "text": "Pursuant to Article V, § 4 of the South Carolina Constitution, the attached local rules are approved for use in the Thirteenth Judicial Circuit Courts of Common Pleas.",
+          "pdfPage": 1,
+          "id": "local-1-section-2"
+        },
+        {
+          "text": "This order is effective upon signing and remains in effect unless amended or rescinded by the Chief Justice.",
+          "pdfPage": 1,
+          "id": "local-1-section-3"
+        },
+        {
+          "text": "s/John W. Kittredge John W. Kittredge Chief Justice of South Carolina",
+          "pdfPage": 1,
+          "id": "local-1-section-4"
+        },
+        {
+          "text": "February 13, 2026 Columbia, South Carolina",
+          "pdfPage": 1,
+          "id": "local-1-section-5"
+        }
+      ],
+      "related": []
+    },
+    {
+      "number": "local-2",
+      "ordinal": 2,
+      "title": "Memorandum — Scope and Introduction",
+      "kind": "memorandum",
+      "pdfPage": 2,
+      "paragraphs": [
+        {
+          "text": "State of South Carolina\nThe Circuit Court of the Thirteenth Judicial Circuit",
+          "pdfPage": 2,
+          "id": "local-2-section-1"
+        },
+        {
+          "text": "Perry H. Gravely\nChief Administrative Judge--Common Pleas\nPost Office Box 219\nPickens, SC 29671\npgravelyj@sccourt.org",
+          "pdfPage": 2,
+          "id": "local-2-section-2"
+        },
+        {
+          "text": "MEMORANDUM FOR COMMON PLEAS CASES",
+          "pdfPage": 2,
+          "id": "local-2-section-3"
+        },
+        {
+          "text": "In Order to seek the efficient management of the Common Pleas jury docket for Greenville County and Pickens County, the Chief Administrative Judge for Common Pleas will be implementing the following procedures:",
+          "pdfPage": 2,
+          "id": "local-2-section-4"
+        }
+      ],
+      "related": []
+    },
+    {
+      "number": "local-3",
+      "ordinal": 3,
+      "title": "Continuance Requests",
+      "kind": "memorandum",
+      "pdfPage": 2,
+      "paragraphs": [
+        {
+          "text": "Once a Jury/Non-Jury trial has been published on a trial roster, all requests for continuances must be in the form of a Motion after consultation with the opposing parties. The Motion must state the basis for the continuance and comply with Rule 40(i), SCRCP and e-filed and a copy provided to the Chief Administrative Judge for Common Pleas and Jury/Non-Jury Trial Coordinator. As provided in Rule 40(i), the continuance, if granted, will normally be moved to the next term of court. During a trial term or the Friday before the term begins, the trial judge shall have the authority to consider any requests for continuances. Consent orders for continuances or scheduling orders will not be accepted by the Court unless directed by the Chief Administrative Judge.",
+          "pdfPage": 2,
+          "endPdfPage": 2,
+          "id": "local-3-section-1"
+        },
+        {
+          "text": "A request for a continuance for Motions shall be in writing to the Non-Jury Coordinator with a copy to the opposing counsel or parties. If there is an objection to or an issue with the continuance, the Non-Jury Coordinator shall submit the request to the Chief Administrative Judge or Presiding Judge if within the term of Court for a final determination.",
+          "pdfPage": 2,
+          "endPdfPage": 2,
+          "id": "local-3-section-2"
+        }
+      ],
+      "related": [
+        "40(i)"
+      ]
+    },
+    {
+      "number": "local-4",
+      "ordinal": 4,
+      "title": "Orders of Protection",
+      "kind": "memorandum",
+      "pdfPage": 2,
+      "paragraphs": [
+        {
+          "text": "All requests for protection from Court Appearances to be submitted to the Jury Coordinator or Non-Jury Coordinator, depending on the matter it relates to, prior to the matter being published on a Roster; otherwise, the Chief Administrative Judge will consider the protection request. Protection shall be granted in all appropriate cases without an Order of Protection issued unless the Chief Administrative Judge determines that an Order is needed.",
+          "pdfPage": 2,
+          "endPdfPage": 2,
+          "id": "local-4-section-1"
+        }
+      ],
+      "related": []
+    },
+    {
+      "number": "local-5",
+      "ordinal": 5,
+      "title": "Motions to Compel",
+      "kind": "memorandum",
+      "pdfPage": 2,
+      "paragraphs": [
+        {
+          "text": "For ALL Motions, Rule 11, SCRCP requires that the moving party communicate “with opposing counsel and has attempted in good faith to resolve the matter…”. For Motions to Compel, this Circuit requests that such communication be orally or in person. If the parties wait until the day of the hearing to resolve the Motion or notify the Court of the resolution, then the Court may consider assessment of attorneys fees as the Court deems appropriate.",
+          "pdfPage": 2,
+          "endPdfPage": 2,
+          "id": "local-5-section-1"
+        }
+      ],
+      "related": [
+        "11"
+      ]
+    },
+    {
+      "number": "local-6",
+      "ordinal": 6,
+      "title": "Minor/Wrongful Death Settlements",
+      "kind": "memorandum",
+      "pdfPage": 3,
+      "paragraphs": [
+        {
+          "text": "For all settlements requiring approval by the Court, counsel shall contact the Non-Jury coordinator to see when the hearing can be scheduled or email the law clerk for the Chief Administrative Judge. The Chief Administrative Judge will attempt to schedule the hearing via WebEx as soon as possible, outside a normal Motions week at the convenience of the parties. These hearings may be scheduled on a Friday afternoon if convenient for the parties and counsel. Prior to the hearing, a Petition or appropriate Motion must be filed with the Clerk of Court.",
+          "pdfPage": 3,
+          "endPdfPage": 3,
+          "id": "local-6-section-1"
+        }
+      ],
+      "related": []
+    },
+    {
+      "number": "local-7",
+      "ordinal": 7,
+      "title": "Scheduling Orders",
+      "kind": "memorandum",
+      "pdfPage": 3,
+      "paragraphs": [
+        {
+          "text": "The 13th Circuit does not favor Scheduling Orders at this time due to the failure of many parties to adhere to the deadlines imposed and their use as “backdoor” continuance. Trials will be scheduled at Status Conferences with input from the parties and it will be up to the parties to set appropriate deadlines for discovery and motions. In some cases, Scheduling Orders are needed and these can be addressed by the Chief Administrative Judge.",
+          "pdfPage": 3,
+          "endPdfPage": 3,
+          "id": "local-7-section-1"
+        }
+      ],
+      "related": []
+    },
+    {
+      "number": "local-8",
+      "ordinal": 8,
+      "title": "Motion to Reconsider under Rule 59(e)",
+      "kind": "memorandum",
+      "pdfPage": 3,
+      "paragraphs": [
+        {
+          "text": "A Motion to Alter or Amend an Order or Judgment (commonly referred to as Motion to Reconsider) must be filed within 10 days after “receipt” of the entry of the Order. Rule 59(g) also provides that a copy of the Motion shall be provided to the Judge and this should be done by email to the Judge’s law clerk. The purpose of Motions to Amend (or Reconsideration) is not to rehash matters argued and ruled on by the Court. Rule 59(f) gives the Presiding Judge the discretion to schedule a hearing or address the Motion on briefs.",
+          "pdfPage": 3,
+          "endPdfPage": 3,
+          "id": "local-8-section-1"
+        }
+      ],
+      "related": [
+        "59(e)",
+        "59(g)",
+        "59(f)"
+      ]
+    },
+    {
+      "number": "local-9",
+      "ordinal": 9,
+      "title": "Status Conferences",
+      "kind": "memorandum",
+      "pdfPage": 3,
+      "paragraphs": [
+        {
+          "text": "Status conferences will be scheduled by the Chief Administrative Judge as soon as the schedule for the next 6 months has been received from Court Administration. At this time, the Chief Administrative Judge has required that counsel appear in person at status conferences. At the status conferences, the case will be placed on a trial roster and older cases will be limited to the earlier trial dates—this placement is not a suggested trial date, but a firm one. If the case cannot proceed as scheduled, then a Motion for a continuance must be filed as set forth above. Per direction from the Chief Justice, once a case has been placed on a trial roster, a motion for a continuance will be granted only for compelling reasons.",
+          "pdfPage": 3,
+          "endPdfPage": 3,
+          "id": "local-9-section-1"
+        }
+      ],
+      "related": []
+    },
+    {
+      "number": "local-10",
+      "ordinal": 10,
+      "title": "Roster Meetings",
+      "kind": "memorandum",
+      "pdfPage": 3,
+      "paragraphs": [
+        {
+          "text": "Roster Meetings for a term of court may be held by the Chief Administrative Judge or Trial Judge during the week prior to the term of Court, most likely the Friday before. These Roster Meetings will be conducted via WebEx and all counsel or their representative must attend. If there is a prior Roster Meeting, the Trial Judge will reconvene the roster meeting prior to Jury Qualification on the morning of the first day of the jury term to confirm the final status of the cases on the roster.",
+          "pdfPage": 3,
+          "endPdfPage": 3,
+          "id": "local-10-section-1"
+        }
+      ],
+      "related": []
+    },
+    {
+      "number": "local-11",
+      "ordinal": 11,
+      "title": "Trial Terms",
+      "kind": "memorandum",
+      "pdfPage": 3,
+      "paragraphs": [
+        {
+          "text": "If a case on a trial roster is not reached, it will automatically be rolled over to the next term of Court unless directed otherwise by the Presiding Judge or Chief Administrative Judge or a Motion for Continuance is granted.",
+          "pdfPage": 3,
+          "endPdfPage": 3,
+          "id": "local-11-section-1"
+        }
+      ],
+      "related": []
+    },
+    {
+      "number": "local-12",
+      "ordinal": 12,
+      "title": "Mediation",
+      "kind": "memorandum",
+      "pdfPage": 3,
+      "paragraphs": [
+        {
+          "text": "Under Rule 5(f), ADR, all cases must be mediated within 300 days of filing. The Chief Administrative Judge will be reviewing cases which have not been mediated within this time frame and implement a procedure to address this issue. The Court is aware that some cases cannot be mediated during this time frame and extensions may be necessary. Otherwise, Counsel and Parties are directed to follow this Rule.",
+          "pdfPage": 3,
+          "endPdfPage": 3,
+          "id": "local-12-section-1"
+        }
+      ],
+      "related": []
+    },
+    {
+      "number": "local-13",
+      "ordinal": 13,
+      "title": "Pre-trial briefs",
+      "kind": "memorandum",
+      "pdfPage": 3,
+      "paragraphs": [
+        {
+          "text": "Pre-trial briefs should be provided as required by the Presiding Judge for that term of court. Briefs or memorandums in connection with Motions should be filed at least 3 days prior to the hearing or trial unless directed otherwise by the Presiding Judge. If the briefs or additional materials have been filed with the Clerk’s office, it is not necessary to email or deliver a copy of the same to the Presiding Judge unless requested.",
+          "pdfPage": 3,
+          "endPdfPage": 4,
+          "id": "local-13-section-1"
+        }
+      ],
+      "related": []
+    },
+    {
+      "number": "local-14",
+      "ordinal": 14,
+      "title": "Proposed Orders",
+      "kind": "memorandum",
+      "pdfPage": 4,
+      "paragraphs": [
+        {
+          "text": "All proposed Orders should be submitted as instructed by the Presiding Judge— with a copy provided to opposing counsel or party. Some judges prefer an email while others prefer that the proposed Order be e-filed. Do not put “Proposed” in the title. Instead of a signature blank, please insert the following: “Presiding Judge’s Electronic Signature to Follow”. Also, indicate in the order the date of the hearing and whether it was held via WebEx. If e-filing, please indicate which judge needs to address the proposed order.",
+          "pdfPage": 4,
+          "endPdfPage": 4,
+          "id": "local-14-section-1"
+        }
+      ],
+      "related": []
+    },
+    {
+      "number": "local-15",
+      "ordinal": 15,
+      "title": "Backup calendar during Jury Terms",
+      "kind": "memorandum",
+      "pdfPage": 4,
+      "paragraphs": [
+        {
+          "text": "Due to the heavy backlog of Motions (3,997 motions filed during 2024), the Court may schedule a back-up Motions calendar during Jury Terms when possible, most likely for Thursday and Friday of that week. If the Jury Term falls apart, then the Motions can proceed. If the Jury Term does not fall apart, then the Chief Administrative Judge will attempt to secure another judge to hear the Motions or move them to another date.",
+          "pdfPage": 4,
+          "endPdfPage": 4,
+          "id": "local-15-section-1"
+        }
+      ],
+      "related": []
+    },
+    {
+      "number": "local-16",
+      "ordinal": 16,
+      "title": "E-filing requirements",
+      "kind": "memorandum",
+      "pdfPage": 4,
+      "paragraphs": [
+        {
+          "text": "All attorney signatures on e-filed documents should comply with Rule 5 of the E-filing Guidelines which requires specific contact information below the signature. Signatures for non-attorneys cannot be e-signed per Rule 5 (c).",
+          "pdfPage": 4,
+          "endPdfPage": 4,
+          "id": "local-16-section-1"
+        }
+      ],
+      "related": []
+    },
+    {
+      "number": "local-17",
+      "ordinal": 17,
+      "title": "Purpose and Signature",
+      "kind": "memorandum",
+      "pdfPage": 4,
+      "paragraphs": [
+        {
+          "text": "The purpose of this Memorandum is to promote an efficient and consistent disposition of pending civil matters. If anyone has any suggestions to improve our Common Pleas docket or procedure, please advise the Chief Administrative Judge.",
+          "pdfPage": 4,
+          "endPdfPage": 4,
+          "id": "local-17-section-1"
+        },
+        {
+          "text": "Greenville/Pickens, South Carolina",
+          "pdfPage": 4,
+          "id": "local-17-section-2"
+        },
+        {
+          "text": "Perry H. Gravely\nChief Administrative Judge-Common Pleas\nThirteenth Circuit (Greenville/Pickens)",
+          "pdfPage": 4,
+          "id": "local-17-section-3"
+        }
+      ],
+      "related": []
+    }
+  ]
+};
