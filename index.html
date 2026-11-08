@@ -1,119 +1,215 @@
 <!DOCTYPE HTML>
 <!--
-	GPTWorks homepage.
-	Design: Lens by HTML5 UP (html5up.net | @ajlkn)
+	Miniport by HTML5 UP
+	html5up.net | @ajlkn
 	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
-	Lens assets live in assets/lens/ so the site's other pages keep their own theme.
+	Miniport assets are in assets/miniport/ so other pages keep their own themes.
 -->
-<html lang="en">
+<html>
 	<head>
 		<title>GPTWorks | Projects</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<meta name="description" content="A collection of little projects I make and share for free." />
-		<link rel="stylesheet" href="assets/lens/css/main.css" />
-		<link rel="stylesheet" href="assets/lens/css/gptworks.css" />
-		<noscript><link rel="stylesheet" href="assets/lens/css/noscript.css" /></noscript>
+		<link rel="stylesheet" href="assets/miniport/css/main.css" />
+		<link rel="stylesheet" href="assets/miniport/css/dark.css" />
 	</head>
-	<body class="is-preload-0 is-preload-1 is-preload-2">
-		<div id="main" tabindex="-1">
-			<header id="header">
-				<p class="logo"><img src="images/about.jpg" alt="GPTWorks"></p>
-				<h1>Welcome to GPTWorks</h1>
-				<p>A collection of little projects I make and share for free. Have a look around.</p>
-				<p class="views">Views: <span id="viewCount">...</span></p>
-				<p><a href="#thumbnails">Explore projects</a></p>
-			</header>
+	<body class="is-preload">
 
-			<section id="about">
-				<h2>About GPTWorks</h2>
-				<p>Some projects are practical tools, some are experiments, and some are still taking shape. Everything available here is free to use.</p>
-				<p><a href="generic.html">Learn more</a></p>
-			</section>
-
-			<section id="projects">
-				<h2>Projects</h2>
-				<p>Little projects I'm building and sharing for free. More links will be added as they're ready.</p>
-			</section>
-
-			<section id="thumbnails">
-				<article>
-					<a class="thumbnail" href="assets/lens/tiles/orrery.svg"><img src="assets/lens/tiles/orrery.svg" alt="Orrery"></a>
-					<h2>Orrery</h2>
-					<p>Explore the solar system, moons, galaxies, and a black hole.</p>
-					<p><a href="orrery/">Explore Orrery</a></p>
-				</article>
-				<article>
-					<a class="thumbnail" href="assets/lens/tiles/landlord.svg"><img src="assets/lens/tiles/landlord.svg" alt="Score My Landlord"></a>
-					<h2>Score My Landlord</h2>
-					<p>Tenant-facing landlord review and reference system so renters can know who will hold their home.</p>
-					<p><a href="tools/score-my-landlord.html">View Project</a></p>
-				</article>
-				<article>
-					<a class="thumbnail" href="assets/lens/tiles/afternumber.svg"><img src="assets/lens/tiles/afternumber.svg" alt="Afternumber"></a>
-					<h2>Afternumber</h2>
-					<p>Forensic switchboard for analyzing spoofed texts and numbers.</p>
-					<p><a href="https://afternumber.grok.me">View Project</a></p>
-				</article>
-				<article>
-					<a class="thumbnail" href="assets/lens/tiles/nova.svg"><img src="assets/lens/tiles/nova.svg" alt="Nova"></a>
-					<h2>Nova</h2>
-					<p>AI-powered tool (in development).</p>
-					<p><a href="tools/nova.html">View Project</a></p>
-				</article>
-				<article>
-					<a class="thumbnail" href="assets/lens/tiles/helioscape.svg"><img src="assets/lens/tiles/helioscape.svg" alt="Helioscape"></a>
-					<h2>Helioscape</h2>
-					<p>Solar system and space visualization experience.</p>
-					<p><a href="https://helioscape.grok.me">View Project</a></p>
-				</article>
-				<article>
-					<a class="thumbnail" href="assets/lens/tiles/cosmic.svg"><img src="assets/lens/tiles/cosmic.svg" alt="Cosmic Drift"></a>
-					<h2>Cosmic Drift</h2>
-					<p>Space exploration game and experience.</p>
-					<p><a href="https://cosmic-drift.grok.me">View Project</a></p>
-				</article>
-			</section>
-
-			<section id="contact">
-				<h2>Get in touch</h2>
-				<p id="contact-status">This contact form is unavailable. It is not connected to a delivery service, so a message cannot be sent from this page.</p>
-				<form id="contact-form" method="post" action="#contact" onsubmit="return false" novalidate aria-describedby="contact-status">
-					<fieldset disabled>
-						<div class="fields">
-							<label for="name">Name</label>
-							<input type="text" name="name" id="name" autocomplete="name">
-							<label for="email">Email</label>
-							<input type="email" name="email" id="email" autocomplete="email">
-							<label for="message">Message</label>
-							<textarea name="message" id="message" rows="4"></textarea>
-						</div>
-						<ul class="actions">
-							<li><button type="button" class="button" disabled>Send Message</button></li>
-						</ul>
-					</fieldset>
-				</form>
-			</section>
-
-			<footer id="footer">
-				<ul class="copyright">
-					<li>&copy; GPTWorks. All rights reserved.</li>
-					<li><a href="privacy-policy.html">Privacy Policy</a></li>
-					<li>Design: <a href="https://html5up.net/lens">Lens by HTML5 UP</a>.</li>
+		<!-- Nav -->
+			<nav id="nav">
+				<ul class="container">
+					<li><a href="#top">Top</a></li>
+					<li><a href="#work">Work</a></li>
+					<li><a href="#portfolio">Portfolio</a></li>
+					<li><a href="#creations">Creations</a></li>
+					<li><a href="#contact">Contact</a></li>
 				</ul>
-			</footer>
-		</div>
+			</nav>
 
-		<script src="assets/lens/js/jquery.min.js"></script>
-		<script src="assets/lens/js/browser.min.js"></script>
-		<script src="assets/lens/js/breakpoints.min.js"></script>
-		<script src="assets/lens/js/main.js"></script>
-		<script src="assets/lens/js/gptworks.js"></script>
-		<script>
-			fetch('https://countapi.mileshilliard.com/api/v1/hit/gptworks-main')
-				.then(function (r) { return r.json(); })
-				.then(function (d) { document.getElementById('viewCount').textContent = d.value || '0'; })
-				.catch(function () { document.getElementById('viewCount').textContent = '—'; });
-		</script>
+		<!-- Home -->
+			<article id="top" class="wrapper style1">
+				<div class="container">
+					<div class="row">
+						<div class="col-4 col-5-large col-12-medium">
+							<span class="image fit"><img src="images/about.jpg" alt="GPTWorks" /></span>
+						</div>
+						<div class="col-8 col-7-large col-12-medium">
+							<header>
+								<h1>Welcome to <strong>GPTWorks</strong>.</h1>
+							</header>
+							<p>A collection of little projects I make and share for free. Have a look around.</p>
+							<p>Views: <span id="viewCount">...</span></p>
+							<a href="#portfolio" class="button large scrolly">Explore projects</a>
+						</div>
+					</div>
+				</div>
+			</article>
+
+		<!-- Work -->
+			<article id="work" class="wrapper style2">
+				<div class="container">
+					<header>
+						<h2>About GPTWorks</h2>
+						<p>Some projects are practical tools, some are experiments, and some are still taking shape. Everything available here is free to use.</p>
+					</header>
+					<div class="row aln-center">
+						<div class="col-4 col-6-medium col-12-small">
+							<section class="box style1">
+								<span class="icon featured fa-comments"></span>
+								<h3>About GPTWorks</h3>
+								<p>Some projects are practical tools, some are experiments, and some are still taking shape. Everything available here is free to use.</p>
+							</section>
+						</div>
+						<div class="col-4 col-6-medium col-12-small">
+							<section class="box style1">
+								<span class="icon solid featured fa-camera-retro"></span>
+								<h3>Projects</h3>
+								<p>Little projects I'm building and sharing for free. More links will be added as they're ready.</p>
+							</section>
+						</div>
+						<div class="col-4 col-6-medium col-12-small">
+							<section class="box style1">
+								<span class="icon featured fa-thumbs-up"></span>
+								<h3>Get in touch</h3>
+								<p>This contact form is unavailable. It is not connected to a delivery service, so a message cannot be sent from this page.</p>
+							</section>
+						</div>
+					</div>
+					<footer>
+						<p><a href="generic.html">Learn more</a></p>
+						<a href="#portfolio" class="button large scrolly">Explore projects</a>
+					</footer>
+				</div>
+			</article>
+
+		<!-- Portfolio -->
+			<article id="portfolio" class="wrapper style3">
+				<div class="container">
+					<header>
+						<h2>Projects</h2>
+						<p>Little projects I'm building and sharing for free. More links will be added as they're ready.</p>
+					</header>
+					<div class="row">
+						<div class="col-4 col-6-medium col-12-small">
+							<article class="box style2">
+								<div class="image featured"><video src="assets/miniport/video/orrery.mp4" width="448" height="672" controls playsinline preload="metadata" poster="assets/miniport/video/orrery-poster.jpg" style="display:block;width:100%;height:auto"><a href="orrery/">Orrery</a></video></div>
+								<h3><a href="orrery/">Orrery</a></h3>
+								<p>Explore the solar system, moons, galaxies, and a black hole.</p>
+							</article>
+						</div>
+						<div class="col-4 col-6-medium col-12-small">
+							<article class="box style2">
+								<a href="tools/score-my-landlord.html" class="image featured"><img src="assets/miniport/images/pic02.jpg" alt="" /></a>
+								<h3><a href="tools/score-my-landlord.html">Score My Landlord</a></h3>
+								<p>Tenant-facing landlord review and reference system so renters can know who will hold their home.</p>
+							</article>
+						</div>
+						<div class="col-4 col-6-medium col-12-small">
+							<article class="box style2">
+								<a href="https://afternumber.grok.me" class="image featured"><img src="assets/miniport/images/afternumber.jpg" alt="Afternumber" /></a>
+								<h3><a href="https://afternumber.grok.me">Afternumber</a></h3>
+								<p>Forensic switchboard for analyzing spoofed texts and numbers.</p>
+							</article>
+						</div>
+						<div class="col-4 col-6-medium col-12-small">
+							<article class="box style2">
+								<a href="tools/nova.html" class="image featured"><img src="assets/miniport/images/pic04.jpg" alt="" /></a>
+								<h3><a href="tools/nova.html">Nova</a></h3>
+								<p>AI-powered tool (in development).</p>
+							</article>
+						</div>
+						<div class="col-4 col-6-medium col-12-small">
+							<article class="box style2">
+								<a href="https://helioscape.grok.me" class="image featured"><img src="assets/miniport/images/pic05.jpg" alt="" /></a>
+								<h3><a href="https://helioscape.grok.me">Helioscape</a></h3>
+								<p>Solar system and space visualization experience.</p>
+							</article>
+						</div>
+						<div class="col-4 col-6-medium col-12-small">
+							<article class="box style2">
+								<a href="https://cosmic-drift.grok.me" class="image featured"><img src="assets/miniport/images/cosmic-drift.png" alt="Cosmic Drift" /></a>
+								<h3><a href="https://cosmic-drift.grok.me">Cosmic Drift</a></h3>
+								<p>Space exploration game and experience.</p>
+							</article>
+						</div>
+					</div>
+					<footer>
+						<p>More links will be added as they're ready.</p>
+						<a href="#contact" class="button large scrolly">Get in touch</a>
+					</footer>
+				</div>
+			</article>
+
+		<!-- Things I Create -->
+			<article id="creations" class="wrapper style2">
+				<div class="container">
+					<header>
+						<h2>Things I Create</h2>
+					</header>
+					<blockquote class="twitter-tweet" data-theme="dark">
+						<a href="https://x.com/GPTWorks/status/1909345632441229688">View this post on X</a>
+					</blockquote>
+					<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+				</div>
+			</article>
+
+		<!-- Contact -->
+			<article id="contact" class="wrapper style4">
+				<div class="container medium">
+					<header>
+						<h2>Get in touch</h2>
+						<p>This contact form is unavailable. It is not connected to a delivery service, so a message cannot be sent from this page.</p>
+					</header>
+					<div class="row">
+						<div class="col-12">
+							<form method="post" action="#" onsubmit="return false">
+								<fieldset disabled>
+									<div class="row">
+										<div class="col-6 col-12-small">
+											<input type="text" name="name" id="name" placeholder="Name" />
+										</div>
+										<div class="col-6 col-12-small">
+											<input type="text" name="email" id="email" placeholder="Email" />
+										</div>
+										<div class="col-12">
+											<input type="text" name="subject" id="subject" placeholder="Subject" />
+										</div>
+										<div class="col-12">
+											<textarea name="message" id="message" placeholder="Message"></textarea>
+										</div>
+										<div class="col-12">
+											<ul class="actions">
+												<li><input type="submit" value="Send Message" /></li>
+												<li><input type="reset" value="Clear Form" class="alt" /></li>
+											</ul>
+										</div>
+									</div>
+								</fieldset>
+							</form>
+						</div>
+					</div>
+					<footer>
+						<ul id="copyright">
+							<li>&copy; GPTWorks. All rights reserved.</li><li><a href="privacy-policy.html">Privacy Policy</a></li><li>Design: <a href="https://twitter.com/ajlkn">AJ</a> for <a href="https://html5up.net">HTML5 UP</a>. <a href="https://html5up.net/license">CCA license</a>.</li><li>Demo Images: <a href="http://unsplash.com">Unsplash</a></li>
+						</ul>
+					</footer>
+				</div>
+			</article>
+
+		<!-- Scripts -->
+			<script src="assets/miniport/js/jquery.min.js"></script>
+			<script src="assets/miniport/js/jquery.scrolly.min.js"></script>
+			<script src="assets/miniport/js/browser.min.js"></script>
+			<script src="assets/miniport/js/breakpoints.min.js"></script>
+			<script src="assets/miniport/js/util.js"></script>
+			<script src="assets/miniport/js/main.js"></script>
+			<script>
+				fetch('https://countapi.mileshilliard.com/api/v1/hit/gptworks-main')
+					.then(function (r) { return r.json(); })
+					.then(function (d) { document.getElementById('viewCount').textContent = d.value || '0'; })
+					.catch(function () { document.getElementById('viewCount').textContent = '—'; });
+			</script>
+
 	</body>
 </html>
