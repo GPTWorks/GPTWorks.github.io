@@ -1,0 +1,90 @@
+/* Dark surfaces for the homepage only. Layout, type, and spacing stay in main.css. */
+html,
+body {
+	background-color: #1a1a1a;
+}
+
+body,
+input,
+textarea,
+select {
+	color: #c8c8c8;
+}
+
+h1, h2, h3, h4, h5, h6,
+b, strong {
+	color: #f2f2f2;
+}
+
+.wrapper.style1 {
+	background-color: #1a1a1a;
+}
+
+.wrapper.style2 {
+	background-color: #161616;
+	text-shadow: none;
+}
+
+.wrapper.style3 {
+	background-color: #1e1e1e;
+	text-shadow: none;
+}
+
+.wrapper.style4 {
+	background-color: #141414;
+	color: #c8c8c8;
+	text-shadow: none;
+}
+
+.wrapper.style4 h1,
+.wrapper.style4 h2,
+.wrapper.style4 h3,
+.wrapper.style4 h4,
+.wrapper.style4 h5,
+.wrapper.style4 h6 {
+	color: #f2f2f2;
+}
+
+.box {
+	background: #242424;
+	box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08), 0 2px 3px rgba(0, 0, 0, 0.35);
+}
+
+blockquote {
+	border-left-color: #3a3a3a;
+	color: #c8c8c8;
+}
+
+hr {
+	border-top-color: rgba(255, 255, 255, 0.16);
+	box-shadow: none;
+}
+
+#copyright {
+	color: #b5b5b5;
+}
+
+#copyright li {
+	border-left-color: rgba(255, 255, 255, 0.28);
+	box-shadow: none;
+}
+
+#copyright a:hover {
+	color: #f2f2f2;
+}
+
+.wrapper.style4 form ::-webkit-input-placeholder {
+	color: #9a9a9a !important;
+}
+
+.wrapper.style4 form ::-moz-placeholder {
+	color: #9a9a9a !important;
+}
+
+.wrapper.style4 form :-ms-input-placeholder {
+	color: #9a9a9a !important;
+}
+
+.wrapper.style4 form ::placeholder {
+	color: #9a9a9a !important;
+}
