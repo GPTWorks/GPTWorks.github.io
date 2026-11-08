@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" role="img" aria-label="Nova">
+  <rect width="800" height="800" fill="#000"/>
+  <g fill="none" stroke="#fff" stroke-width="16" stroke-linecap="round">
+    <path d="M400 120v120M400 560v120M120 400h120M560 400h120"/>
+    <path d="M200 200l86 86M514 514l86 86M600 200l-86 86M286 514l-86 86"/>
+  </g>
+  <circle cx="400" cy="400" r="36" fill="#fff"/>
+</svg>
