@@ -1,0 +1,25 @@
+/* Dark shell for existing tool pages. Keeps their markup and scripts. */
+html, body, body.is-preload, #wrapper, #main, .wrapper, .inner, section.wrapper {
+  background: #07060d !important;
+  color: #f6f1e8 !important;
+}
+body { font-family: Georgia, "Iowan Old Style", serif; }
+h1, h2, h3, .logo, .title { color: #f6f1e8 !important; font-family: "Syne", "Avenir Next", sans-serif; }
+p, li, label, small { color: #d9d3e4; }
+a { color: #e7c4ff; }
+button, .btn, a.btn { box-shadow: 0 0 16px rgba(255, 79, 216, 0.35); }
+header, #header, footer, #footer { background: transparent !important; border-color: rgba(246,241,232,.14) !important; }
+.demo, .review, #response, #output {
+  background: #14131c !important;
+  color: #f6f1e8 !important;
+  border-color: rgba(246,241,232,.2) !important;
+}
+input, textarea, select {
+  background: #0c0b12 !important;
+  color: #f6f1e8 !important;
+  border: 1px solid rgba(246,241,232,.24) !important;
+}
+.button, a.button, button {
+  border-radius: 999px;
+}
+.views { color: #b7b0c4 !important; }
