@@ -1,59 +1,81 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Afternumber | GPTWorks</title>
-    <link rel="stylesheet" href="../assets/css/main.css">
-    <style>
-        .demo { background: #f8f9fa; padding: 1.5em; border-radius: 8px; margin: 1em 0; }
-        input, button { margin: 0.3em 0; padding: 0.5em; width: 100%; max-width: 400px; }
-        button { background: #4a90e2; color: white; border: none; cursor: pointer; }
-        #result { margin-top: 1em; padding: 1em; background: white; border-left: 3px solid #4a90e2; }
-        .views { margin: 1em 0; font-size: 0.95em; color: #555; }
-    </style>
-<link rel="stylesheet" href="../assets/cosmos/tools.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Afternumber | GPTWorks</title>
+  <meta name="description" content="Hunt what the costume number cannot hide. Spoofed texts and callback numbers — built with Grok.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,460;9..144,600&family=Syne:wght@500;700;800&display=swap">
+  <link rel="stylesheet" href="../assets/cosmos/tools.css">
 </head>
-<body class="is-preload">
-    <div id="wrapper">
-        <section class="wrapper style3 fade-up">
-            <div class="inner">
-                <h1>Afternumber</h1>
-                <p>Forensic switchboard for analyzing spoofed texts and numbers.</p>
-                <p class="views">Views: <span id="viewCount">...</span></p>
+<body>
+  <header class="tool-header">
+    <a class="brand" href="../"><img src="../images/gptworks-logo.png" alt="" width="36" height="36"> GPTWorks</a>
+    <nav aria-label="Secondary">
+      <a href="index.html">Tools</a>
+      <a href="https://afternumber.grok.me">Open on Grok</a>
+    </nav>
+  </header>
+  <main class="tool-main">
+    <p class="badge">Built with Grok</p>
+    <p class="kicker">Safety</p>
+    <h1>Afternumber</h1>
+    <p class="lede">Hunt what the costume number cannot hide. Trace spoofed texts, callback numbers, and neighbor-spoof patterns.</p>
+    <p class="meta">Views: <span id="viewCount">…</span></p>
 
-                <div class="demo">
-                    <h2>Try the Demo</h2>
-                    <label>Enter a phone number or text snippet</label>
-                    <input type="text" id="input" placeholder="e.g. +1-555-123-4567 or 'Your account is locked, call this number'">
-                    <button onclick="analyze()">Analyze</button>
-                    <div id="result"></div>
-                </div>
+    <section class="panel">
+      <h2>Full forensic desk</h2>
+      <p>The live Afternumber switchboard runs on Grok — log a line, run Trace / Circle / Packet, and keep your number on-device for the neighbor-spoof test.</p>
+      <div class="actions">
+        <a class="button primary" href="https://afternumber.grok.me" target="_blank" rel="noopener">Launch Afternumber</a>
+      </div>
+    </section>
 
-                <p><small>Simple pattern check only. Not a full forensic tool.</small></p>
+    <section class="panel">
+      <h2>Quick pattern check</h2>
+      <p class="note">A lightweight checklist on this site. For the full desk, use the Grok app above.</p>
+      <label for="input">Phone number or text</label>
+      <textarea id="input" rows="4" placeholder="Example: Your account is locked. Call +1 (555) 123-4567 now to verify."></textarea>
+      <div class="actions">
+        <button class="primary" type="button" id="analyzeBtn">Analyze</button>
+        <button class="ghost" type="button" id="sampleBtn">Try a sample</button>
+      </div>
+      <div id="result" class="result" style="margin-top:16px" hidden></div>
+    </section>
 
-                <ul class="actions">
-                    <li><a href="../" class="button">Back to GPTWorks</a></li>
-                </ul>
-            </div>
-        </section>
+    <div class="actions">
+      <a class="button ghost" href="index.html">All tools</a>
+      <a class="button ghost" href="../">Back to GPTWorks</a>
     </div>
-    <script>
-        function analyze() {
-            const val = document.getElementById('input').value.trim();
-            const result = document.getElementById('result');
-            if (!val) { result.innerHTML = 'Enter something to analyze.'; return; }
-            let flags = [];
-            if (/\+?1?[-.\s]?\(?\d{3}\)?[-.\s]?\d{3}[-.\s]?\d{4}/.test(val)) flags.push('Looks like a US phone number');
-            if (/urgent|locked|verify|suspended|prize|winner|call now/i.test(val)) flags.push('Contains common spoof/scam keywords');
-            if (val.length < 10) flags.push('Very short input');
-            result.innerHTML = flags.length ? '<strong>Flags:</strong><br>' + flags.join('<br>') : 'No obvious red flags in this simple check.';
-        }
-
-        fetch('https://countapi.mileshilliard.com/api/v1/hit/gptworks-afternumber')
-            .then(r => r.json())
-            .then(d => { document.getElementById('viewCount').textContent = d.value || '0'; })
-            .catch(() => { document.getElementById('viewCount').textContent = '—'; });
-    </script>
+  </main>
+  <footer class="tool-footer"><p>&copy; GPTWorks. Free to use.</p></footer>
+  <script>
+    const input = document.getElementById("input");
+    const result = document.getElementById("result");
+    function analyze() {
+      const val = input.value.trim();
+      result.hidden = false;
+      if (!val) { result.innerHTML = "<p>Enter a number or message to analyze.</p>"; return; }
+      const flags = [];
+      if (/\+?1?[-.\s]?\(?\d{3}\)?[-.\s]?\d{3}[-.\s]?\d{4}/.test(val)) flags.push("Contains a phone-number-shaped string. Confirm it against a trusted source before calling.");
+      if (/urgent|immediately|locked|verify|suspended|prize|winner|call now|act now|final notice|gift card|wire/i.test(val)) flags.push("Uses urgency or account-threat language common in scam texts.");
+      if (/gift ?card|bitcoin|wire transfer|cash app|venmo|zelle|payment/i.test(val)) flags.push("Mentions payment methods often used in scams.");
+      if (/arrest|lawsuit|police|irs|warrant|deport/i.test(val)) flags.push("Uses legal or law-enforcement threats. Treat as high risk.");
+      if (/https?:\/\/|bit\.ly|tinyurl|t\.co/i.test(val)) flags.push("Contains a link. Prefer opening the real site yourself, not from the text.");
+      const level = flags.length >= 3 ? "High caution" : flags.length ? "Review carefully" : "No obvious red flags in this simple check";
+      result.innerHTML = `<p><strong>${level}</strong></p>` + (flags.length ? flags.map((f) => `<div class="flag">${f}</div>`).join("") : "<p class='note'>Still verify unexpected requests through an official channel.</p>");
+    }
+    document.getElementById("analyzeBtn").addEventListener("click", analyze);
+    document.getElementById("sampleBtn").addEventListener("click", () => {
+      input.value = "URGENT: Your account is locked. Call +1 (555) 123-4567 now to verify or face suspension.";
+      analyze();
+    });
+    fetch("https://countapi.mileshilliard.com/api/v1/hit/gptworks-afternumber")
+      .then((r) => r.json())
+      .then((d) => { document.getElementById("viewCount").textContent = d.value || "0"; })
+      .catch(() => { document.getElementById("viewCount").textContent = "—"; });
+  </script>
 </body>
 </html>

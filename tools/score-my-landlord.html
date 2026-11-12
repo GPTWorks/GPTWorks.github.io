@@ -1,76 +1,134 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Score My Landlord | GPTWorks</title>
-    <link rel="stylesheet" href="../assets/css/main.css">
-    <style>
-        .demo { background: #f8f9fa; padding: 1.5em; border-radius: 8px; margin: 1em 0; }
-        .review { border-left: 3px solid #4a90e2; padding: 0.5em 1em; margin: 0.5em 0; background: white; }
-        input, select, textarea, button { margin: 0.3em 0; padding: 0.5em; width: 100%; max-width: 400px; }
-        button { background: #4a90e2; color: white; border: none; cursor: pointer; }
-        .views { margin: 1em 0; font-size: 0.95em; color: #555; }
-    </style>
-<link rel="stylesheet" href="../assets/cosmos/tools.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Score My Landlord | GPTWorks</title>
+  <meta name="description" content="Tenant-facing landlord review notes stored only in your browser.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,460;9..144,600&family=Syne:wght@500;700;800&display=swap">
+  <link rel="stylesheet" href="../assets/cosmos/tools.css">
 </head>
-<body class="is-preload">
-    <div id="wrapper">
-        <section class="wrapper style3 fade-up">
-            <div class="inner">
-                <h1>Score My Landlord</h1>
-                <p>Tenant-facing landlord review and reference system so renters can know who will hold their home.</p>
-                <p class="views">Views: <span id="viewCount">...</span></p>
+<body>
+  <header class="tool-header">
+    <a class="brand" href="../"><img src="../images/gptworks-logo.png" alt="" width="36" height="36"> GPTWorks</a>
+    <nav aria-label="Secondary">
+      <a href="index.html">Tools</a>
+      <a href="../sc-civil-rules/landlord-tenant-act.html">Landlord Act</a>
+    </nav>
+  </header>
+  <main class="tool-main">
+    <p class="kicker">Tenant tools</p>
+    <h1>Score My Landlord</h1>
+    <p class="lede">Keep landlord notes and scores so you remember who held your home well — and who did not.</p>
+    <p class="meta">Views: <span id="viewCount">…</span> · Saved on this device only</p>
 
-                <div class="demo">
-                    <h2>Try the Demo</h2>
-                    <form id="reviewForm">
-                        <label>Landlord / Property Name</label>
-                        <input type="text" id="landlordName" placeholder="e.g. Oak Street Apartments" required>
-                        <label>Score (1-5)</label>
-                        <select id="score">
-                            <option value="5">5 - Excellent</option>
-                            <option value="4">4 - Good</option>
-                            <option value="3">3 - Average</option>
-                            <option value="2">2 - Poor</option>
-                            <option value="1">1 - Terrible</option>
-                        </select>
-                        <label>Your experience</label>
-                        <textarea id="comment" rows="3" placeholder="What was it like renting from them?"></textarea>
-                        <button type="submit">Add Review</button>
-                    </form>
-                    <div id="reviews">
-                        <h3>Sample Reviews</h3>
-                        <div class="review"><strong>Maple Court Apts</strong> — 4/5<br>Responsive to maintenance requests. Deposit returned on time.</div>
-                        <div class="review"><strong>River View Rentals</strong> — 2/5<br>Hard to reach. Took months to fix a leak.</div>
-                    </div>
-                </div>
+    <section class="panel">
+      <h2>Add a review</h2>
+      <form id="reviewForm">
+        <label for="landlordName">Landlord / property</label>
+        <input id="landlordName" name="landlordName" type="text" placeholder="e.g. Oak Street Apartments" required autocomplete="organization">
+        <label for="score">Score</label>
+        <select id="score" name="score">
+          <option value="5">5 — Excellent</option>
+          <option value="4">4 — Good</option>
+          <option value="3">3 — Average</option>
+          <option value="2">2 — Poor</option>
+          <option value="1">1 — Terrible</option>
+        </select>
+        <label for="comment">What happened</label>
+        <textarea id="comment" name="comment" rows="3" placeholder="Repairs, deposit return, communication, safety…"></textarea>
+        <div class="actions">
+          <button class="primary" type="submit">Save review</button>
+          <button class="ghost" type="button" id="exportBtn">Download notes</button>
+          <button class="ghost" type="button" id="clearBtn">Clear all</button>
+        </div>
+      </form>
+    </section>
 
-                <p><small>This is a simple demo. Reviews are stored only in your browser for this session.</small></p>
+    <section class="panel">
+      <h2>Your reviews</h2>
+      <div id="reviews"></div>
+      <p class="note">Nothing leaves this browser unless you download it. Clearing site data erases these notes.</p>
+    </section>
 
-                <ul class="actions">
-                    <li><a href="../" class="button">Back to GPTWorks</a></li>
-                </ul>
-            </div>
-        </section>
+    <div class="actions">
+      <a class="button ghost" href="tenant-help.html">SC Tenant Help</a>
+      <a class="button ghost" href="../">Back to GPTWorks</a>
     </div>
-    <script>
-        document.getElementById('reviewForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const name = document.getElementById('landlordName').value;
-            const score = document.getElementById('score').value;
-            const comment = document.getElementById('comment').value || 'No additional comment.';
-            const div = document.createElement('div');
-            div.className = 'review';
-            div.innerHTML = `<strong>${name}</strong> — ${score}/5<br>${comment}`;
-            document.getElementById('reviews').appendChild(div);
-            this.reset();
-        });
+  </main>
+  <footer class="tool-footer"><p>&copy; GPTWorks. Free to use.</p></footer>
+  <script>
+    const KEY = "gptworks-landlord-reviews";
+    const list = document.getElementById("reviews");
 
-        fetch('https://countapi.mileshilliard.com/api/v1/hit/gptworks-score-my-landlord')
-            .then(r => r.json())
-            .then(d => { document.getElementById('viewCount').textContent = d.value || '0'; })
-            .catch(() => { document.getElementById('viewCount').textContent = '—'; });
-    </script>
+    function escapeHtml(value) {
+      return String(value)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;");
+    }
+
+    function load() {
+      try { return JSON.parse(localStorage.getItem(KEY) || "[]"); }
+      catch { return []; }
+    }
+
+    function save(items) {
+      localStorage.setItem(KEY, JSON.stringify(items));
+      render(items);
+    }
+
+    function render(items) {
+      if (!items.length) {
+        list.innerHTML = "<p class='note'>No reviews yet. Add your first landlord note above.</p>";
+        return;
+      }
+      list.innerHTML = items.map((item) => (
+        `<article class="review"><strong>${escapeHtml(item.name)}</strong> — ${escapeHtml(item.score)}/5` +
+        `<br>${escapeHtml(item.comment || "No additional comment.")}` +
+        `<br><small>${escapeHtml(item.when || "")}</small></article>`
+      )).join("");
+    }
+
+    document.getElementById("reviewForm").addEventListener("submit", (event) => {
+      event.preventDefault();
+      const items = load();
+      items.unshift({
+        name: document.getElementById("landlordName").value.trim(),
+        score: document.getElementById("score").value,
+        comment: document.getElementById("comment").value.trim(),
+        when: new Date().toLocaleString()
+      });
+      save(items);
+      event.target.reset();
+    });
+
+    document.getElementById("exportBtn").addEventListener("click", () => {
+      const items = load();
+      const text = items.length
+        ? items.map((i) => `${i.name} — ${i.score}/5\n${i.comment || ""}\n${i.when || ""}`).join("\n\n")
+        : "No landlord reviews saved.";
+      const blob = new Blob([text], { type: "text/plain" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "score-my-landlord.txt";
+      a.click();
+      URL.revokeObjectURL(url);
+    });
+
+    document.getElementById("clearBtn").addEventListener("click", () => {
+      if (confirm("Clear all landlord reviews saved in this browser?")) save([]);
+    });
+
+    render(load());
+    fetch("https://countapi.mileshilliard.com/api/v1/hit/gptworks-score-my-landlord")
+      .then((r) => r.json())
+      .then((d) => { document.getElementById("viewCount").textContent = d.value || "0"; })
+      .catch(() => { document.getElementById("viewCount").textContent = "—"; });
+  </script>
 </body>
 </html>
