@@ -1272,58 +1272,234 @@
           "title": "Definition",
           "depth": 1,
           "label": "A.",
-          "kind": "topic"
+          "paragraphs": [
+            "This is general educational information about South Carolina law. It is not legal advice and does not decide how the law applies to any particular case. Read the linked opinions and statutes in full before relying on them.",
+            "Conversion is the claim that someone took your personal property, or kept it, and treated it as their own. \"Conversion is the unauthorized assumption and exercise of the right of ownership over goods or personal chattels belonging to another, to the alteration of the condition or the exclusion of the owner's rights.\" Moore v. Weinberg, Op. No. 4209 (Ct. App. 2007), quoting Hawkins v. City of Greenville, 358 S.C. 280, 297 (Ct. App. 2004). Moore, citing Kirby v. Horne Motor Co., 295 S.C. 7 (Ct. App. 1988), describes it as a wrongful taking or a wrongful detention. The Supreme Court has used a close formulation: \"the unauthorized assumption in the exercise of the right of ownership over goods or personal chattels belonging to another to the exclusion of the owner's rights.\" Gignilliat v. Gignilliat, Savitz & Bettis, L.L.P., Op. No. 26735 (S.C. 2009), quoting SSI Medical Services, Inc. v. Cox, 301 S.C. 493, 498 (1990).",
+            "The usual subject is tangible personal property, or an intangible right identified with a document. Gignilliat limited conversion of intangible rights to rights \"identified with some document.\" Continued use of a deceased law partner's name, with no document of that right, was not conversion.",
+            "Money is narrower. \"There can be no conversion of money unless there is an obligation on the defendant to deliver a specific, identifiable fund to the plaintiff.\" Richardson's Restaurants, Inc. v. National Bank of South Carolina, 304 S.C. 289, 294 (Ct. App. 1991). In that case a general bank deposit, commingled with other deposits and owed only as a debt, was not conversion. \"Money may be the subject of conversion when it is capable of being identified and there may be conversion of determinate sums even though the specific coins and bills are not identified.\" SSI Medical Services, 301 S.C. at 498. The sum does not have to sit in its own account. Mullis v. Trident Emergency Physicians, Op. No. 3548 (Ct. App. 2002), held that $20,000 withheld from a doctor's pay was a \"determinative sum,\" and commingling it with partnership funds did not change that.",
+            "Tenant/landlord example: After move-out, the landlord will not return the tenant's furniture, or keeps the security deposit and sends no itemized notice. Furniture and other belongings are ordinary personal property. A deposit is money. S.C. Code § 27-40-410 requires the landlord to return property or money held as security, less accrued rent and damages from the tenant's noncompliance with § 27-40-510, and to itemize any deduction in a written notice. That is a determinate sum the statute says must be returned, so it can fit the identifiable-fund rule above. A mere unpaid debt cannot. No South Carolina appellate case applying that money rule to a residential security deposit was pulled for this summary. The statute's own recovery is under Damages."
+          ],
+          "authorities": [
+            {
+              "label": "Moore v. Weinberg, Op. No. 4209 (Ct. App. 2007)",
+              "url": "https://www.sccourts.org/media/opinions/HTMLFiles/COA/4209.htm"
+            },
+            {
+              "label": "Gignilliat v. Gignilliat, Savitz & Bettis, L.L.P., Op. No. 26735 (S.C. 2009)",
+              "url": "https://law.justia.com/cases/south-carolina/supreme-court/2009/26735.html"
+            },
+            {
+              "label": "SSI Medical Services, Inc. v. Cox, 301 S.C. 493, 392 S.E.2d 789 (1990)",
+              "url": "https://law.justia.com/cases/south-carolina/supreme-court/1990/23229-2.html"
+            },
+            {
+              "label": "Richardson's Restaurants, Inc. v. National Bank of South Carolina, 304 S.C. 289, 403 S.E.2d 669 (Ct. App. 1991)",
+              "url": "https://law.justia.com/cases/south-carolina/court-of-appeals/1991/304-s-c-289-2.html"
+            },
+            {
+              "label": "Mullis v. Trident Emergency Physicians, Op. No. 3548 (Ct. App. 2002)",
+              "url": "https://www.sccourts.org/media/opinions/HTMLFiles/COA/3548.htm"
+            },
+            {
+              "label": "S.C. Code § 27-40-410 — security deposits",
+              "url": "https://www.scstatehouse.gov/code/t27c040.php"
+            }
+          ]
         },
         {
           "id": "claim-13-section-2",
           "title": "Elements",
           "depth": 1,
           "label": "B.",
-          "kind": "topic"
+          "paragraphs": [
+            "The three topics below are the parts of a circuit charge set out in Hennes v. Shaw, Op. No. 4948 (Ct. App. 2012). The Court of Appeals reversed that charge because conversion had not been pleaded and the defendant had no chance to meet it. The opinion sets the charge out in full and, separately, states the definition and the title-or-possession requirement.",
+            "1. An interest by the plaintiff in the thing converted.",
+            "2. The defendant converted the property to his or her own use.",
+            "3. The use was without the plaintiff's permission.",
+            "\"To recover in an action for conversion, the plaintiff must prove by the preponderance or greater weight of the evidence an interest by the plaintiff in the thing converted, the defendant converted the property to his own use and that the use was without the plaintiff's permission.\" Hennes (circuit charge). The Court of Appeals stated: \"To establish the tort of conversion, the plaintiff must establish either title to or right to the possession of the personal property.\" Hennes, quoting Regions Bank v. Schmauch, 354 S.C. 648, 667 (Ct. App. 2003). Gignilliat quotes the same requirement from Moseley v. Oswald, 376 S.C. 251, 254 (2008).",
+            "Standard of proof: Preponderance of the evidence for the conversion itself. The Hennes charge calls it \"the preponderance or greater weight of the evidence.\" Punitive damages use a higher standard. The plaintiff must prove by clear and convincing evidence that the harm was the result of wilful, wanton, or reckless conduct. S.C. Code §§ 15-33-135 and 15-32-520(D)."
+          ],
+          "authorities": [
+            {
+              "label": "Hennes v. Shaw, Op. No. 4948 (Ct. App. 2012)",
+              "url": "https://www.sccourts.org/media/opinions/HTMLFiles/COA/4948.htm"
+            },
+            {
+              "label": "Gignilliat v. Gignilliat, Savitz & Bettis, L.L.P., Op. No. 26735 (S.C. 2009)",
+              "url": "https://law.justia.com/cases/south-carolina/supreme-court/2009/26735.html"
+            },
+            {
+              "label": "S.C. Code § 15-33-135 — clear and convincing evidence",
+              "url": "https://www.scstatehouse.gov/code/t15c033.php"
+            },
+            {
+              "label": "S.C. Code § 15-32-520(D) — punitive damages",
+              "url": "https://www.scstatehouse.gov/code/t15c032.php"
+            }
+          ]
         },
         {
           "id": "claim-13-section-3",
           "title": "Elements Defined",
           "depth": 1,
-          "label": "C.",
-          "kind": "topic"
+          "label": "C."
         },
         {
           "id": "claim-13-section-4",
           "title": "An Interest by the Plaintiff in the Thing Converted",
           "depth": 2,
           "label": "1.",
-          "kind": "topic"
+          "paragraphs": [
+            "The plaintiff must have title, or a right to possess the property, when it is converted. Hennes; Moore, citing Oxford Finance Cos. v. Burgess, 303 S.C. 534 (1991); Gignilliat, quoting Moseley, 376 S.C. at 254. Full record title is not the only path. The opinions state the requirement as title or a right to possession. For a tenant, the interest in furniture and other belongings is ownership or the right to take them back. For a security deposit, the interest is the right to the sum § 27-40-410 requires the landlord to return, less the deductions that section allows. Whether that sum is specific enough to be converted is the money rule in the Definition. No South Carolina appellate case deciding that a residential security deposit is, by itself, an interest that will support conversion was pulled for this summary."
+          ],
+          "authorities": [
+            {
+              "label": "Hennes v. Shaw, Op. No. 4948 (Ct. App. 2012)",
+              "url": "https://www.sccourts.org/media/opinions/HTMLFiles/COA/4948.htm"
+            },
+            {
+              "label": "Moore v. Weinberg, Op. No. 4209 (Ct. App. 2007)",
+              "url": "https://www.sccourts.org/media/opinions/HTMLFiles/COA/4209.htm"
+            },
+            {
+              "label": "S.C. Code § 27-40-410 — security deposits",
+              "url": "https://www.scstatehouse.gov/code/t27c040.php"
+            }
+          ]
         },
         {
           "id": "claim-13-section-5",
           "title": "The Defendant Converted the Property to His or Her Own Use",
           "depth": 2,
           "label": "2.",
-          "kind": "topic"
+          "paragraphs": [
+            "The defendant must exercise ownership: by taking the property, using it, or keeping it. \"Conversion may arise by some illegal use or misuse, or by illegal detention of another's personal property.\" Moore, quoting Regions Bank, 354 S.C. at 667, which cites Owens v. Andrews Bank & Trust Co., 265 S.C. 490, 496 (1975), and Castell v. Stephenson Finance Co., 244 S.C. 45, 50-51 (1964). Moore also describes conversion as a wrongful taking or a wrongful detention. The Hennes charge says any act inconsistent with the plaintiff's right of possession, or subversive of the right to the property, is conversion, and that \"[i]t cannot arise from the defendant's exercise of a legal right over property.\"",
+            "Unauthorized detention after a demand is one way to prove conversion. \"A plaintiff claiming conversion may prevail based upon a showing of unauthorized detention of property, after demand.\" Hennes, quoting Mackela v. Bentley, 365 S.C. 44, 48 (Ct. App. 2005). Demand and refusal are unnecessary when the defendant got the property \"illegally, tortiously, by fraud, or other wrongful conduct.\" SSI Medical Services, citing McPherson v. Neuffer & Hendrix, 45 S.C.L. (11 Rich.) 267, 281 (1858). In SSI, permission to sell the vehicles was not permission to keep the proceeds. The employer identified a determinate sum, not less than $121,489.64 from 35 vehicles, and the account where it was deposited.",
+            "A landlord who keeps a tenant's furniture after the tenant asks for it is detaining personal property. A landlord who applies a deposit only to accrued rent or to damages from the tenant's noncompliance with § 27-40-510, and who itemizes that deduction as § 27-40-410(a) requires, is using a statutory right as to that part. Keeping the rest is the kind of detention the money cases describe. No residential-deposit conversion case was pulled for this summary."
+          ],
+          "authorities": [
+            {
+              "label": "Moore v. Weinberg, Op. No. 4209 (Ct. App. 2007)",
+              "url": "https://www.sccourts.org/media/opinions/HTMLFiles/COA/4209.htm"
+            },
+            {
+              "label": "Hennes v. Shaw, Op. No. 4948 (Ct. App. 2012)",
+              "url": "https://www.sccourts.org/media/opinions/HTMLFiles/COA/4948.htm"
+            },
+            {
+              "label": "SSI Medical Services, Inc. v. Cox, 301 S.C. 493 (1990)",
+              "url": "https://law.justia.com/cases/south-carolina/supreme-court/1990/23229-2.html"
+            },
+            {
+              "label": "S.C. Code § 27-40-410 — security deposits",
+              "url": "https://www.scstatehouse.gov/code/t27c040.php"
+            }
+          ]
         },
         {
           "id": "claim-13-section-6",
           "title": "The Use Was Without the Plaintiff's Permission",
           "depth": 2,
           "label": "3.",
-          "kind": "topic"
+          "paragraphs": [
+            "The use has to be without the plaintiff's permission. That is the third part of the Hennes charge. Whether the plaintiff consented is a question for the jury. Mullis, citing Fredericks v. Commercial Credit Co., 145 S.C. 380, 387 (1928). Permission can be limited. In SSI, the employer allowed the employee to sell the cars and did not allow him to keep the proceeds. The employer also could not have acquiesced in a scheme it did not know about. Agreeing that a landlord may hold a deposit during the tenancy is not permission to keep the sum § 27-40-410 requires the landlord to return."
+          ],
+          "authorities": [
+            {
+              "label": "Hennes v. Shaw, Op. No. 4948 (Ct. App. 2012)",
+              "url": "https://www.sccourts.org/media/opinions/HTMLFiles/COA/4948.htm"
+            },
+            {
+              "label": "Mullis v. Trident Emergency Physicians, Op. No. 3548 (Ct. App. 2002)",
+              "url": "https://www.sccourts.org/media/opinions/HTMLFiles/COA/3548.htm"
+            },
+            {
+              "label": "SSI Medical Services, Inc. v. Cox, 301 S.C. 493 (1990)",
+              "url": "https://law.justia.com/cases/south-carolina/supreme-court/1990/23229-2.html"
+            }
+          ]
         },
         {
           "id": "claim-13-section-7",
           "title": "Defenses",
           "depth": 1,
           "label": "D.",
-          "kind": "topic"
+          "paragraphs": [
+            "Statute of limitations: Three years. Walsh v. Woods, Op. No. 3758 (Ct. App. 2004), applied S.C. Code § 15-3-530(1) and (5) and said the period for a conversion claim is three years, together with the discovery rule in § 15-3-535. Under that rule the three years run from when the person knew, or by reasonable diligence should have known, that he had a cause of action. In Walsh, dismissal of a related federal case on November 20, 1997, was notice enough, and the later suit was too late. Section 15-3-530(4) separately sets three years for \"an action for taking, detaining, or injuring any goods or chattels including an action for the specific recovery of personal property.\" An unpublished opinion with no precedential value, Cumbee v. Georgetown County, 2005-UP-454 (Ct. App.), applied subsection (4) to a conversion claim for a car the sheriff impounded. It treated the claim as arising when the owner knew the car had been taken, and it discussed tolling for incarceration under the version of the tolling statute then in effect. The opinion says it should not be cited or relied on as precedent except as Rule 239(d)(2), SCACR, allows. Section 15-3-535 is written for actions under subsection (5). Which subsection fits a particular conversion is fact-specific.",
+            "No title and no right to possession at the time of the conversion. Moore, citing Oxford Finance, 303 S.C. 534.",
+            "The defendant exercised a legal right. \"Conversion cannot arise from the defendant's exercise of a legal right over the property.\" Richardson's, citing Castell. The Hennes charge says the same. In Richardson's, a bank that debited a general account for charges the deposit agreement allowed had not converted those funds, and the plaintiff had no interest in the commingled deposit.",
+            "The money is only a debt, or it is not a specific identifiable fund. Richardson's. Commingling does not defeat a sum that is already determinate. Mullis.",
+            "Consent. If the plaintiff permitted the use, there is no conversion. Consent is for the jury. Mullis. Limited permission, as in SSI, leaves the unpermitted use open.",
+            "No demand, where the claim is that the defendant lawfully received the property and then kept it. Hennes, quoting Mackela, treats unauthorized detention after demand as a way to prove conversion. SSI holds that demand and refusal are unnecessary when possession was obtained by wrongful conduct. Which path fits depends on how the defendant got the property.",
+            "Landlord statutes. A deposit deduction for accrued rent or for damages from noncompliance with § 27-40-510, itemized in the written notice, is what § 27-40-410(a) allows. The tenant's failure to give a forwarding address can cut off the damages in that subsection when the landlord had no notice of the tenant's whereabouts and mailed the notice and any amount due to the last known address. After an eviction, personal property placed on a public street or highway is handled under § 27-40-710(D), including removal by local officials after 48 hours, excluding Saturdays, Sundays, and holidays, and a landlord's later disposal where the locality does not collect that debris. The eviction notice must tell the tenant about that section. Abandoned property, or property left when the rental agreement has ended, may be disposed of under § 27-40-730(d) only in the circumstances that subsection states, including a fair-market value of $500 or less. Other left property may be removed only under §§ 27-37-10 through 27-37-150. § 27-40-730(e). A contractual lien on the tenant's household goods is not enforceable unless it was perfected before the Residential Landlord and Tenant Act. § 27-40-740(a). Whether giving the property back is a complete defense, or only goes to damages: no case was pulled for it."
+          ],
+          "authorities": [
+            {
+              "label": "Walsh v. Woods, Op. No. 3758 (Ct. App. 2004)",
+              "url": "https://www.sccourts.org/media/opinions/HTMLFiles/COA/3758.htm"
+            },
+            {
+              "label": "Cumbee v. Georgetown County, 2005-UP-454 (Ct. App.) (unpublished; no precedential value)",
+              "url": "https://www.sccourts.org/opinions/unpublishedopinions/HTMLFiles/COA/2005-UP-454.htm"
+            },
+            {
+              "label": "S.C. Code §§ 15-3-530 and 15-3-535 — three-year limitations",
+              "url": "https://www.scstatehouse.gov/code/t15c003.php"
+            },
+            {
+              "label": "Richardson's Restaurants, Inc. v. National Bank of South Carolina, 304 S.C. 289 (Ct. App. 1991)",
+              "url": "https://law.justia.com/cases/south-carolina/court-of-appeals/1991/304-s-c-289-2.html"
+            },
+            {
+              "label": "SSI Medical Services, Inc. v. Cox, 301 S.C. 493 (1990)",
+              "url": "https://law.justia.com/cases/south-carolina/supreme-court/1990/23229-2.html"
+            },
+            {
+              "label": "S.C. Code §§ 27-40-410, 27-40-710, 27-40-730, and 27-40-740",
+              "url": "https://www.scstatehouse.gov/code/t27c040.php"
+            }
+          ]
         },
         {
           "id": "claim-13-section-8",
           "title": "Damages",
           "depth": 1,
           "label": "E.",
-          "kind": "topic"
+          "paragraphs": [
+            "For an innocent conversion, \"where the property is converted by mistake or under a bona fide belief or right (as in the case of an innocent purchaser for value), the measure of damages is the value of the property at the time and place of conversion.\" The owner \"is not entitled to any additions or enhancements made by the converter.\" Green v. Waidner, 284 S.C. 35, 37-38 (Ct. App. 1984).",
+            "For a wilful and intentional conversion, \"where the property is converted with knowledge of the owner's rights in the property,\" the measure \"is the highest market value of the property with interest up to the time of trial, including any additional value due to additions or improvements made by the converter.\" Green, citing Industrial Welding Supplies, Inc. v. Atlas Vending Co., 276 S.C. 196 (1981). Green held it was error to require recklessness before the jury could consider that enhanced value. Recklessness is the punitive-damages question.",
+            "Where the converted property is a determinate sum of money, SSI affirmed summary judgment on liability only and said the plaintiff still had to prove each element of its damages. No separate South Carolina formula for interest on converted money, beyond Green's statement of interest in the wilful-conversion measure, was pulled for this summary.",
+            "Punitive damages are available for conversion. They are not available for every conversion. \"Only if the owner seeks punitive damages must the evidence show that the conversion was done recklessly and with conscious indifference to the owner's rights.\" Green, citing Long v. Gibbs Auto Wrecking Co., 253 S.C. 370 (1969), and Lumpkin v. Allstate Insurance Co., 251 S.C. 19 (1968). Current statutes add requirements. The complaint must specifically pray for punitive damages and must not plead a dollar amount. S.C. Code § 15-32-510. They \"may be awarded only if the plaintiff proves by clear and convincing evidence that his harm was the result of the defendant's wilful, wanton, or reckless conduct.\" § 15-32-520(D). Section 15-33-135 states the same clear-and-convincing burden. If a defendant asks, the trial is bifurcated. § 15-32-520(A). Except as the statute provides, an award may not exceed the greater of three times the compensatory damages or $500,000. § 15-32-530(A). Subsection (B) can raise that ceiling, and subsection (C) removes the cap in the situations it lists, including an intent to harm that did harm the claimant.",
+            "A residential security deposit has a statutory measure that sits alongside the tort. If the landlord does not return prepaid rent or the deposit with the notice § 27-40-410(a) requires, \"the tenant may recover the property and money in an amount equal to three times the amount wrongfully withheld and reasonable attorney's fees.\" § 27-40-410(b). That section \"does not preclude the landlord or tenant from recovering other damages to which he may be entitled under this chapter or otherwise.\" § 27-40-410(d). The treble amount is the statutory remedy. It is not a holding that the deposit was converted. If the landlord disposes of property under § 27-40-730(d) and the property was worth more than $500, \"the landlord is not liable unless the landlord was grossly negligent.\" § 27-40-730(f)."
+          ],
+          "authorities": [
+            {
+              "label": "Green v. Waidner, 284 S.C. 35, 324 S.E.2d 331 (Ct. App. 1984)",
+              "url": "https://law.justia.com/cases/south-carolina/court-of-appeals/1984/284-s-c-35-2.html"
+            },
+            {
+              "label": "SSI Medical Services, Inc. v. Cox, 301 S.C. 493 (1990)",
+              "url": "https://law.justia.com/cases/south-carolina/supreme-court/1990/23229-2.html"
+            },
+            {
+              "label": "S.C. Code §§ 15-32-510, 15-32-520, and 15-32-530 — punitive damages",
+              "url": "https://www.scstatehouse.gov/code/t15c032.php"
+            },
+            {
+              "label": "S.C. Code § 15-33-135 — clear and convincing evidence",
+              "url": "https://www.scstatehouse.gov/code/t15c033.php"
+            },
+            {
+              "label": "S.C. Code §§ 27-40-410 and 27-40-730",
+              "url": "https://www.scstatehouse.gov/code/t27c040.php"
+            }
+          ]
         }
-      ]
+      ],
+      "guide": {
+        "updated": "2026-11-12",
+        "provenance": "This is general educational information about South Carolina law. It is not legal advice and does not decide how the law applies to any particular case. Read the linked opinions and statutes in full before relying on them."
+      }
     },
     {
       "number": "claim-14",
