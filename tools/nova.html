@@ -1,61 +1,95 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Nova | GPTWorks</title>
-    <link rel="stylesheet" href="../assets/css/main.css">
-    <style>
-        .demo { background: #f8f9fa; padding: 1.5em; border-radius: 8px; margin: 1em 0; }
-        textarea, button { margin: 0.3em 0; padding: 0.5em; width: 100%; max-width: 500px; }
-        button { background: #4a90e2; color: white; border: none; cursor: pointer; }
-        #response { margin-top: 1em; padding: 1em; background: white; border-left: 3px solid #4a90e2; min-height: 60px; }
-        .views { margin: 1em 0; font-size: 0.95em; color: #555; }
-    </style>
-<link rel="stylesheet" href="../assets/cosmos/tools.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Nova | GPTWorks</title>
+  <meta name="description" content="Turn a messy task into a short, practical plan. Works offline in your browser.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,460;9..144,600&family=Syne:wght@500;700;800&display=swap">
+  <link rel="stylesheet" href="../assets/cosmos/tools.css">
 </head>
-<body class="is-preload">
-    <div id="wrapper">
-        <section class="wrapper style3 fade-up">
-            <div class="inner">
-                <h1>Nova</h1>
-                <p>AI-powered tool (in development).</p>
-                <p class="views">Views: <span id="viewCount">...</span></p>
+<body>
+  <header class="tool-header">
+    <a class="brand" href="../"><img src="../images/gptworks-logo.png" alt="" width="36" height="36"> GPTWorks</a>
+    <nav aria-label="Secondary">
+      <a href="index.html">Tools</a>
+      <a href="../#contact">Contact</a>
+    </nav>
+  </header>
+  <main class="tool-main">
+    <p class="kicker">Focus</p>
+    <h1>Nova</h1>
+    <p class="lede">Describe what is weighing on you. Nova turns it into a short plan you can start today — no API required.</p>
+    <p class="meta">Views: <span id="viewCount">…</span></p>
 
-                <div class="demo">
-                    <h2>Try the Demo</h2>
-                    <label>Ask Nova something</label>
-                    <textarea id="prompt" rows="3" placeholder="e.g. Help me plan a simple budget"></textarea>
-                    <button onclick="askNova()">Ask</button>
-                    <div id="response"></div>
-                </div>
+    <section class="panel">
+      <label for="prompt">What do you need to get done?</label>
+      <textarea id="prompt" rows="4" placeholder="e.g. Catch up on bills, fix the leaky faucet, and finish my resume this week"></textarea>
+      <div class="actions">
+        <button class="primary" type="button" id="askBtn">Make a plan</button>
+        <button class="ghost" type="button" id="copyBtn">Copy plan</button>
+      </div>
+      <div id="response" class="result" style="margin-top:16px" hidden></div>
+    </section>
 
-                <p><small>Simulated responses only. Real AI integration coming later.</small></p>
-
-                <ul class="actions">
-                    <li><a href="../" class="button">Back to GPTWorks</a></li>
-                </ul>
-            </div>
-        </section>
+    <div class="actions">
+      <a class="button ghost" href="index.html">All tools</a>
+      <a class="button ghost" href="../">Back to GPTWorks</a>
     </div>
-    <script>
-        function askNova() {
-            const prompt = document.getElementById('prompt').value.trim();
-            const response = document.getElementById('response');
-            if (!prompt) { response.innerHTML = 'Enter a question or request.'; return; }
-            const replies = [
-                'I can help break that down into smaller steps.',
-                'Here is a simple starting point based on what you asked.',
-                'That sounds useful. A practical approach would be...',
-                'I can outline options for you.'
-            ];
-            response.innerHTML = '<strong>Nova:</strong> ' + replies[Math.floor(Math.random() * replies.length)] + '<br><br><em>(Demo response)</em>';
-        }
+  </main>
+  <footer class="tool-footer"><p>&copy; GPTWorks. Free to use.</p></footer>
+  <script>
+    const response = document.getElementById("response");
 
-        fetch('https://countapi.mileshilliard.com/api/v1/hit/gptworks-nova')
-            .then(r => r.json())
-            .then(d => { document.getElementById('viewCount').textContent = d.value || '0'; })
-            .catch(() => { document.getElementById('viewCount').textContent = '—'; });
-    </script>
+    function planFrom(text) {
+      const parts = text
+        .split(/[,;.]|\band\b|\bthen\b/i)
+        .map((p) => p.trim())
+        .filter((p) => p.length > 2)
+        .slice(0, 6);
+
+      const steps = (parts.length ? parts : [text]).map((item, i) => {
+        const label = item.charAt(0).toUpperCase() + item.slice(1);
+        return `${i + 1}. ${label}${/[.!?]$/.test(label) ? "" : "."}`;
+      });
+
+      return [
+        "Here is a practical starting plan:",
+        "",
+        ...steps,
+        "",
+        "Next move: finish step 1 in the next 25 minutes, then reassess.",
+        "If it still feels heavy, shrink step 1 until it takes under 10 minutes."
+      ].join("\n");
+    }
+
+    document.getElementById("askBtn").addEventListener("click", () => {
+      const prompt = document.getElementById("prompt").value.trim();
+      response.hidden = false;
+      if (!prompt) {
+        response.textContent = "Tell Nova what you need to get done.";
+        return;
+      }
+      response.textContent = planFrom(prompt);
+    });
+
+    document.getElementById("copyBtn").addEventListener("click", async () => {
+      if (response.hidden || !response.textContent) return;
+      try {
+        await navigator.clipboard.writeText(response.textContent);
+        document.getElementById("copyBtn").textContent = "Copied";
+        setTimeout(() => { document.getElementById("copyBtn").textContent = "Copy plan"; }, 1200);
+      } catch {
+        document.getElementById("copyBtn").textContent = "Copy failed";
+      }
+    });
+
+    fetch("https://countapi.mileshilliard.com/api/v1/hit/gptworks-nova")
+      .then((r) => r.json())
+      .then((d) => { document.getElementById("viewCount").textContent = d.value || "0"; })
+      .catch(() => { document.getElementById("viewCount").textContent = "—"; });
+  </script>
 </body>
 </html>

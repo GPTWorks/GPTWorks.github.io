@@ -234,6 +234,12 @@ h2 { font-size: clamp(2.4rem, 5vw, 4.4rem); margin: 0 0 12px; color: #fff; text-
   box-shadow: 0 0 40px rgba(176, 38, 255, 0.2);
 }
 .grok-panel p { color: var(--muted); }
+.grok-links {
+  list-style: none; padding: 0; margin: 0 0 18px;
+  display: grid; gap: 10px;
+}
+.grok-links a { color: var(--ink); text-decoration: none; font-family: var(--ui); }
+.grok-links a:hover { color: var(--magenta); }
 .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
 form { display: grid; gap: 10px; }
 input, textarea {

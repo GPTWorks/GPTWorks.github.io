@@ -1,74 +1,91 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Cosmic Drift | GPTWorks</title>
-    <link rel="stylesheet" href="../assets/css/main.css">
-    <style>
-        .demo { background: #f8f9fa; padding: 1.5em; border-radius: 8px; margin: 1em 0; text-align: center; }
-        #canvas { border: 1px solid #ccc; background: #111; margin: 1em auto; display: block; }
-        button { margin: 0.5em; padding: 0.5em 1em; background: #4a90e2; color: white; border: none; cursor: pointer; }
-        #score { font-size: 1.2em; margin: 0.5em; }
-        .views { margin: 1em 0; font-size: 0.95em; color: #555; text-align: left; }
-    </style>
-<link rel="stylesheet" href="../assets/cosmos/tools.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cosmic Drift | GPTWorks</title>
+  <meta name="description" content="A flight chart of Hubble galaxies, nearby portraits, and the nebulae around them — built with Grok.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,460;9..144,600&family=Syne:wght@500;700;800&display=swap">
+  <link rel="stylesheet" href="../assets/cosmos/tools.css">
 </head>
-<body class="is-preload">
-    <div id="wrapper">
-        <section class="wrapper style3 fade-up">
-            <div class="inner">
-                <h1>Cosmic Drift</h1>
-                <p>Space exploration game and experience.</p>
-                <p class="views">Views: <span id="viewCount">...</span></p>
+<body>
+  <header class="tool-header">
+    <a class="brand" href="../"><img src="../images/gptworks-logo.png" alt="" width="36" height="36"> GPTWorks</a>
+    <nav aria-label="Secondary">
+      <a href="index.html">Tools</a>
+      <a href="https://cosmic-drift.grok.me">Open on Grok</a>
+    </nav>
+  </header>
+  <main class="tool-main">
+    <p class="badge">Built with Grok</p>
+    <p class="kicker">Space</p>
+    <h1>Cosmic Drift</h1>
+    <p class="lede">A flight chart of Hubble galaxies, nearby portraits, and the nebulae around them. The deep field hangs behind two rows of doors.</p>
+    <p class="meta">Views: <span id="viewCount">…</span></p>
 
-                <div class="demo">
-                    <h2>Try the Demo</h2>
-                    <p>Click the ship to drift and score points.</p>
-                    <canvas id="canvas" width="400" height="200"></canvas>
-                    <div id="score">Score: 0</div>
-                    <button onclick="reset()">Reset</button>
-                </div>
+    <section class="panel">
+      <h2>Full experience</h2>
+      <p>The live app runs on Grok hosting. Open it for the complete space exploration experience.</p>
+      <div class="actions">
+        <a class="button primary" href="https://cosmic-drift.grok.me" target="_blank" rel="noopener">Launch Cosmic Drift</a>
+        <a class="button ghost" href="../orrery/">Also try Orrery</a>
+      </div>
+    </section>
 
-                <p><small>Very simple click-to-score demo. Full game coming later.</small></p>
+    <section class="panel">
+      <h2>Mini demo</h2>
+      <p class="note">Click the canvas to drift the ship and score points. A tiny taste while the full app loads elsewhere.</p>
+      <canvas id="canvas" width="400" height="200" style="width:100%;max-width:400px;border:1px solid rgba(232,210,255,.2);border-radius:14px;background:#0a0814;display:block;margin:12px 0;touch-action:none"></canvas>
+      <div id="score">Score: 0</div>
+      <div class="actions">
+        <button class="ghost" type="button" id="resetBtn">Reset</button>
+      </div>
+    </section>
 
-                <ul class="actions">
-                    <li><a href="../" class="button">Back to GPTWorks</a></li>
-                </ul>
-            </div>
-        </section>
+    <div class="actions">
+      <a class="button ghost" href="index.html">All tools</a>
+      <a class="button ghost" href="../">Back to GPTWorks</a>
     </div>
-    <script>
-        const canvas = document.getElementById('canvas');
-        const ctx = canvas.getContext('2d');
-        let score = 0;
-        let x = 200, y = 100;
-        function draw() {
-            ctx.fillStyle = '#111';
-            ctx.fillRect(0, 0, 400, 200);
-            ctx.fillStyle = '#4a90e2';
-            ctx.beginPath();
-            ctx.arc(x, y, 15, 0, Math.PI * 2);
-            ctx.fill();
-            ctx.fillStyle = 'white';
-            ctx.font = '12px sans-serif';
-            ctx.fillText('Ship', x - 15, y + 30);
-        }
-        canvas.addEventListener('click', function(e) {
-            const rect = canvas.getBoundingClientRect();
-            x = e.clientX - rect.left;
-            y = e.clientY - rect.top;
-            score += 10;
-            document.getElementById('score').textContent = 'Score: ' + score;
-            draw();
-        });
-        function reset() { score = 0; x = 200; y = 100; document.getElementById('score').textContent = 'Score: 0'; draw(); }
-        draw();
-
-        fetch('https://countapi.mileshilliard.com/api/v1/hit/gptworks-cosmic-drift')
-            .then(r => r.json())
-            .then(d => { document.getElementById('viewCount').textContent = d.value || '0'; })
-            .catch(() => { document.getElementById('viewCount').textContent = '—'; });
-    </script>
+  </main>
+  <footer class="tool-footer"><p>&copy; GPTWorks. Free to use.</p></footer>
+  <script>
+    const canvas = document.getElementById("canvas");
+    const ctx = canvas.getContext("2d");
+    let score = 0, x = 200, y = 100;
+    function draw() {
+      ctx.fillStyle = "#0a0814";
+      ctx.fillRect(0, 0, 400, 200);
+      for (let i = 0; i < 40; i++) {
+        ctx.fillStyle = i % 7 === 0 ? "#ff4fd8" : "#f7f2ff";
+        ctx.fillRect((i * 97) % 400, (i * 53) % 200, 2, 2);
+      }
+      ctx.fillStyle = "#e7b6ff";
+      ctx.beginPath();
+      ctx.arc(x, y, 14, 0, Math.PI * 2);
+      ctx.fill();
+    }
+    canvas.addEventListener("click", (e) => {
+      const rect = canvas.getBoundingClientRect();
+      const scaleX = canvas.width / rect.width;
+      const scaleY = canvas.height / rect.height;
+      x = (e.clientX - rect.left) * scaleX;
+      y = (e.clientY - rect.top) * scaleY;
+      score += 10;
+      document.getElementById("score").textContent = "Score: " + score;
+      draw();
+    });
+    document.getElementById("resetBtn").addEventListener("click", () => {
+      score = 0; x = 200; y = 100;
+      document.getElementById("score").textContent = "Score: 0";
+      draw();
+    });
+    draw();
+    fetch("https://countapi.mileshilliard.com/api/v1/hit/gptworks-cosmic-drift")
+      .then((r) => r.json())
+      .then((d) => { document.getElementById("viewCount").textContent = d.value || "0"; })
+      .catch(() => { document.getElementById("viewCount").textContent = "—"; });
+  </script>
 </body>
 </html>

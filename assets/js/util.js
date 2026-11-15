@@ -639,21 +639,5 @@ function loadGodsProfoundTruth(apiKey) {
     });
 }
 
-// Initialize God's Profound Truth Tool
-document.addEventListener("DOMContentLoaded", () => {
-    if (window.location.pathname.includes("gods-profound-truth.html")) {
-        fetch("/tools/config.js")
-            .then((response) => response.text())
-            .then((configText) => {
-                const config = new Function(configText)(); // Parse config.js
-                if (config.apiKey) {
-                    loadGodsProfoundTruth(config.apiKey);
-                } else {
-                    console.error("API key not found in config.js");
-                }
-            })
-            .catch((error) => {
-                console.error("Error loading config.js:", error);
-            });
-    }
-});
+// God's Profound Truth no longer loads API keys in the browser.
+// See tools/gods-profound-truth.html for the offline study worksheet.
