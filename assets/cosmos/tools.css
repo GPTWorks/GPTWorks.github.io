@@ -234,21 +234,49 @@ textarea { min-height: 110px; resize: vertical; }
 }
 
 .tool-card {
-  display: block;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
   padding: 18px;
   border: 1px solid var(--line);
   border-radius: 16px;
   background: var(--glass);
   text-decoration: none;
   color: inherit;
-  transition: border-color 0.2s ease, transform 0.2s ease;
+  transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
 }
 .tool-card:hover {
   border-color: var(--magenta);
   transform: translateY(-2px);
   color: inherit;
+  box-shadow: 0 0 22px rgba(255, 79, 216, 0.28);
 }
-.tool-card h3 { margin-bottom: 6px; }
+.tool-card h3 {
+  display: inline-flex;
+  align-items: center;
+  align-self: flex-start;
+  gap: 0.45em;
+  margin: 0;
+  min-height: 40px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(232, 180, 255, 0.5);
+  background: rgba(176, 38, 255, 0.16);
+  font-size: 0.95rem;
+  letter-spacing: 0.04em;
+  transition: border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+}
+.tool-card h3::after {
+  content: "→";
+  font-weight: 500;
+  opacity: 0.85;
+}
+.tool-card:hover h3,
+.tool-card:focus-visible h3 {
+  border-color: var(--magenta);
+  background: rgba(255, 79, 216, 0.22);
+  box-shadow: 0 0 16px rgba(255, 79, 216, 0.35);
+}
 .tool-card p { margin: 0; color: var(--muted); }
 
 @media (max-width: 720px) {
