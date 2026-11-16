@@ -4,53 +4,204 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Score My Landlord | GPTWorks</title>
-  <meta name="description" content="Tenant-facing landlord review notes stored only in your browser.">
+  <meta name="description" content="Score a past landlord in South Carolina by the property address you rented. Greenville County reviews post first. We never contact landlords.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,460;9..144,600&family=Syne:wght@500;700;800&display=swap">
   <link rel="stylesheet" href="../assets/cosmos/tools.css">
+  <style>
+    .scoreboard {
+      display: flex; flex-wrap: wrap; gap: 14px; align-items: center;
+      margin: 12px 0 0; padding: 14px 16px; border-radius: 14px;
+      border: 1px solid var(--line); background: #14131c;
+    }
+    .scoreboard strong {
+      font-family: var(--display); font-size: 2rem; letter-spacing: -0.03em; color: #fff;
+    }
+    .warn {
+      border-left: 3px solid var(--magenta);
+      padding: 12px 14px; margin: 0 0 18px;
+      background: rgba(255, 79, 216, 0.08); border-radius: 0 12px 12px 0;
+    }
+    .share-box {
+      display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-top: 12px;
+    }
+    .share-box input {
+      flex: 1 1 220px; min-width: 0;
+    }
+    .scale {
+      display: grid; gap: 8px; margin: 8px 0 16px;
+    }
+    .scale label {
+      display: grid; grid-template-columns: 1fr auto; gap: 10px; align-items: center;
+      margin: 0; text-transform: none; letter-spacing: 0; font-size: 0.98rem; color: var(--ink);
+      font-family: var(--text);
+    }
+    .scale select { width: auto; min-width: 7.5rem; }
+    .county-note[hidden] { display: none !important; }
+  </style>
 </head>
 <body>
   <header class="tool-header">
     <a class="brand" href="../"><img src="../images/gptworks-logo.png" alt="" width="36" height="36"> GPTWorks</a>
     <nav aria-label="Secondary">
       <a href="index.html">Tools</a>
-      <a href="../sc-civil-rules/landlord-tenant-act.html">Landlord Act</a>
+      <a href="tenant-help.html">Tenant Help</a>
     </nav>
   </header>
   <main class="tool-main">
-    <p class="kicker">Tenant tools</p>
+    <p class="kicker">For renters · past landlords only</p>
     <h1>Score My Landlord</h1>
-    <p class="lede">Keep landlord notes and scores so you remember who held your home well — and who did not.</p>
-    <p class="meta">Views: <span id="viewCount">…</span> · Saved on this device only</p>
+    <p class="lede">Leave a review of a landlord you had in the past. Enter the property address you rented, answer a few experience questions, and we calculate a landlord score. This is not a rating of the rental unit itself.</p>
+    <p class="meta">Views: <span id="viewCount">…</span> · Greenville County, SC posts first</p>
 
     <section class="panel">
-      <h2>Add a review</h2>
-      <form id="reviewForm">
-        <label for="landlordName">Landlord / property</label>
-        <input id="landlordName" name="landlordName" type="text" placeholder="e.g. Oak Street Apartments" required autocomplete="organization">
-        <label for="score">Score</label>
-        <select id="score" name="score">
-          <option value="5">5 — Excellent</option>
-          <option value="4">4 — Good</option>
-          <option value="3">3 — Average</option>
-          <option value="2">2 — Poor</option>
-          <option value="1">1 — Terrible</option>
-        </select>
-        <label for="comment">What happened</label>
-        <textarea id="comment" name="comment" rows="3" placeholder="Repairs, deposit return, communication, safety…"></textarea>
-        <div class="actions">
-          <button class="primary" type="submit">Save review</button>
-          <button class="ghost" type="button" id="exportBtn">Download notes</button>
-          <button class="ghost" type="button" id="clearBtn">Clear all</button>
-        </div>
-      </form>
+      <h2>Before you start</h2>
+      <div class="warn">
+        <p style="margin:0"><strong>Past landlords only.</strong> Do not score a landlord you still rent from. A current review can put your housing at risk. Wait until you have moved out.</p>
+      </div>
+      <ul class="list">
+        <li>You only need the address of the place you rented and your experience with that landlord.</li>
+        <li>Right now, scores are posted publicly for <strong>Greenville County, SC</strong> properties.</li>
+        <li>If your address is elsewhere in South Carolina, still submit. We keep the review and will post that county when enough reviews arrive.</li>
+        <li>Anyone can submit. We store reviews in our database. We do not share your information with anyone, and we never contact a landlord because of a review.</li>
+      </ul>
     </section>
 
     <section class="panel">
-      <h2>Your reviews</h2>
-      <div id="reviews"></div>
-      <p class="note">Nothing leaves this browser unless you download it. Clearing site data erases these notes.</p>
+      <h2>Your review</h2>
+      <form id="reviewForm">
+        <label class="warn" style="display:block;text-transform:none;letter-spacing:0;font-family:var(--text);font-size:1rem;color:var(--ink)">
+          <input id="pastOnly" name="pastOnly" type="checkbox" required style="width:auto;margin-right:8px">
+          I am scoring a landlord from a place I already moved out of (not my current landlord).
+        </label>
+
+        <label for="street">Property address you rented</label>
+        <input id="street" name="street" type="text" placeholder="Street address" required autocomplete="street-address">
+
+        <label for="city">City</label>
+        <input id="city" name="city" type="text" placeholder="City" required autocomplete="address-level2">
+
+        <label for="county">South Carolina county</label>
+        <select id="county" name="county" required>
+          <option value="">Select county</option>
+          <option value="Greenville">Greenville</option>
+          <option value="Anderson">Anderson</option>
+          <option value="Pickens">Pickens</option>
+          <option value="Spartanburg">Spartanburg</option>
+          <option value="Laurens">Laurens</option>
+          <option value="Richland">Richland</option>
+          <option value="Charleston">Charleston</option>
+          <option value="Horry">Horry</option>
+          <option value="Other SC">Other South Carolina county</option>
+        </select>
+        <p class="note county-note" id="countyNote" hidden></p>
+
+        <label for="zip">ZIP</label>
+        <input id="zip" name="zip" type="text" inputmode="numeric" pattern="[0-9]{5}" placeholder="29601" required autocomplete="postal-code">
+
+        <label for="landlordName">Landlord or company name (optional)</label>
+        <input id="landlordName" name="landlordName" type="text" placeholder="Who managed the property?" autocomplete="organization">
+
+        <label for="years">About when did you rent there? (optional)</label>
+        <input id="years" name="years" type="text" placeholder="e.g. 2022–2024">
+
+        <h3 style="margin-top:22px">Score the landlord experience</h3>
+        <p class="note">Rate the landlord — communication, repairs, fairness — not the apartment’s finishes or neighborhood amenities.</p>
+        <div class="scale" id="scoreFields">
+          <label>Communication &amp; responsiveness
+            <select name="communication" data-score required>
+              <option value="5">5 — Excellent</option>
+              <option value="4">4 — Good</option>
+              <option value="3" selected>3 — Okay</option>
+              <option value="2">2 — Poor</option>
+              <option value="1">1 — Terrible</option>
+            </select>
+          </label>
+          <label>Repairs &amp; maintenance follow-through
+            <select name="repairs" data-score required>
+              <option value="5">5 — Excellent</option>
+              <option value="4">4 — Good</option>
+              <option value="3" selected>3 — Okay</option>
+              <option value="2">2 — Poor</option>
+              <option value="1">1 — Terrible</option>
+            </select>
+          </label>
+          <label>Deposit &amp; move-out fairness
+            <select name="deposit" data-score required>
+              <option value="5">5 — Excellent</option>
+              <option value="4">4 — Good</option>
+              <option value="3" selected>3 — Okay</option>
+              <option value="2">2 — Poor</option>
+              <option value="1">1 — Terrible</option>
+            </select>
+          </label>
+          <label>Respect &amp; professionalism
+            <select name="respect" data-score required>
+              <option value="5">5 — Excellent</option>
+              <option value="4">4 — Good</option>
+              <option value="3" selected>3 — Okay</option>
+              <option value="2">2 — Poor</option>
+              <option value="1">1 — Terrible</option>
+            </select>
+          </label>
+          <label>Safety / habitability follow-through
+            <select name="safety" data-score required>
+              <option value="5">5 — Excellent</option>
+              <option value="4">4 — Good</option>
+              <option value="3" selected>3 — Okay</option>
+              <option value="2">2 — Poor</option>
+              <option value="1">1 — Terrible</option>
+            </select>
+          </label>
+        </div>
+
+        <div class="scoreboard" aria-live="polite">
+          <div>
+            <div class="kicker" style="margin:0">Calculated landlord score</div>
+            <strong><span id="liveScore">3.0</span> / 5</strong>
+          </div>
+          <p class="note" style="margin:0;max-width:22rem">We average your answers. You do not pick the final score yourself.</p>
+        </div>
+
+        <label for="comment">What should other renters know about this landlord? (optional)</label>
+        <textarea id="comment" name="comment" rows="4" placeholder="Stick to how the landlord treated you: replies, repairs, deposit, respect, follow-through…"></textarea>
+
+        <label for="email">Email (optional)</label>
+        <input id="email" name="email" type="email" placeholder="Only if you want a copy of your submission" autocomplete="email">
+        <p class="note">Optional. Never shared. Never used to contact a landlord.</p>
+
+        <input type="hidden" name="_subject" value="Score My Landlord review">
+        <input type="hidden" name="calculatedScore" id="calculatedScore" value="3.0">
+        <input type="hidden" name="publishStatus" id="publishStatus" value="">
+        <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px" aria-hidden="true">
+
+        <div class="actions">
+          <button class="primary" type="submit">Submit review</button>
+        </div>
+      </form>
+      <p class="note" id="formStatus" role="status" style="margin-top:14px"></p>
+    </section>
+
+    <section class="panel">
+      <h2>Privacy</h2>
+      <ul class="list">
+        <li>We keep submitted reviews in our database so Greenville County (and later other SC counties) can be shown fairly.</li>
+        <li>We do not sell or share your information with anyone for any reason.</li>
+        <li>We do not contact landlords for or because of anyone’s review.</li>
+        <li>Renters answer the questions; GPTWorks calculates the score.</li>
+      </ul>
+      <p class="note"><a href="../privacy-policy.html">Privacy policy</a></p>
+    </section>
+
+    <section class="panel">
+      <h2>Know someone who rents?</h2>
+      <p>If this was useful, pass it to people you know who rent. No pressure and no pitch — just the link.</p>
+      <div class="share-box">
+        <input id="shareUrl" type="text" readonly value="">
+        <button class="ghost" type="button" id="copyShare">Copy link</button>
+      </div>
+      <p class="note" id="shareStatus" role="status"></p>
     </section>
 
     <div class="actions">
@@ -58,73 +209,94 @@
       <a class="button ghost" href="../">Back to GPTWorks</a>
     </div>
   </main>
-  <footer class="tool-footer"><p>&copy; GPTWorks. Free to use.</p></footer>
+  <footer class="tool-footer"><p>&copy; GPTWorks. Free to use. We never contact landlords about these reviews.</p></footer>
   <script>
-    const KEY = "gptworks-landlord-reviews";
-    const list = document.getElementById("reviews");
+    const form = document.getElementById("reviewForm");
+    const liveScore = document.getElementById("liveScore");
+    const calculatedScore = document.getElementById("calculatedScore");
+    const publishStatus = document.getElementById("publishStatus");
+    const county = document.getElementById("county");
+    const countyNote = document.getElementById("countyNote");
+    const formStatus = document.getElementById("formStatus");
+    const shareUrl = document.getElementById("shareUrl");
+    const shareStatus = document.getElementById("shareStatus");
 
-    function escapeHtml(value) {
-      return String(value)
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;");
+    shareUrl.value = location.href.split("#")[0];
+
+    function averageScore() {
+      const values = [...form.querySelectorAll("[data-score]")].map((el) => Number(el.value));
+      const avg = values.reduce((a, b) => a + b, 0) / values.length;
+      return Math.round(avg * 10) / 10;
     }
 
-    function load() {
-      try { return JSON.parse(localStorage.getItem(KEY) || "[]"); }
-      catch { return []; }
+    function refreshScore() {
+      const score = averageScore();
+      liveScore.textContent = score.toFixed(1);
+      calculatedScore.value = score.toFixed(1);
     }
 
-    function save(items) {
-      localStorage.setItem(KEY, JSON.stringify(items));
-      render(items);
-    }
-
-    function render(items) {
-      if (!items.length) {
-        list.innerHTML = "<p class='note'>No reviews yet. Add your first landlord note above.</p>";
+    function refreshCountyNote() {
+      const value = county.value;
+      if (!value) {
+        countyNote.hidden = true;
+        publishStatus.value = "";
         return;
       }
-      list.innerHTML = items.map((item) => (
-        `<article class="review"><strong>${escapeHtml(item.name)}</strong> — ${escapeHtml(item.score)}/5` +
-        `<br>${escapeHtml(item.comment || "No additional comment.")}` +
-        `<br><small>${escapeHtml(item.when || "")}</small></article>`
-      )).join("");
+      countyNote.hidden = false;
+      if (value === "Greenville") {
+        countyNote.textContent = "Greenville County reviews can appear on the site as we publish them.";
+        publishStatus.value = "eligible-greenville";
+      } else {
+        countyNote.textContent = "Thanks — we will keep this review. It will not show on the site until there are enough reviews to open another South Carolina county.";
+        publishStatus.value = "held-until-county-opens";
+      }
     }
 
-    document.getElementById("reviewForm").addEventListener("submit", (event) => {
+    form.querySelectorAll("[data-score]").forEach((el) => el.addEventListener("change", refreshScore));
+    county.addEventListener("change", refreshCountyNote);
+    refreshScore();
+    refreshCountyNote();
+
+    form.addEventListener("submit", async (event) => {
       event.preventDefault();
-      const items = load();
-      items.unshift({
-        name: document.getElementById("landlordName").value.trim(),
-        score: document.getElementById("score").value,
-        comment: document.getElementById("comment").value.trim(),
-        when: new Date().toLocaleString()
-      });
-      save(items);
-      event.target.reset();
+      refreshScore();
+      refreshCountyNote();
+      formStatus.textContent = "Sending your review…";
+
+      const endpoint = "https://formsubmit.co/ajax/gptworks1@gmail.com";
+      const body = new FormData(form);
+      body.set("tool", "Score My Landlord");
+      body.set("page", location.href);
+
+      try {
+        const response = await fetch(endpoint, {
+          method: "POST",
+          headers: { Accept: "application/json" },
+          body
+        });
+        if (!response.ok) throw new Error("submit failed");
+        const greenville = county.value === "Greenville";
+        form.reset();
+        refreshScore();
+        refreshCountyNote();
+        formStatus.textContent = greenville
+          ? "Review received. Your calculated score was saved for Greenville County posting."
+          : "Review received. It is saved and will stay held until another South Carolina county has enough reviews to open.";
+      } catch {
+        formStatus.textContent = "Could not reach the review inbox from this browser. Email gptworks1@gmail.com with your address, county, and scores, or try again later.";
+      }
     });
 
-    document.getElementById("exportBtn").addEventListener("click", () => {
-      const items = load();
-      const text = items.length
-        ? items.map((i) => `${i.name} — ${i.score}/5\n${i.comment || ""}\n${i.when || ""}`).join("\n\n")
-        : "No landlord reviews saved.";
-      const blob = new Blob([text], { type: "text/plain" });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = "score-my-landlord.txt";
-      a.click();
-      URL.revokeObjectURL(url);
+    document.getElementById("copyShare").addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText(shareUrl.value);
+        shareStatus.textContent = "Link copied. Send it to renters you know — that’s enough.";
+      } catch {
+        shareUrl.select();
+        shareStatus.textContent = "Copy the link from the box and send it along.";
+      }
     });
 
-    document.getElementById("clearBtn").addEventListener("click", () => {
-      if (confirm("Clear all landlord reviews saved in this browser?")) save([]);
-    });
-
-    render(load());
     fetch("https://countapi.mileshilliard.com/api/v1/hit/gptworks-score-my-landlord")
       .then((r) => r.json())
       .then((d) => { document.getElementById("viewCount").textContent = d.value || "0"; })
