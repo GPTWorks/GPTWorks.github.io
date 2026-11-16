@@ -40,15 +40,50 @@
     .speed input { flex: 1; accent-color: #e4b15a; height: 44px; }
     .stick { width: 112px; height: 112px; border-radius: 999px; border: 1px solid #2c3040; background: #14161ed9; touch-action: none; }
     .hidden { display: none !important; }
+    .help-layer {
+      position: fixed; inset: 0; z-index: 20; display: grid; place-items: center;
+      padding: 16px; background: rgba(7, 8, 12, 0.72); pointer-events: auto;
+    }
+    .help-card {
+      width: min(34rem, 100%); max-height: min(86vh, 720px); overflow: auto;
+      background: #14161ef2; border: 1px solid #3a342c; border-radius: 18px; padding: 22px 22px 18px;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
+    }
+    .help-card h2 { margin: 0 0 8px; font-family: Georgia, serif; font-size: 28px; font-weight: 500; }
+    .help-card .lede { color: #e8e4d8; font-size: 15px; max-width: none; margin: 0 0 14px; }
+    .help-card ol { margin: 0; padding-left: 1.2rem; color: #d7d2c6; font-size: 14px; line-height: 1.55; }
+    .help-card li { margin: 0.45em 0; }
+    .help-card .actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+    .help-card .hint { margin: 12px 0 0; color: #9a958a; font-size: 13px; max-width: none; }
   </style>
 </head>
 <body>
   <div id="view"></div>
+  <div class="help-layer" id="helpLayer" role="dialog" aria-modal="true" aria-labelledby="helpTitle">
+    <div class="help-card">
+      <p class="kicker">What this is</p>
+      <h2 id="helpTitle">Orrery is a space explorer</h2>
+      <p class="lede">It is not a score game. You are looking at a living model of the solar system — then the Milky Way, then farther out. Explore at your own pace.</p>
+      <ol>
+        <li><b>Drag</b> the sky to look around. <b>Scroll</b> (or pinch) to move closer or farther.</li>
+        <li><b>Tap a planet</b> in the sky, or use the name chips along the bottom, to focus on that world.</li>
+        <li>Open <b>Facts</b> on a focused world to read about it. On many worlds, press <b>Walk</b> to step onto the surface.</li>
+        <li>On Saturn, try <b>Rings</b>. On the black hole, try <b>Fly in</b>.</li>
+        <li><b>Tour</b> auto-visits worlds for you. <b>Zoom out</b> pulls back to the galaxy, then the universe. <b>System</b> resets to the solar system view.</li>
+        <li>Use <b>Pause</b> and the speed slider to slow or speed the orbits.</li>
+      </ol>
+      <p class="hint">Built for wonder — especially for kids who love planets. You cannot “win.” Just look around.</p>
+      <div class="actions">
+        <button class="primary" id="helpStart" type="button">Start exploring</button>
+        <button id="helpTour" type="button">Start with a tour</button>
+      </div>
+    </div>
+  </div>
   <div class="hud" id="orbitHud">
     <header>
       <div>
         <h1>Orrery</h1>
-        <p>We live in the Milky Way. Zoom out to see home from the outside, then the universe. <a href="../#work">Back to GPTWorks</a></p>
+        <p>Interactive solar system. Drag to look, tap a world to visit, walk on planets, fly the rings or a black hole. <button type="button" id="helpOpen" style="height:auto;padding:0;border:0;background:none;color:#e4b15a;text-decoration:underline;cursor:pointer;font:inherit">How to play</button> · <a href="../#work">Back to GPTWorks</a></p>
       </div>
       <div class="row">
         <button class="primary" id="tourBtn" type="button">Tour</button>
@@ -551,6 +586,22 @@
       }
     }
     paintChips();
+
+    const HELP_KEY = "gptworks-orrery-help-seen";
+    const helpLayer = document.getElementById("helpLayer");
+    function openHelp() { helpLayer.classList.remove("hidden"); }
+    function closeHelp() {
+      helpLayer.classList.add("hidden");
+      try { localStorage.setItem(HELP_KEY, "1"); } catch {}
+    }
+    document.getElementById("helpOpen").onclick = () => openHelp();
+    document.getElementById("helpStart").onclick = () => closeHelp();
+    document.getElementById("helpTour").onclick = () => {
+      closeHelp();
+      document.getElementById("tourBtn").click();
+    };
+    try { if (!localStorage.getItem(HELP_KEY)) openHelp(); else helpLayer.classList.add("hidden"); }
+    catch { openHelp(); }
 
     const speedInput = document.getElementById("speed");
     function syncSpeed() { document.getElementById("speedLabel").textContent = state.speed + "×" + (state.paused ? " · paused" : ""); speedInput.value = String(Math.max(0, SPEEDS.indexOf(state.speed))); }
