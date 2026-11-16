@@ -1,0 +1,129 @@
+FIBER OPTICS NIGHT SKY — FILM SCRIPT
+GPTWorks how-to · Target length: 8–10 minutes
+Project: Twinkling star ceiling for a child's bedroom
+
+========================================
+COLD OPEN (0:00–0:20)
+========================================
+[VISUAL] Dark room. Ceiling lights up with tiny stars. Soft twinkle.
+[YOU] "Tonight we're building a night sky on the ceiling — with fiber optics.
+      Basics first. Then a real bedroom project you can finish at home."
+
+========================================
+WHAT YOU'LL LEARN (0:20–0:40)
+========================================
+[VISUAL] On-screen checklist appears.
+[YOU] "By the end you'll know:
+      one — what fiber optic cable is,
+      two — which parts to buy,
+      three — how to plan a constellation map,
+      and four — how to install a safe twinkling sky."
+
+========================================
+PART 1 — THE BASICS (0:40–2:30)
+========================================
+[VISUAL] Hold up a short strand of end-glow fiber. Shine a flashlight into one end.
+[YOU] "Fiber optics are thin strands that carry light from one end to the other.
+      For a star ceiling we want end-glow fiber — light shoots out the tip like a star.
+      Side-glow fiber lights along the length. That's for shooting-star lines, not dots."
+
+[VISUAL] Show illuminator / LED light engine box.
+[YOU] "The light engine is a small LED box. Fibers plug into it. Power stays low-voltage.
+      Many kits include a twinkle wheel or remote so the stars flicker like a real sky."
+
+[VISUAL] B-roll: bundle of fibers, remote, power cord.
+[YOU] "You do not need glass fiber for a bedroom. Plastic end-glow fiber is easier, safer to cut,
+      and made for home kits."
+
+========================================
+PART 2 — SAFETY (2:30–3:15)
+========================================
+[VISUAL] On-screen: SAFETY in bold. Point to outlet and engine.
+[YOU] "Safety rules for this project:
+      Use a purpose-built LED fiber illuminator — not a laser pointer.
+      Keep the light engine in open air, off bedding, and away from curtains.
+      If you rent, use adhesive mounts or ask before drilling.
+      Turn power off before trimming fibers or opening the engine."
+
+========================================
+PART 3 — SHOPPING LIST (3:15–4:15)
+========================================
+[VISUAL] Lay parts on a table, name each one.
+[YOU] "Here's what I use for a kid's room:
+      — LED fiber optic illuminator with twinkle or remote
+      — End-glow fiber strands, mixed thicknesses if you want bright and faint stars
+      — Painter's tape and a constellation printout
+      — A fine drill bit for drywall, or clear adhesive star mounts if you can't drill
+      — Flush cutters or a sharp craft blade for clean fiber tips
+      Optional: dimmer/remote batteries, and a short extension cord to hide the engine
+        in a closet or behind a dresser."
+
+========================================
+PART 4 — PLAN THE SKY (4:15–5:20)
+========================================
+[VISUAL] Tape a paper map on the ceiling or hold it up to camera.
+[YOU] "Decide the story of the sky. For my son's room I mix a few real constellations
+      with a soft random scatter so it still feels like wonder, not a textbook.
+
+      Tip: fewer brighter stars look better than hundreds of dull ones.
+      Mark each hole with a pencil dot. Leave a path for the fiber bundle to travel
+      to the light engine — usually toward a corner or closet."
+
+========================================
+PART 5 — INSTALL (5:20–7:20)
+========================================
+[VISUAL] Drill or mount demo on scrap drywall if possible; otherwise show carefully on ceiling.
+[YOU] "Step one: place the light engine where it can breathe and where the cord reaches an outlet.
+      Step two: feed fibers from the ceiling points back to that corner. Keep bundles loose — no tight kinks.
+      Step three: seat the fiber ends into the illuminator according to your kit.
+      Step four: at the ceiling, pull each fiber until the tip is flush, then trim clean.
+      A flat tip makes a crisp star. A ragged tip looks fuzzy.
+
+      If you're using adhesive mounts instead of holes, stick the mount, press the fiber tip in,
+      and hide the run along crown molding or behind a fabric canopy edge."
+
+========================================
+PART 6 — TWINKLE + FIRST LIGHT (7:20–8:20)
+========================================
+[VISUAL] Lights off. Turn engine on. Show remote twinkle modes.
+[YOU] "Power on. Start dim. Then try twinkle.
+      If one star is dead, check that fiber's seat in the engine and whether the tip is clean.
+      If the whole sky is dim, the bundle may be bent too hard or not fully inserted.
+
+      Patch paint around holes if needed. Hide the engine. Put the remote where a three-year-old
+      can reach it — or where only you can."
+
+========================================
+CLOSE (8:20–9:00)
+========================================
+[VISUAL] Child's-eye view of the glowing ceiling. Soft music optional.
+[YOU] "That's the basics — and a bedroom sky you can build.
+      Full step-by-step with animations is free on GPTWorks.
+      Make something wonderful. I'll see you in the next how-to."
+
+[END CARD]
+GPTWorks · Fiber Optics Night Sky
+Link: /tools/fiber-optics-night-sky.html
+Email: gptworks1@gmail.com
+
+========================================
+SHOT LIST (quick)
+========================================
+1. Finished ceiling (hero)
+2. Fiber tip close-up with light
+3. End-glow vs side-glow comparison
+4. Illuminator + remote
+5. Parts table
+6. Constellation map / tape marks
+7. Bundle run to corner
+8. Trim tip flush
+9. First light + twinkle
+10. Bedtime wide shot
+
+========================================
+ON-SCREEN TEXT CUES
+========================================
+- End-glow = star points
+- Side-glow = light streaks
+- LED engine only — no lasers
+- Plan → Route → Seat → Trim → Twinkle

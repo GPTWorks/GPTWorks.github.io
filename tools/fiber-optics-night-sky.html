@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Fiber Optics Night Sky | GPTWorks</title>
+  <meta name="description" content="Animated step-by-step: learn fiber optic basics, then build a twinkling star ceiling for a child's bedroom.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,460;9..144,600&family=Syne:wght@500;700;800&display=swap">
+  <link rel="stylesheet" href="../assets/cosmos/tools.css">
+  <style>
+    .sky-stage {
+      position: relative;
+      height: min(42vw, 280px);
+      min-height: 200px;
+      margin: 18px 0 8px;
+      border-radius: 18px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      background:
+        radial-gradient(120px 80px at 70% 30%, rgba(176, 38, 255, 0.22), transparent 70%),
+        radial-gradient(180px 100px at 20% 70%, rgba(255, 79, 216, 0.12), transparent 65%),
+        #05030c;
+    }
+    .sky-stage .star {
+      position: absolute;
+      width: 3px; height: 3px; border-radius: 50%;
+      background: #fff;
+      box-shadow: 0 0 6px #fff, 0 0 14px rgba(255, 79, 216, 0.8);
+      animation: twinkle 2.8s ease-in-out infinite;
+    }
+    .sky-stage .star.bright {
+      width: 5px; height: 5px;
+      box-shadow: 0 0 10px #fff, 0 0 22px var(--magenta);
+    }
+    .sky-stage .fiber {
+      position: absolute;
+      width: 2px;
+      background: linear-gradient(180deg, transparent, rgba(231, 182, 255, 0.55), #fff);
+      transform-origin: bottom center;
+      opacity: 0.55;
+      animation: pulse-fiber 3.2s ease-in-out infinite;
+    }
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.35; transform: scale(0.85); }
+      50% { opacity: 1; transform: scale(1.15); }
+    }
+    @keyframes pulse-fiber {
+      0%, 100% { opacity: 0.25; }
+      50% { opacity: 0.7; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .sky-stage .star, .sky-stage .fiber { animation: none; opacity: 0.9; }
+    }
+
+    .stepper {
+      display: flex; flex-wrap: wrap; gap: 8px;
+      margin: 18px 0 8px;
+    }
+    .stepper button {
+      min-height: 40px; padding: 0 12px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: transparent;
+      color: var(--muted);
+      font-family: var(--ui);
+      font-size: 0.72rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      cursor: pointer;
+    }
+    .stepper button[aria-current="step"] {
+      color: #1a0624;
+      border-color: transparent;
+      background: linear-gradient(90deg, #7c3aed, var(--magenta) 55%, #fff);
+      box-shadow: 0 0 18px rgba(255, 79, 216, 0.4);
+    }
+    .stepper button.done { color: var(--laser); border-color: rgba(255, 79, 216, 0.45); }
+
+    .progress {
+      height: 6px; border-radius: 999px; background: rgba(255,255,255,0.06);
+      overflow: hidden; margin: 10px 0 22px;
+    }
+    .progress > span {
+      display: block; height: 100%; width: 0%;
+      background: linear-gradient(90deg, #7c3aed, var(--magenta));
+      transition: width 0.35s ease;
+    }
+
+    .step-panel[hidden] { display: none !important; }
+    .step-panel h2 { margin-top: 0; }
+    .checklist { list-style: none; padding: 0; margin: 12px 0 0; }
+    .checklist li {
+      display: grid; grid-template-columns: auto 1fr; gap: 10px; align-items: start;
+      margin: 10px 0; color: #d9d3e4;
+    }
+    .checklist input { margin-top: 4px; accent-color: var(--magenta); width: auto; }
+
+    .compare {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 14px;
+    }
+    .compare .demo {
+      border: 1px solid var(--line); border-radius: 14px; padding: 14px; background: #0c0b12;
+      min-height: 110px; position: relative; overflow: hidden;
+    }
+    .compare .demo strong {
+      display: block; font-family: var(--ui); font-size: 0.78rem;
+      letter-spacing: 0.08em; text-transform: uppercase; color: var(--laser); margin-bottom: 10px;
+    }
+    .end-glow-dot {
+      width: 10px; height: 10px; border-radius: 50%; margin: 28px auto 0;
+      background: #fff; box-shadow: 0 0 16px #fff, 0 0 28px var(--magenta);
+      animation: twinkle 2s ease-in-out infinite;
+    }
+    .side-glow-line {
+      height: 4px; margin: 36px 8px 0; border-radius: 999px;
+      background: linear-gradient(90deg, transparent, #e7b6ff, #fff, #e7b6ff, transparent);
+      box-shadow: 0 0 12px rgba(255, 79, 216, 0.55);
+      animation: pulse-fiber 2.4s ease-in-out infinite;
+    }
+    @media (max-width: 640px) { .compare { grid-template-columns: 1fr; } }
+
+    .script-box {
+      white-space: pre-wrap;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 0.82rem; line-height: 1.5;
+      max-height: 420px; overflow: auto;
+      padding: 16px; border-radius: 14px;
+      border: 1px solid var(--line); background: #0c0b12; color: #e8dff5;
+    }
+    .mode-toggle { display: flex; flex-wrap: wrap; gap: 10px; margin: 8px 0 18px; }
+  </style>
+</head>
+<body>
+  <header class="tool-header">
+    <a class="brand" href="../"><img src="../images/gptworks-logo.png" alt="" width="36" height="36"> GPTWorks</a>
+    <nav aria-label="Secondary">
+      <a href="index.html">Tools</a>
+      <a href="../#tribute">For my son</a>
+      <a href="#script">Film script</a>
+    </nav>
+  </header>
+
+  <main class="tool-main">
+    <p class="badge">How-to</p>
+    <p class="kicker">Home projects</p>
+    <h1>Fiber Optics Night Sky</h1>
+    <p class="lede">Learn the basics of fiber optics, then build a twinkling star ceiling — the kind of wonder that belongs over a toddler’s bed.</p>
+
+    <div class="sky-stage" id="sky" aria-hidden="true"></div>
+    <p class="note">Animated preview of end-glow “stars.” Use the steps below for the real build.</p>
+
+    <div class="mode-toggle actions">
+      <button class="primary" type="button" id="modeSteps" aria-pressed="true">Step-by-step</button>
+      <button class="ghost" type="button" id="modeScript" aria-pressed="false">Film script</button>
+      <a class="button ghost" href="fiber-optics-night-sky-script.txt" download>Download script</a>
+    </div>
+
+    <div id="guideView">
+      <div class="stepper" id="stepper" role="tablist" aria-label="Build steps"></div>
+      <div class="progress" aria-hidden="true"><span id="bar"></span></div>
+
+      <section class="panel step-panel" data-step="0">
+        <h2>1 · What fiber optics are</h2>
+        <p>A fiber optic strand is a thin plastic (or glass) path that carries light from one end to the other. For a bedroom sky you almost always want <strong>end-glow</strong> fiber: light exits the tip like a star point.</p>
+        <div class="compare">
+          <div class="demo"><strong>End-glow</strong><div class="end-glow-dot"></div><p class="note">Star points on a ceiling</p></div>
+          <div class="demo"><strong>Side-glow</strong><div class="side-glow-line"></div><p class="note">Glowing streaks / “shooting stars”</p></div>
+        </div>
+        <ul class="list">
+          <li>The <strong>illuminator</strong> (LED light engine) is the box that feeds light into the bundle.</li>
+          <li>Plastic end-glow fiber is beginner-friendly: easy to cut, made for home kits.</li>
+          <li>Twinkle comes from a wheel, sparkle disc, or a programmable LED engine — not from the fiber itself.</li>
+        </ul>
+      </section>
+
+      <section class="panel step-panel" data-step="1" hidden>
+        <h2>2 · Safety first</h2>
+        <ul class="list">
+          <li>Use a purpose-built <strong>LED fiber illuminator</strong> — never a laser pointer into fibers for a kid’s room.</li>
+          <li>Keep the engine in open air: off bedding, away from curtains, where heat can escape.</li>
+          <li>Unplug before seating fibers, trimming tips, or opening the engine.</li>
+          <li>If you rent, prefer adhesive mounts or get written OK before drilling drywall.</li>
+        </ul>
+        <p class="note">This guide is a DIY overview, not electrical or landlord advice. Follow your kit’s manual.</p>
+      </section>
+
+      <section class="panel step-panel" data-step="2" hidden>
+        <h2>3 · What to buy</h2>
+        <ul class="checklist" id="buyList">
+          <li><input type="checkbox" id="b1"><label for="b1">LED fiber optic illuminator with twinkle or remote</label></li>
+          <li><input type="checkbox" id="b2"><label for="b2">End-glow fiber strands (mixed thicknesses = bright + faint stars)</label></li>
+          <li><input type="checkbox" id="b3"><label for="b3">Painter’s tape + constellation printout or sketch</label></li>
+          <li><input type="checkbox" id="b4"><label for="b4">Fine drywall bit <em>or</em> clear adhesive star mounts</label></li>
+          <li><input type="checkbox" id="b5"><label for="b5">Flush cutters or sharp craft blade for clean tips</label></li>
+          <li><input type="checkbox" id="b6"><label for="b6">Optional: short extension cord to hide the engine in a closet/corner</label></li>
+        </ul>
+        <p class="note">Checkboxes save in this browser so you can shop later.</p>
+      </section>
+
+      <section class="panel step-panel" data-step="3" hidden>
+        <h2>4 · Plan the sky</h2>
+        <p>Pick a story: a few real constellations plus soft random scatter beats a dense grid of identical dots.</p>
+        <ul class="list">
+          <li>Mark each star with a pencil tip or tape flag.</li>
+          <li>Fewer brighter stars read better than hundreds of dull ones.</li>
+          <li>Leave a clear route for the fiber bundle toward the light engine (closet, corner, behind a dresser).</li>
+          <li>For a toddler room, keep the brightest cluster away from a direct stare-at-the-bulb feel — aim for gentle points.</li>
+        </ul>
+      </section>
+
+      <section class="panel step-panel" data-step="4" hidden>
+        <h2>5 · Install</h2>
+        <ol class="list">
+          <li><strong>Place the engine</strong> where it can breathe and reach an outlet.</li>
+          <li><strong>Route fibers</strong> from each ceiling point back to that corner. Avoid sharp kinks.</li>
+          <li><strong>Seat the bundle</strong> in the illuminator per your kit.</li>
+          <li><strong>Trim flush</strong> at the ceiling: a flat tip = a crisp star; a ragged tip looks fuzzy.</li>
+          <li>Using mounts instead of holes? Stick the mount, press the tip in, hide the run along molding or a canopy edge.</li>
+        </ol>
+      </section>
+
+      <section class="panel step-panel" data-step="5" hidden>
+        <h2>6 · First light &amp; twinkle</h2>
+        <ul class="list">
+          <li>Lights off. Power on. Start dim, then enable twinkle.</li>
+          <li>One dead star? Reseat that fiber and re-trim the tip.</li>
+          <li>Whole sky dim? Check hard bends and whether the bundle is fully inserted.</li>
+          <li>Patch paint if needed. Hide the engine. Decide who gets the remote.</li>
+        </ul>
+        <p>When it works, you’ve got a portable lesson in light — and a sky that belongs to your kid.</p>
+      </section>
+
+      <div class="actions">
+        <button class="ghost" type="button" id="prevBtn">Back</button>
+        <button class="primary" type="button" id="nextBtn">Next</button>
+        <a class="button ghost" href="../orrery/">Visit Orrery</a>
+      </div>
+    </div>
+
+    <div id="scriptView" hidden>
+      <section class="panel" id="script">
+        <h2>Film script</h2>
+        <p class="note">8–10 minute how-to. Shot list and on-screen cues are at the bottom of the file.</p>
+        <pre class="script-box" id="scriptBox">Loading script…</pre>
+        <div class="actions">
+          <a class="button primary" href="fiber-optics-night-sky-script.txt" download>Download .txt</a>
+          <button class="ghost" type="button" id="copyScript">Copy script</button>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="tool-footer">
+    <p>&copy; GPTWorks. Free to use. DIY overview — follow your kit manual and local rules.</p>
+  </footer>
+
+  <script>
+    const steps = [
+      "Basics", "Safety", "Shopping", "Plan", "Install", "Twinkle"
+    ];
+    const panels = [...document.querySelectorAll(".step-panel")];
+    const stepper = document.getElementById("stepper");
+    const bar = document.getElementById("bar");
+    const prevBtn = document.getElementById("prevBtn");
+    const nextBtn = document.getElementById("nextBtn");
+    let index = 0;
+
+    steps.forEach((label, i) => {
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.textContent = `${i + 1}. ${label}`;
+      btn.addEventListener("click", () => show(i));
+      stepper.appendChild(btn);
+    });
+
+    function show(i) {
+      index = Math.max(0, Math.min(panels.length - 1, i));
+      panels.forEach((p, n) => { p.hidden = n !== index; });
+      [...stepper.children].forEach((b, n) => {
+        b.setAttribute("aria-current", n === index ? "step" : "false");
+        b.classList.toggle("done", n < index);
+      });
+      bar.style.width = ((index + 1) / panels.length * 100) + "%";
+      prevBtn.disabled = index === 0;
+      nextBtn.textContent = index === panels.length - 1 ? "Done" : "Next";
+    }
+
+    prevBtn.addEventListener("click", () => show(index - 1));
+    nextBtn.addEventListener("click", () => {
+      if (index < panels.length - 1) show(index + 1);
+    });
+    show(0);
+
+    // Sky animation
+    const sky = document.getElementById("sky");
+    const spots = [
+      [12, 18], [22, 40], [30, 22], [38, 55], [48, 30], [55, 18], [62, 48],
+      [70, 28], [78, 60], [85, 22], [18, 70], [42, 72], [66, 75], [88, 45],
+      [8, 50], [92, 70], [50, 48], [28, 58]
+    ];
+    spots.forEach(([x, y], i) => {
+      const s = document.createElement("span");
+      s.className = "star" + (i % 5 === 0 ? " bright" : "");
+      s.style.left = x + "%";
+      s.style.top = y + "%";
+      s.style.animationDelay = (i * 0.17) + "s";
+      sky.appendChild(s);
+      if (i % 4 === 0) {
+        const f = document.createElement("span");
+        f.className = "fiber";
+        f.style.left = x + "%";
+        f.style.bottom = "0";
+        f.style.height = (100 - y) + "%";
+        f.style.animationDelay = (i * 0.2) + "s";
+        sky.appendChild(f);
+      }
+    });
+
+    // Shopping checklist persistence
+    const buyKey = "gptworks-fiber-buy-list";
+    try {
+      const saved = JSON.parse(localStorage.getItem(buyKey) || "{}");
+      document.querySelectorAll("#buyList input").forEach((el) => {
+        if (saved[el.id]) el.checked = true;
+        el.addEventListener("change", () => {
+          const next = {};
+          document.querySelectorAll("#buyList input").forEach((i) => { next[i.id] = i.checked; });
+          localStorage.setItem(buyKey, JSON.stringify(next));
+        });
+      });
+    } catch {}
+
+    // Mode toggle + script load
+    const guideView = document.getElementById("guideView");
+    const scriptView = document.getElementById("scriptView");
+    const modeSteps = document.getElementById("modeSteps");
+    const modeScript = document.getElementById("modeScript");
+    const scriptBox = document.getElementById("scriptBox");
+
+    function setMode(script) {
+      guideView.hidden = script;
+      scriptView.hidden = !script;
+      modeSteps.setAttribute("aria-pressed", script ? "false" : "true");
+      modeScript.setAttribute("aria-pressed", script ? "true" : "false");
+      modeSteps.className = script ? "ghost" : "primary";
+      modeScript.className = script ? "primary" : "ghost";
+      if (script && scriptBox.dataset.loaded !== "1") {
+        fetch("fiber-optics-night-sky-script.txt")
+          .then((r) => r.text())
+          .then((t) => { scriptBox.textContent = t; scriptBox.dataset.loaded = "1"; })
+          .catch(() => { scriptBox.textContent = "Could not load script. Use the download link."; });
+      }
+    }
+    modeSteps.addEventListener("click", () => setMode(false));
+    modeScript.addEventListener("click", () => setMode(true));
+    document.getElementById("copyScript").addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText(scriptBox.textContent);
+        document.getElementById("copyScript").textContent = "Copied";
+        setTimeout(() => { document.getElementById("copyScript").textContent = "Copy script"; }, 1200);
+      } catch {
+        document.getElementById("copyScript").textContent = "Copy failed";
+      }
+    });
+
+    if (location.hash === "#script") setMode(true);
+  </script>
+</body>
+</html>
