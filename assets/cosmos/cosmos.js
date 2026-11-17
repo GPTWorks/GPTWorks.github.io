@@ -1,101 +1,99 @@
 (function () {
-  const canvas = document.getElementById("field");
   const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  if (canvas && canvas.getContext) {
-    const ctx = canvas.getContext("2d", { alpha: true });
-    const palette = ["#f5d0fe", "#e879f9", "#c026d3", "#a78bfa", "#67e8f9", "#ffffff"];
-    let nodes = [];
-    let w = 0;
-    let h = 0;
-    let raf = 0;
-    const pointer = { x: -9999, y: -9999 };
+  const root = document.documentElement;
 
-    function resize() {
-      const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
-      w = window.innerWidth;
-      h = window.innerHeight;
-      canvas.width = Math.floor(w * dpr);
-      canvas.height = Math.floor(h * dpr);
-      canvas.style.width = w + "px";
-      canvas.style.height = h + "px";
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      const count = w < 700 ? 46 : 88;
-      nodes = Array.from({ length: count }, () => ({
-        x: Math.random() * w,
-        y: Math.random() * h,
-        vx: (Math.random() - 0.5) * 0.22,
-        vy: (Math.random() - 0.5) * 0.22,
-        r: Math.random() * 1.7 + 0.5,
-        c: palette[(Math.random() * palette.length) | 0]
-      }));
-    }
+  // Tree palette sampled from the GPTWorks logo (warm left → cool right).
+  const palette = [
+    [255, 77, 46],
+    [255, 176, 32],
+    [255, 79, 216],
+    [124, 92, 255],
+    [77, 183, 255],
+    [46, 230, 199],
+    [157, 255, 77]
+  ];
 
-    function draw(time) {
-      ctx.clearRect(0, 0, w, h);
-      const reach = 118;
-      for (let i = 0; i < nodes.length; i++) {
-        const n = nodes[i];
-        if (!reduce) {
-          n.x += n.vx;
-          n.y += n.vy;
-          const dx = pointer.x - n.x;
-          const dy = pointer.y - n.y;
-          const dist = Math.hypot(dx, dy);
-          if (dist < 160 && dist > 0) {
-            n.x -= (dx / dist) * 0.2;
-            n.y -= (dy / dist) * 0.2;
-          }
-          if (n.x < 0 || n.x > w) n.vx *= -1;
-          if (n.y < 0 || n.y > h) n.vy *= -1;
-        }
-      }
-      ctx.lineWidth = 1;
-      for (let i = 0; i < nodes.length; i++) {
-        for (let j = i + 1; j < nodes.length; j++) {
-          const a = nodes[i];
-          const b = nodes[j];
-          const dx = a.x - b.x;
-          const dy = a.y - b.y;
-          const d2 = dx * dx + dy * dy;
-          if (d2 < reach * reach) {
-            const alpha = 1 - Math.sqrt(d2) / reach;
-            ctx.strokeStyle = "rgba(232, 180, 255," + (alpha * 0.45) + ")";
-            ctx.beginPath();
-            ctx.moveTo(a.x, a.y);
-            ctx.lineTo(b.x, b.y);
-            ctx.stroke();
-            if (!reduce && alpha > 0.72) {
-              const t = (time / 1400 + i * 0.07) % 1;
-              ctx.fillStyle = "#fff";
-              ctx.beginPath();
-              ctx.arc(a.x + (b.x - a.x) * t, a.y + (b.y - a.y) * t, 1.6, 0, Math.PI * 2);
-              ctx.fill();
-            }
-          }
-        }
-      }
-      for (const n of nodes) {
-        ctx.fillStyle = n.c;
-        ctx.beginPath();
-        ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
-        ctx.fill();
-      }
-      if (!reduce) raf = requestAnimationFrame(draw);
-    }
+  function mix(a, b, t) {
+    return [
+      Math.round(a[0] + (b[0] - a[0]) * t),
+      Math.round(a[1] + (b[1] - a[1]) * t),
+      Math.round(a[2] + (b[2] - a[2]) * t)
+    ];
+  }
 
-    resize();
-    draw(0);
-    window.addEventListener("resize", () => { resize(); if (reduce) draw(0); });
+  function cssColor(rgb, alpha) {
+    if (alpha == null) return "rgb(" + rgb[0] + "," + rgb[1] + "," + rgb[2] + ")";
+    return "rgba(" + rgb[0] + "," + rgb[1] + "," + rgb[2] + "," + alpha + ")";
+  }
+
+  function sample(phase) {
+    const scaled = ((phase % 1) + 1) % 1 * palette.length;
+    const i = Math.floor(scaled) % palette.length;
+    const next = (i + 1) % palette.length;
+    return mix(palette[i], palette[next], scaled - Math.floor(scaled));
+  }
+
+  let raf = 0;
+  function driveLight(time) {
+    const t = time * 0.001;
+    const phase = (t / 8.5) % 1;
+    const phase2 = (t / 8.5 + 0.38) % 1;
+    const c1 = sample(phase);
+    const c2 = sample(phase2);
+    const angle = 96 + Math.sin(t / 3.2) * 38 + Math.cos(t / 5.1) * 12;
+    const intensity = 0.28 + (Math.sin(t / 2.4) * 0.5 + 0.5) * 0.22;
+    const x = 26 + Math.sin(t / 4.6) * 4;
+    const y = 16 + Math.cos(t / 5.8) * 3;
+
+    root.style.setProperty("--light-color", cssColor(c1));
+    root.style.setProperty("--light-color-2", cssColor(c2));
+    root.style.setProperty("--light-angle", angle.toFixed(2) + "deg");
+    root.style.setProperty("--light-angle-base", angle.toFixed(2) + "deg");
+    root.style.setProperty("--light-intensity", intensity.toFixed(3));
+    root.style.setProperty("--light-intensity-base", intensity.toFixed(3));
+    root.style.setProperty("--light-x", x.toFixed(2) + "%");
+    root.style.setProperty("--light-y", y.toFixed(2) + "%");
+
+    if (!reduce) raf = requestAnimationFrame(driveLight);
+  }
+
+  if (reduce) {
+    root.style.setProperty("--light-color", "#67e8f9");
+    root.style.setProperty("--light-color-2", "#ff4fd8");
+    root.style.setProperty("--light-angle", "118deg");
+    root.style.setProperty("--light-angle-base", "118deg");
+    root.style.setProperty("--light-intensity", "0.4");
+    root.style.setProperty("--light-intensity-base", "0.4");
+  } else {
+    raf = requestAnimationFrame(driveLight);
+    document.addEventListener("visibilitychange", () => {
+      if (document.hidden) cancelAnimationFrame(raf);
+      else raf = requestAnimationFrame(driveLight);
+    });
+  }
+
+  // Animated tree video: muted autoplay with static PNG fallback.
+  const treeVideo = document.getElementById("tree-video");
+  if (treeVideo) {
+    treeVideo.muted = true;
+    treeVideo.playsInline = true;
+    const tryPlay = () => {
+      const play = treeVideo.play();
+      if (play && typeof play.catch === "function") play.catch(() => {});
+    };
     if (!reduce) {
-      window.addEventListener("pointermove", (event) => {
-        pointer.x = event.clientX;
-        pointer.y = event.clientY;
-      }, { passive: true });
+      if (treeVideo.readyState >= 2) tryPlay();
+      else treeVideo.addEventListener("loadeddata", tryPlay, { once: true });
       document.addEventListener("visibilitychange", () => {
-        if (document.hidden) cancelAnimationFrame(raf);
-        else raf = requestAnimationFrame(draw);
+        if (!document.hidden) tryPlay();
       });
+    } else {
+      treeVideo.removeAttribute("autoplay");
+      treeVideo.pause();
     }
+    treeVideo.addEventListener("error", () => {
+      treeVideo.classList.add("is-fallback");
+    });
   }
 
   const reveals = document.querySelectorAll(".reveal");
