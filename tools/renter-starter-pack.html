@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Renter Starter Pack | GPTWorks</title>
+  <meta name="description" content="South Carolina renter starter pack: know your rights, read the Landlord and Tenant Act, and score a past landlord. Free tools from GPTWorks.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,460;9..144,600&family=Syne:wght@500;700;800&display=swap">
+  <link rel="stylesheet" href="../assets/cosmos/tools.css">
+  <style>
+    .path {
+      display: grid;
+      gap: 12px;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      margin-top: 16px;
+    }
+    .path-card {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: #14131c;
+      text-decoration: none;
+      color: inherit;
+      transition: border-color 0.2s ease, transform 0.2s ease;
+      min-height: 100%;
+    }
+    .path-card:hover {
+      border-color: var(--magenta);
+      transform: translateY(-2px);
+      color: inherit;
+    }
+    .path-card .num {
+      font-family: var(--ui);
+      font-size: 0.72rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--magenta);
+    }
+    .path-card h3 { margin: 0; font-size: 1.25rem; }
+    .path-card p { margin: 0; color: var(--muted); flex: 1; }
+    .path-card .go {
+      font-family: var(--ui);
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--laser);
+    }
+    .flow {
+      display: grid;
+      gap: 10px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      counter-reset: flow;
+    }
+    .flow li {
+      counter-increment: flow;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 12px;
+      align-items: start;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--line);
+      color: #d9d3e4;
+    }
+    .flow li:last-child { border-bottom: 0; }
+    .flow li::before {
+      content: counter(flow);
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      display: grid; place-items: center;
+      font-family: var(--ui); font-size: 0.78rem;
+      color: #1a0624;
+      background: linear-gradient(90deg, #7c3aed, var(--magenta));
+      box-shadow: 0 0 12px rgba(255, 79, 216, 0.35);
+    }
+    .warn {
+      border-left: 3px solid var(--magenta);
+      padding: 12px 14px; margin: 0;
+      background: rgba(255, 79, 216, 0.08);
+      border-radius: 0 12px 12px 0;
+    }
+  </style>
+</head>
+<body>
+  <header class="tool-header">
+    <a class="brand" href="../"><img src="../images/gptworks-logo.png" alt="" width="36" height="36"> GPTWorks</a>
+    <nav aria-label="Secondary">
+      <a href="index.html">Tools</a>
+      <a href="score-my-landlord.html">Score a landlord</a>
+      <a href="tenant-help.html">Rights help</a>
+    </nav>
+  </header>
+
+  <main class="tool-main">
+    <p class="badge">South Carolina</p>
+    <p class="kicker">For renters</p>
+    <h1>Renter Starter Pack</h1>
+    <p class="lede">One clear place to start: know your rights, read the law, then — only after you move out — score a past landlord so other renters can learn.</p>
+    <p class="meta">Free · Not legal advice · We never contact landlords about reviews</p>
+
+    <section class="panel">
+      <h2>Where are you right now?</h2>
+      <p class="note">Pick the path that matches your situation.</p>
+      <div class="path">
+        <a class="path-card" href="tenant-help.html">
+          <span class="num">Path A</span>
+          <h3>I need to know my rights</h3>
+          <p>Repairs, deposits, notices, evictions — start with SC Tenant Help and the Landlord &amp; Tenant Act.</p>
+          <span class="go">Open rights help →</span>
+        </a>
+        <a class="path-card" href="score-my-landlord.html">
+          <span class="num">Path B</span>
+          <h3>I already moved out</h3>
+          <p>Score the landlord from a place you left. Greenville County reviews can post first.</p>
+          <span class="go">Score My Landlord →</span>
+        </a>
+        <a class="path-card" href="../sc-civil-rules/">
+          <span class="num">Path C</span>
+          <h3>I need rules or forms</h3>
+          <p>Civil rules, claim elements, Greenville procedures, and court forms.</p>
+          <span class="go">SC Civil Rules →</span>
+        </a>
+        <a class="path-card" href="tenantGPT.html">
+          <span class="num">Path D</span>
+          <h3>I have a question</h3>
+          <p>Open TenantGPT for a guided chat about South Carolina tenant rights.</p>
+          <span class="go">Launch TenantGPT →</span>
+        </a>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>The pack, in order</h2>
+      <ol class="flow">
+        <li>
+          <div>
+            <strong>Read the basics</strong>
+            <p style="margin:4px 0 0">Use <a href="tenant-help.html">SC Tenant Help</a> for official links and a plain starting point. Then open the <a href="../sc-civil-rules/landlord-tenant-act.html">Landlord &amp; Tenant Act</a> reader.</p>
+          </div>
+        </li>
+        <li>
+          <div>
+            <strong>Save what happened</strong>
+            <p style="margin:4px 0 0">Keep dates, texts, photos, and repair requests. If you later score a landlord, stick to how they treated you — not the apartment finishes.</p>
+          </div>
+        </li>
+        <li>
+          <div>
+            <strong>Only after you move out: score them</strong>
+            <p style="margin:4px 0 0"><a href="score-my-landlord.html">Score My Landlord</a> is for past landlords. A current review can put your housing at risk.</p>
+          </div>
+        </li>
+        <li>
+          <div>
+            <strong>Go deeper if you need to</strong>
+            <p style="margin:4px 0 0"><a href="../sc-civil-rules/">SC Civil Rules</a> covers procedures and forms. <a href="tenantGPT.html">TenantGPT</a> is there when you want to ask in plain language.</p>
+          </div>
+        </li>
+      </ol>
+    </section>
+
+    <section class="panel">
+      <div class="warn">
+        <p style="margin:0"><strong>Past landlords only for scoring.</strong> Do not score a landlord you still rent from. Wait until you have moved out, then leave a review by the property address you rented.</p>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>What’s inside</h2>
+      <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));">
+        <a class="tool-card" href="tenant-help.html"><h3>SC Tenant Help</h3><p>Rights overview, official resources, next steps.</p></a>
+        <a class="tool-card" href="score-my-landlord.html"><h3>Score My Landlord</h3><p>Past landlords · address-based · Greenville posts first.</p></a>
+        <a class="tool-card" href="../sc-civil-rules/landlord-tenant-act.html"><h3>Landlord &amp; Tenant Act</h3><p>S.C. Code Title 27, Chapter 40 reader.</p></a>
+        <a class="tool-card" href="../sc-civil-rules/"><h3>SC Civil Rules</h3><p>Rules, claims, Greenville, court forms.</p></a>
+        <a class="tool-card" href="tenantGPT.html"><h3>TenantGPT</h3><p>Custom GPT for SC tenant questions.</p></a>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Quick checklist</h2>
+      <ul class="list">
+        <li>Something broken? Put the request in writing and keep a copy.</li>
+        <li>Deposit dispute? Note move-out date, forwarding address, and photos.</li>
+        <li>Notice or eviction paperwork? Read it carefully, then check the Act and civil rules — or get legal help.</li>
+        <li>Ready to help others? After you move out, <a href="score-my-landlord.html">score that past landlord</a>.</li>
+      </ul>
+      <p class="note">This pack is information, not legal advice. For personal legal help, contact <a href="https://www.sclegal.org/" target="_blank" rel="noopener">South Carolina Legal Services</a> or a licensed attorney.</p>
+    </section>
+
+    <div class="actions">
+      <a class="button primary" href="tenant-help.html">Start with rights help</a>
+      <a class="button ghost" href="score-my-landlord.html">Score a past landlord</a>
+      <a class="button ghost" href="../">Back to GPTWorks</a>
+    </div>
+  </main>
+
+  <footer class="tool-footer">
+    <p>&copy; GPTWorks. Free to use. We never contact landlords about renter reviews.</p>
+  </footer>
+</body>
+</html>
