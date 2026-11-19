@@ -72,11 +72,12 @@
     });
   }
 
-  // Animated tree video: muted autoplay with static PNG fallback.
+  // Animated logo video: play once, hold the final branded frame.
   const treeVideo = document.getElementById("tree-video");
   if (treeVideo) {
     treeVideo.muted = true;
     treeVideo.playsInline = true;
+    treeVideo.loop = false;
     const tryPlay = () => {
       const play = treeVideo.play();
       if (play && typeof play.catch === "function") play.catch(() => {});
@@ -84,15 +85,27 @@
     if (!reduce) {
       if (treeVideo.readyState >= 2) tryPlay();
       else treeVideo.addEventListener("loadeddata", tryPlay, { once: true });
+      // Replay only when the visitor returns to the tab after it finished.
       document.addEventListener("visibilitychange", () => {
-        if (!document.hidden) tryPlay();
+        if (document.hidden) return;
+        if (treeVideo.ended) {
+          treeVideo.currentTime = 0;
+          tryPlay();
+        } else {
+          tryPlay();
+        }
       });
     } else {
       treeVideo.removeAttribute("autoplay");
       treeVideo.pause();
+      treeVideo.classList.add("is-fallback");
+      const fallback = document.querySelector(".tree-fallback");
+      if (fallback) fallback.hidden = false;
     }
     treeVideo.addEventListener("error", () => {
       treeVideo.classList.add("is-fallback");
+      const fallback = document.querySelector(".tree-fallback");
+      if (fallback) fallback.hidden = false;
     });
   }
 
