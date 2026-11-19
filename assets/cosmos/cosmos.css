@@ -224,8 +224,10 @@ a:hover { color: #fff; }
 }
 .logo-well video.tree {
   object-fit: contain;
-  background: #000;
+  aspect-ratio: 416 / 752;
+  background: transparent;
   mix-blend-mode: screen;
+  border-radius: 18px;
 }
 .logo-well .tree-fallback[hidden],
 .logo-well video.tree[hidden] { display: none !important; }
