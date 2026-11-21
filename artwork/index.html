@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Process Films | GPTWorks</title>
-  <meta name="description" content="Hand-painted process films: MoonFlowers and SpeakEasy, from blank surface to finished work.">
+  <title>Artwork | GPTWorks</title>
+  <meta name="description" content="Hand-painted artwork from GPTWorks: process films and living paintings brought to life with Grok.">
   <meta name="theme-color" content="#070312">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -55,7 +55,7 @@
       aspect-ratio: 4 / 3;
     }
     .film-stage.portrait {
-      aspect-ratio: 397 / 507;
+      aspect-ratio: 3 / 4;
       max-width: min(420px, 100%);
       margin-left: auto;
       margin-right: auto;
@@ -78,10 +78,22 @@
       letter-spacing: 0.06em;
       text-transform: uppercase;
     }
+    .section-label {
+      margin: 40px 0 0;
+      font-family: var(--ui);
+      font-size: 0.78rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--magenta);
+    }
+    .section-label + .films { margin-top: 14px; }
     @media (min-width: 900px) {
-      .films {
+      .films.split {
         grid-template-columns: 1.15fr 0.85fr;
         align-items: start;
+      }
+      .films.solo {
+        grid-template-columns: minmax(0, 480px);
       }
     }
   </style>
@@ -96,10 +108,37 @@
   </header>
   <main class="tool-main">
     <p class="kicker">Studio · Hand work</p>
-    <h1>Process films</h1>
-    <p class="lede">Two short films of paintings growing in place — stop-motion from blank surface to finished piece. Polished for the Living Void: cropped into the dark, sped for the web, silent.</p>
+    <h1>Artwork</h1>
+    <p class="lede">Paintings made by hand — some filmed as they grow, one brought to life with Grok.</p>
 
-    <div class="films">
+    <p class="section-label" id="living">Living paintings</p>
+    <div class="films solo">
+      <article class="film" id="tiger">
+        <div class="film-copy">
+          <p class="kind">Portrait · ~6s · Handmade + Grok</p>
+          <h2>Tiger</h2>
+          <p>My own handmade tiger painting. Grok brought it to life — the painted face blinks, breathes, and watches from the frame on the wall.</p>
+        </div>
+        <div class="film-stage portrait">
+          <video
+            controls
+            playsinline
+            preload="metadata"
+            poster="../images/artwork/tiger-living-poster.jpg"
+            aria-label="Living tiger painting: a handmade tiger portrait blinks and moves while hanging in its frame">
+            <source src="../images/artwork/tiger-living.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="film-meta">
+          <span>Hand-painted</span>
+          <span>Animated with Grok</span>
+          <span>Physical canvas</span>
+        </div>
+      </article>
+    </div>
+
+    <p class="section-label" id="process">Process films</p>
+    <div class="films split">
       <article class="film" id="moonflowers">
         <div class="film-copy">
           <p class="kind">Landscape · ~20s</p>
@@ -148,8 +187,9 @@
     </div>
 
     <section class="panel">
-      <h2>About these films</h2>
-      <p>These are progress sequences of physical paintings — not AI generations. Each frame is a photo of the work mid-way; the edit only crops the table edges, steadies the frames, and quickens the pace for the site.</p>
+      <h2>About this studio</h2>
+      <p><strong>Process films</strong> are progress sequences of physical paintings — not AI generations. Each frame is a photo of the work mid-way; the edit only crops, steadies, and quickens the pace for the site.</p>
+      <p><strong>Living paintings</strong> start as handmade work. Grok animates the finished painting so the piece can move while staying true to the brushstrokes on the canvas.</p>
       <div class="actions">
         <a class="button ghost" href="../#creations">Back to Studio</a>
         <a class="button primary" href="../">Home</a>
@@ -157,7 +197,7 @@
     </section>
   </main>
   <footer class="tool-footer">
-    <p>&copy; GPTWorks. Hand artwork and process films.</p>
+    <p>&copy; GPTWorks. Hand artwork, process films, and living paintings.</p>
   </footer>
 </body>
 </html>
