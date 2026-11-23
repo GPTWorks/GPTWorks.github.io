@@ -1,0 +1,55 @@
+{
+  "title": "Art by a Human",
+  "pieces": [
+    {
+      "id": "tiger",
+      "title": "Tiger",
+      "kind": "Living painting",
+      "filter": "living",
+      "filterLabel": "Living paintings",
+      "image": "images/stills/tiger.jpg",
+      "href": "artwork/#tiger",
+      "summary": "A handmade tiger portrait. The painted face blinks and watches from its frame.",
+      "medium": "Hand-painted canvas",
+      "film": "images/artwork/tiger-living.mp4",
+      "filmNote": "The painting was made by hand. Motion was added afterward so the original brushwork could breathe."
+    },
+    {
+      "id": "moonflowers",
+      "title": "MoonFlowers",
+      "kind": "Built from stills",
+      "filter": "process",
+      "filterLabel": "Built from stills",
+      "image": "images/stills/moonflowers.jpg",
+      "href": "artwork/#moonflowers",
+      "summary": "A film made from many stills of a painting as color blooms across a dark field.",
+      "medium": "Hand-painted, filmed from stills",
+      "film": "images/artwork/moonflowers-progress.mp4",
+      "filmNote": "Each frame is a photo of the physical painting. The film only crops, steadies, and quickens those stills."
+    },
+    {
+      "id": "speakeasy",
+      "title": "SpeakEasy",
+      "kind": "Built from stills",
+      "filter": "process",
+      "filterLabel": "Built from stills",
+      "image": "images/stills/speakeasy.jpg",
+      "href": "artwork/#speakeasy",
+      "summary": "A night street built frame by frame, from ink line to neon wash.",
+      "medium": "Hand-painted, filmed from stills",
+      "film": "images/artwork/speakeasy-progress.mp4",
+      "filmNote": "A handmade street scene, photographed as it grew and cut together from those stills."
+    },
+    {
+      "id": "studio",
+      "title": "Artwork studio",
+      "kind": "Studio",
+      "filter": "studio",
+      "filterLabel": "Studio",
+      "image": "images/stills/artwork-studio.jpg",
+      "href": "artwork/index.html",
+      "summary": "The studio for hand-made paintings and the films made from them.",
+      "medium": "Human-made"
+    }
+  ]
+}

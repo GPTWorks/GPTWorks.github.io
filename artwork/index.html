@@ -3,201 +3,37 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Artwork | GPTWorks</title>
-  <meta name="description" content="Hand-painted artwork from GPTWorks: process films and living paintings brought to life with Grok.">
-  <meta name="theme-color" content="#070312">
+  <title>Art by a Human | GPTWorks</title>
+  <meta name="description" content="Human-made artwork from GPTWorks: hand-painted work and films built from stills of that work.">
+  <meta name="theme-color" content="#000000">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,460;9..144,600&family=Syne:wght@500;700;800&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,460;9..144,560&family=Josefin+Sans:wght@300;400;500;600&display=swap">
   <link rel="stylesheet" href="../assets/cosmos/tools.css">
-  <style>
-    .films {
-      display: grid;
-      gap: 28px;
-      margin: 28px 0 8px;
-    }
-    .film {
-      margin: 0;
-      padding: 0;
-      border: 1px solid var(--line);
-      border-radius: 18px;
-      background: rgba(8, 4, 18, 0.88);
-      overflow: hidden;
-    }
-    .film-copy {
-      padding: 20px 22px 8px;
-    }
-    .film-copy .kind {
-      margin: 0 0 8px;
-      font-family: var(--ui);
-      font-size: 0.72rem;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: var(--magenta);
-    }
-    .film-copy h2 {
-      margin: 0 0 8px;
-      font-size: clamp(1.35rem, 3vw, 1.85rem);
-    }
-    .film-copy p {
-      margin: 0;
-      color: #d9d3e4;
-      max-width: 38rem;
-    }
-    .film-stage {
-      margin: 14px 18px 18px;
-      border-radius: 14px;
-      overflow: hidden;
-      background: #000;
-      border: 1px solid rgba(255, 255, 255, 0.06);
-    }
-    .film-stage.landscape {
-      aspect-ratio: 4 / 3;
-    }
-    .film-stage.portrait {
-      aspect-ratio: 3 / 4;
-      max-width: min(420px, 100%);
-      margin-left: auto;
-      margin-right: auto;
-    }
-    .film-stage video {
-      display: block;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      background: #000;
-    }
-    .film-meta {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px 16px;
-      padding: 0 22px 18px;
-      color: var(--muted);
-      font-family: var(--ui);
-      font-size: 0.78rem;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-    }
-    .section-label {
-      margin: 40px 0 0;
-      font-family: var(--ui);
-      font-size: 0.78rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--magenta);
-    }
-    .section-label + .films { margin-top: 14px; }
-    @media (min-width: 900px) {
-      .films.split {
-        grid-template-columns: 1.15fr 0.85fr;
-        align-items: start;
-      }
-      .films.solo {
-        grid-template-columns: minmax(0, 480px);
-      }
-    }
-  </style>
+  <link rel="stylesheet" href="../assets/cosmos/spheres.css">
 </head>
 <body>
   <header class="tool-header">
-    <a class="brand" href="../"><img src="../images/gptworks-logo.png" alt="" width="36" height="36"> GPTWorks</a>
+    <a class="brand" href="../"><img src="../images/gptworks-logo.png" alt="" width="48" height="48"> GPTWorks</a>
     <nav aria-label="Secondary">
-      <a href="../#creations">Studio</a>
+      <a href="../#creations">Art by a Human</a>
       <a href="../tools/">Tools</a>
     </nav>
   </header>
-  <main class="tool-main">
-    <p class="kicker">Studio · Hand work</p>
-    <h1>Artwork</h1>
-    <p class="lede">Paintings made by hand — some filmed as they grow, one brought to life with Grok.</p>
-
-    <p class="section-label" id="living">Living paintings</p>
-    <div class="films solo">
-      <article class="film" id="tiger">
-        <div class="film-copy">
-          <p class="kind">Portrait · ~6s · Handmade + Grok</p>
-          <h2>Tiger</h2>
-          <p>My own handmade tiger painting. Grok brought it to life — the painted face blinks, breathes, and watches from the frame on the wall.</p>
-        </div>
-        <div class="film-stage portrait">
-          <video
-            controls
-            playsinline
-            preload="metadata"
-            poster="../images/artwork/tiger-living-poster.jpg"
-            aria-label="Living tiger painting: a handmade tiger portrait blinks and moves while hanging in its frame">
-            <source src="../images/artwork/tiger-living.mp4" type="video/mp4">
-          </video>
-        </div>
-        <div class="film-meta">
-          <span>Hand-painted</span>
-          <span>Animated with Grok</span>
-          <span>Physical canvas</span>
-        </div>
-      </article>
-    </div>
-
-    <p class="section-label" id="process">Process films</p>
-    <div class="films split">
-      <article class="film" id="moonflowers">
-        <div class="film-copy">
-          <p class="kind">Landscape · ~20s</p>
-          <h2>MoonFlowers</h2>
-          <p>Color blooms into a dark field — petals, starbursts, and trails of light until the void is full.</p>
-        </div>
-        <div class="film-stage landscape">
-          <video
-            controls
-            playsinline
-            preload="metadata"
-            poster="../images/artwork/moonflowers-progress-poster.jpg"
-            aria-label="MoonFlowers process film: the painting builds from dark splatters into a dense field of glowing flowers">
-            <source src="../images/artwork/moonflowers-progress.mp4" type="video/mp4">
-          </video>
-        </div>
-        <div class="film-meta">
-          <span>Hand-painted</span>
-          <span>Stop-motion</span>
-          <span>Muted for the page</span>
-        </div>
-      </article>
-
-      <article class="film" id="speakeasy">
-        <div class="film-copy">
-          <p class="kind">Portrait · ~21s</p>
-          <h2>SpeakEasy</h2>
-          <p>A night street from ink line to neon wash — orange curb, cyan lamps, and a one-way arrow into the dark.</p>
-        </div>
-        <div class="film-stage portrait">
-          <video
-            controls
-            playsinline
-            preload="metadata"
-            poster="../images/artwork/speakeasy-progress-poster.jpg"
-            aria-label="SpeakEasy process film: a street scene builds from a line drawing into a glowing night painting">
-            <source src="../images/artwork/speakeasy-progress.mp4" type="video/mp4">
-          </video>
-        </div>
-        <div class="film-meta">
-          <span>Hand-painted</span>
-          <span>Stop-motion</span>
-          <span>Muted for the page</span>
-        </div>
-      </article>
-    </div>
-
-    <section class="panel">
-      <h2>About this studio</h2>
-      <p><strong>Process films</strong> are progress sequences of physical paintings — not AI generations. Each frame is a photo of the work mid-way; the edit only crops, steadies, and quickens the pace for the site.</p>
-      <p><strong>Living paintings</strong> start as handmade work. Grok animates the finished painting so the piece can move while staying true to the brushstrokes on the canvas.</p>
-      <div class="actions">
-        <a class="button ghost" href="../#creations">Back to Studio</a>
-        <a class="button primary" href="../">Home</a>
-      </div>
-    </section>
+  <main class="tool-main tool-directory">
+    <p class="human-flag">Human-made</p>
+    <p class="kicker">Portfolio</p>
+    <h1>Art by a Human</h1>
+    <p class="lede">Original artwork made by hand, and films built from many stills of that work. Nothing in this gallery is an icon or a generated stand-in. New pieces are added in the data file, not by redrawing the page.</p>
+    <div class="filters" id="art-filters" role="toolbar" aria-label="Filter human-made artwork"></div>
+    <div class="sphere-grid" id="art-grid" data-src="../data/art.json" data-root="../"></div>
+    <div class="film-list" id="art-films"></div>
+    <p class="actions"><a class="pill" href="../">Home <span aria-hidden="true">→</span></a></p>
   </main>
   <footer class="tool-footer">
-    <p>&copy; GPTWorks. Hand artwork, process films, and living paintings.</p>
+    <p>&copy; GPTWorks. Hand-made artwork and films built from stills. Add a piece by editing data/art.json.</p>
   </footer>
+  <script src="../assets/cosmos/cosmos.js"></script>
+  <script src="../assets/cosmos/portfolio.js"></script>
 </body>
 </html>

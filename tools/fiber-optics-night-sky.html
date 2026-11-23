@@ -7,8 +7,9 @@
   <meta name="description" content="Animated step-by-step: learn fiber optic basics, then build a twinkling star ceiling for a child's bedroom.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,460;9..144,600&family=Syne:wght@500;700;800&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,460;9..144,560&family=Josefin+Sans:wght@300;400;500;600&display=swap">
   <link rel="stylesheet" href="../assets/cosmos/tools.css">
+  <link rel="stylesheet" href="../assets/cosmos/spheres.css">
   <style>
     .sky-stage {
       position: relative;
@@ -71,10 +72,10 @@
       cursor: pointer;
     }
     .stepper button[aria-current="step"] {
-      color: #1a0624;
+      color: #111;
       border-color: transparent;
-      background: linear-gradient(90deg, #7c3aed, var(--magenta) 55%, #fff);
-      box-shadow: 0 0 18px rgba(255, 79, 216, 0.4);
+      background: rgba(255, 255, 255, 0.88);
+      box-shadow: 0 0 18px rgba(210, 225, 255, 0.35);
     }
     .stepper button.done { color: var(--laser); border-color: rgba(255, 79, 216, 0.45); }
 
@@ -84,7 +85,7 @@
     }
     .progress > span {
       display: block; height: 100%; width: 0%;
-      background: linear-gradient(90deg, #7c3aed, var(--magenta));
+      background: rgba(255, 255, 255, 0.72);
       transition: width 0.35s ease;
     }
 
@@ -146,7 +147,7 @@
     <p class="badge">How-to</p>
     <p class="kicker">Home projects</p>
     <h1>Fiber Optics Night Sky</h1>
-    <p class="lede">Learn the basics of fiber optics, then build a twinkling star ceiling — the kind of wonder that belongs over a toddler’s bed.</p>
+    <p class="lede">Learn the basics of fiber optics, then build a twinkling star ceiling — a field of gentle points overhead.</p>
 
     <div class="sky-stage" id="sky" aria-hidden="true"></div>
     <p class="note">Animated preview of end-glow “stars.” Use the steps below for the real build.</p>
@@ -206,7 +207,7 @@
           <li>Mark each star with a pencil tip or tape flag.</li>
           <li>Fewer brighter stars read better than hundreds of dull ones.</li>
           <li>Leave a clear route for the fiber bundle toward the light engine (closet, corner, behind a dresser).</li>
-          <li>For a toddler room, keep the brightest cluster away from a direct stare-at-the-bulb feel — aim for gentle points.</li>
+          <li>In a bedroom, keep the brightest cluster away from a direct stare-at-the-bulb feel — aim for gentle points.</li>
         </ul>
       </section>
 

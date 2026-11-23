@@ -1,0 +1,249 @@
+/* Cosmic glass marbles, holographic stills, and translucent pills. */
+.sphere-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 34px 18px;
+  margin-top: 28px;
+  min-width: 0;
+}
+.sphere {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+  max-width: 100%;
+  padding: 8px 4px 4px;
+  color: #fff;
+  text-decoration: none;
+  text-align: center;
+}
+.sphere[hidden] { display: none !important; }
+.orb {
+  position: relative;
+  width: min(100%, 210px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  overflow: hidden;
+  isolation: isolate;
+  background: #05060a;
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.55),
+    inset 10px 14px 18px rgba(255, 255, 255, 0.12),
+    inset -16px -18px 24px rgba(0, 0, 0, 0.28),
+    0 12px 28px rgba(0, 0, 0, 0.38),
+    0 0 22px rgba(186, 214, 255, 0.28);
+  transform: translateZ(0);
+}
+.holo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.08);
+  filter: saturate(1.08) contrast(1.04);
+  z-index: 0;
+}
+.orb-shade,
+.orb-shine,
+.orb-stars {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  pointer-events: none;
+}
+.orb-shade {
+  z-index: 1;
+  background: linear-gradient(118deg, transparent 36%, rgba(255, 255, 255, 0.22) 49%, transparent 62%);
+  mix-blend-mode: screen;
+}
+.orb-shine {
+  z-index: 2;
+  background:
+    radial-gradient(circle at 30% 24%, rgba(255, 255, 255, 0.72), rgba(255, 255, 255, 0.08) 18%, transparent 36%),
+    linear-gradient(160deg, rgba(255, 255, 255, 0.28), transparent 42%);
+  mix-blend-mode: screen;
+}
+.orb-stars {
+  z-index: 3;
+  opacity: 0.85;
+  background-image:
+    radial-gradient(1.2px 1.2px at 22% 32%, rgba(255, 255, 255, 0.9), transparent),
+    radial-gradient(1px 1px at 68% 22%, rgba(255, 255, 255, 0.75), transparent),
+    radial-gradient(1.4px 1.4px at 78% 64%, rgba(210, 230, 255, 0.8), transparent),
+    radial-gradient(1px 1px at 36% 74%, rgba(255, 255, 255, 0.6), transparent),
+    radial-gradient(1px 1px at 54% 46%, rgba(255, 255, 255, 0.45), transparent);
+  mix-blend-mode: screen;
+}
+.sphere-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+  width: 100%;
+}
+.sphere .kind,
+.kind {
+  margin: 0;
+  font-family: var(--ui, "Josefin Sans", sans-serif);
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.62);
+}
+.sphere-title {
+  font-family: var(--display, "Josefin Sans", sans-serif);
+  font-weight: 400;
+  font-size: 1.05rem;
+  letter-spacing: 0.08em;
+  line-height: 1.25;
+  color: #fff;
+}
+.sphere-text {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 0.92rem;
+  line-height: 1.45;
+}
+.pill,
+.button,
+button.primary,
+button.ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4em;
+  min-height: 44px;
+  padding: 0 16px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  font-family: var(--ui, "Josefin Sans", sans-serif);
+  font-weight: 500;
+  font-size: 0.74rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.45),
+    0 0 16px rgba(190, 214, 255, 0.22);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, color 0.2s ease;
+}
+.sphere > .pill { width: min(100%, 210px); }
+a.button::after,
+button.primary::after,
+button.ghost::after {
+  content: "→";
+}
+.pill:hover,
+.pill:focus-visible,
+.button:hover,
+.button:focus-visible,
+button.primary:hover,
+button.primary:focus-visible,
+button.ghost:hover,
+button.ghost:focus-visible,
+.sphere:hover > .pill,
+.sphere:focus-visible > .pill {
+  background: rgba(255, 255, 255, 0.16);
+  border-color: #fff;
+  color: #fff;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.6),
+    0 0 22px rgba(210, 228, 255, 0.48);
+  filter: none;
+}
+.pill.is-on,
+.pill[aria-pressed="true"] {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: #fff;
+  color: #fff;
+}
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 18px;
+}
+.human-flag {
+  display: inline-flex;
+  align-items: center;
+  min-height: 32px;
+  margin: 0 0 12px;
+  padding: 0 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  color: rgba(255, 255, 255, 0.86);
+  font-family: var(--ui, "Josefin Sans", sans-serif);
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+.film-list {
+  display: grid;
+  gap: 28px;
+  margin-top: 36px;
+}
+.film-piece {
+  min-width: 0;
+}
+.film-piece video {
+  display: block;
+  width: min(100%, 520px);
+  margin: 12px auto 0;
+  border-radius: 18px;
+  background: #000;
+}
+@keyframes holo-live {
+  0%, 100% {
+    transform: scale(1.08) translate3d(0, 0, 0);
+    filter: saturate(1.05) brightness(1) drop-shadow(0 0 10px rgba(180, 210, 255, 0.25));
+  }
+  50% {
+    transform: scale(1.16) translate3d(-2.2%, -2.6%, 0);
+    filter: saturate(1.22) brightness(1.1) drop-shadow(0 0 18px rgba(210, 230, 255, 0.45));
+  }
+}
+@media (hover: hover) and (pointer: fine) {
+  .sphere:hover .holo,
+  .sphere:focus-visible .holo {
+    animation: holo-live 9s ease-in-out infinite;
+  }
+  .sphere:hover .orb,
+  .sphere:focus-visible .orb {
+    box-shadow:
+      inset 0 0 0 1px rgba(255, 255, 255, 0.62),
+      inset 0 -18px 28px rgba(0, 0, 0, 0.35),
+      inset 0 16px 22px rgba(255, 255, 255, 0.22),
+      0 16px 34px rgba(0, 0, 0, 0.42),
+      0 0 28px rgba(200, 224, 255, 0.4);
+  }
+}
+@media (hover: none), (pointer: coarse) {
+  .sphere.is-live .holo {
+    animation: holo-live 9s ease-in-out infinite;
+  }
+}
+@media (max-width: 1100px) {
+  .sphere-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@media (max-width: 720px) {
+  .sphere-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px 12px; }
+  .orb, .sphere > .pill { width: min(100%, 180px); }
+  .sphere-text { font-size: 0.86rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .holo,
+  .sphere:hover .holo,
+  .sphere:focus-visible .holo,
+  .sphere.is-live .holo {
+    animation: none !important;
+    transform: scale(1.06);
+  }
+}

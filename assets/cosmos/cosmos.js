@@ -141,6 +141,24 @@
     });
   }
 
+  const phoneMotion = window.matchMedia("(hover: none), (pointer: coarse)").matches;
+  function bindSpheres(root) {
+    if (reduce || !phoneMotion || !("IntersectionObserver" in window)) return;
+    const spheres = (root || document).querySelectorAll(".sphere:not([data-motion])");
+    if (!spheres.length) return;
+    const motion = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        entry.target.classList.toggle("is-live", entry.isIntersecting);
+      });
+    }, { threshold: 0.45 });
+    spheres.forEach((el) => {
+      el.dataset.motion = "1";
+      motion.observe(el);
+    });
+  }
+  bindSpheres(document);
+  document.addEventListener("spheres:ready", () => bindSpheres(document));
+
   const views = document.getElementById("viewCount");
   if (views) {
     fetch("https://countapi.mileshilliard.com/api/v1/hit/gptworks-main")
