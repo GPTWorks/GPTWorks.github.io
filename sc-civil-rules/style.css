@@ -40,6 +40,8 @@ button{cursor:pointer}
 
 /* ---------- Header ---------- */
 header{min-height:var(--header-h);background:var(--paper);color:var(--ink);padding:14px 34px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;border-bottom:1px solid var(--line);box-shadow:0 1px 0 rgba(255,79,216,.55), 0 10px 28px rgba(124,58,237,.18)}
+.gw-mark{display:flex;align-items:center;flex:none}
+.gw-mark img{width:42px;height:42px;object-fit:contain;display:block}
 .brand{display:flex;align-items:center;gap:14px;text-decoration:none;color:var(--ink);font:600 19px/1.2 var(--font-reading);letter-spacing:-.005em}
 .brand:hover{color:var(--ink)}
 .monogram{font:600 18px/1 var(--font-reading);color:var(--paper);background:var(--ink);padding:9px 10px;border-radius:3px;letter-spacing:.04em}
