@@ -17,6 +17,7 @@
   --danger:#ff9b93;
   --font-ui:Montserrat,"Gill Sans","Gill Sans MT",Futura,"Helvetica Neue",Helvetica,Arial,sans-serif;
   --font-reading:Montserrat,"Gill Sans","Gill Sans MT",Futura,"Helvetica Neue",Helvetica,Arial,sans-serif;
+  --font-display:"Josefin Sans","Avenir Next","Segoe UI",sans-serif;
   --radius:6px;
   --header-h:76px;
 }
@@ -96,7 +97,8 @@ main{min-width:0;padding:0 48px 64px}
 #browse{display:none}
 .rule-head{padding:36px 0 22px;max-width:72ch}
 .eyebrow{font:600 11px/1.4 var(--font-ui);letter-spacing:.14em;color:var(--muted);text-transform:uppercase}
-.rule-head h1{font:600 34px/1.22 var(--font-reading);letter-spacing:-.01em;margin:10px 0 20px;overflow-wrap:anywhere}
+h1,h2,h3,h4,h5,h6{font-family:var(--font-display)}
+.rule-head h1{font:400 34px/1.22 var(--font-display);letter-spacing:.06em;margin:10px 0 20px;overflow-wrap:anywhere}
 .rule-tools{display:flex;gap:8px;flex-wrap:wrap}
 .rule-tools button,.reader-source-button{background:var(--surface);border:1px solid var(--line-strong);border-radius:var(--radius);color:var(--ink);padding:6px 12px;font-size:13.5px;text-decoration:none}
 .rule-tools button:hover,.reader-source-button:hover{background:var(--wash);color:var(--ink)}
@@ -157,8 +159,8 @@ main{min-width:0;padding:0 48px 64px}
 .reading-guide summary{padding:15px 20px;cursor:pointer;font-weight:600;color:var(--ink)}
 .reading-guide summary span{display:block;font-size:.8rem;font-weight:400;margin:4px 0 0 18px;color:var(--muted)}
 .guide-body{padding:0 22px 22px;line-height:1.72;font:1rem/1.72 var(--font-reading)}
-.guide-body h2{font:600 1.2rem/1.45 var(--font-reading);margin:12px 0}
-.guide-body h3{font:600 .95rem/1.4 var(--font-ui);margin:20px 0 5px}
+.guide-body h2{font:400 1.2rem/1.45 var(--font-display);letter-spacing:.04em;margin:12px 0}
+.guide-body h3{font:400 .95rem/1.4 var(--font-display);letter-spacing:.04em;margin:20px 0 5px}
 .guide-status,.original-label{font:600 .72rem/1.4 var(--font-ui);letter-spacing:.12em;color:var(--muted)}
 .guide-boundary{border-top:1px solid var(--line);margin-top:20px;padding-top:8px;font:.85rem/1.6 var(--font-ui);color:var(--muted)}
 .guide-actions,.dictionary-actions{display:flex;gap:14px;flex-wrap:wrap;font:.875rem/1.5 var(--font-ui)}
@@ -166,7 +168,7 @@ main{min-width:0;padding:0 48px 64px}
 .dictionary-input{display:flex;gap:8px;align-items:stretch;margin:8px 0 18px}
 .dictionary-input input{flex:1;min-width:0}
 .dictionary-source{border-top:1px solid var(--line);padding-top:20px;margin-top:22px}
-.dictionary-source h3{margin:9px 0;font:600 1.2rem/1.4 var(--font-reading)}
+.dictionary-source h3{margin:9px 0;font:400 1.2rem/1.4 var(--font-display);letter-spacing:.04em}
 .dictionary-source p,#dictionary-results p,.dictionary-context{font-size:.95rem;line-height:1.7}
 .dictionary-source .eyebrow{font-size:.7rem}
 .dictionary-context{border-top:1px solid var(--line);padding-top:16px;color:var(--muted)}
@@ -191,7 +193,7 @@ dialog{color:var(--ink);background:var(--surface);width:min(760px,calc(100% - 32
 dialog::backdrop{background:rgba(26,24,20,.38)}
 #research-dialog{width:min(850px,calc(100% - 32px))}
 .dialog-heading{display:flex;align-items:center;justify-content:space-between;gap:15px}
-.dialog-heading h2,dialog>h2{font:600 26px/1.25 var(--font-reading);margin:0 0 8px}
+.dialog-heading h2,dialog>h2{font:400 26px/1.25 var(--font-display);letter-spacing:.05em;margin:0 0 8px}
 .dialog-heading>button{font-size:24px;border:0;padding:0 6px;background:none;color:var(--muted)}
 dialog button{background:var(--paper);border:1px solid var(--line-strong);border-radius:var(--radius);color:var(--ink);padding:7px 12px;font-size:14px}
 dialog button:hover{background:var(--wash)}
@@ -204,7 +206,7 @@ dialog label{display:block;font-size:13.5px;font-weight:600;margin-bottom:6px}
 dialog input,dialog select,dialog textarea{display:block;width:100%;font:16px/1.5 var(--font-ui);border:1px solid var(--line-strong);border-radius:var(--radius);background:var(--paper);padding:9px 11px;margin-top:6px;color:var(--ink)}
 dialog textarea{resize:vertical}
 .saved-card{border-top:1px solid var(--line);padding:20px 0;overflow-wrap:anywhere}
-.saved-card h3{font:600 17px/1.4 var(--font-reading);margin:0 0 10px}
+.saved-card h3{font:400 17px/1.4 var(--font-display);letter-spacing:.04em;margin:0 0 10px}
 .saved-excerpt{font:16px/1.65 var(--font-reading);white-space:pre-wrap}
 .saved-note{background:var(--panel);padding:12px;font-size:14px;white-space:pre-wrap;overflow-wrap:anywhere;border-radius:var(--radius)}
 .card-actions,.tags,.dialog-actions{display:flex;flex-wrap:wrap;gap:8px}
@@ -221,7 +223,7 @@ dialog textarea{resize:vertical}
 #notepad-floating:hover{background:#d9d3c6}
 #argument-notepad{position:fixed;inset:0 0 0 auto;width:460px;max-width:100vw;z-index:35;background:var(--surface);border-left:1px solid var(--line-strong);box-shadow:-10px 0 30px rgba(26,24,20,.08);padding:24px;display:flex;flex-direction:column;gap:14px}
 .notepad-heading{display:flex;align-items:center;justify-content:space-between;gap:12px}
-.notepad-heading h2{margin:4px 0 0;font:600 1.35rem/1.3 var(--font-reading)}
+.notepad-heading h2{margin:4px 0 0;font:400 1.35rem/1.3 var(--font-display);letter-spacing:.04em}
 .notepad-heading button{font-size:1.6rem;border:0;background:none;padding:4px 10px;color:var(--muted)}
 .notepad-help{margin:0;font-size:.85rem;color:var(--muted);line-height:1.6}
 #notepad-text{flex:1;min-height:160px;width:100%;resize:none;border:1px solid var(--line-strong);border-radius:var(--radius);padding:16px;background:var(--paper);color:var(--ink);font:1.02rem/1.75 var(--font-reading)}
@@ -248,7 +250,7 @@ dialog textarea{resize:vertical}
 .forms-main{max-width:1180px;margin:auto;padding:40px 34px 56px}
 .forms-heading{display:flex;align-items:flex-end;justify-content:space-between;gap:24px}
 .forms-kicker{color:var(--muted);font:600 12px/1.4 var(--font-ui);letter-spacing:.14em;margin:0 0 8px}
-.forms-heading h1{font:600 38px/1.2 var(--font-reading);letter-spacing:-.01em;margin:0}
+.forms-heading h1{font:400 38px/1.2 var(--font-display);letter-spacing:.06em;margin:0}
 .official-forms{font-size:15px}
 .forms-intro{margin:22px 0 6px;font:1.05rem/1.6 var(--font-reading)}
 .forms-note{color:var(--muted);font-size:14px;margin:0 0 26px}

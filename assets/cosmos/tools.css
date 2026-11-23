@@ -83,6 +83,9 @@ a:hover { color: #fff; }
 .tool-main.tool-directory {
   width: min(1180px, calc(100% - 32px));
 }
+.tool-directory section.section-gap {
+  margin-top: 48px;
+}
 .kicker {
   font-family: var(--ui);
   letter-spacing: 0.28em;
