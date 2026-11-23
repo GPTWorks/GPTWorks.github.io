@@ -200,6 +200,7 @@ button.ghost:focus-visible,
   border-radius: 18px;
   background: #000;
 }
+.film-piece video[hidden] { display: none; }
 @keyframes holo-live {
   0%, 100% {
     transform: scale(1.08) translate3d(0, 0, 0);
