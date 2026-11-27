@@ -114,6 +114,28 @@ h3 { font-size: 1.05rem; margin: 0 0 8px; font-weight: 400; letter-spacing: 0.08
   font-size: clamp(1.1rem, 2vw, 1.35rem);
   margin: 0 0 22px;
 }
+.tool-intro {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  flex-wrap: wrap;
+  margin: 8px 0 18px;
+}
+.tool-intro .orb {
+  width: 112px;
+  flex: none;
+}
+.tool-intro .tool-intro-copy {
+  min-width: min(100%, 220px);
+  flex: 1;
+}
+.tool-intro h1 {
+  margin: 0;
+}
+.tool-intro .lede {
+  margin-top: 10px;
+  margin-bottom: 0;
+}
 .meta {
   color: var(--muted);
   font-size: 0.95rem;
