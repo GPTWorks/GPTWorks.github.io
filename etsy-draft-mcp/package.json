@@ -1,0 +1,37 @@
+{
+  "name": "etsy-draft-mcp",
+  "version": "1.0.0",
+  "description": "Draft-only Etsy MCP for Grok Bot — create drafts, upload images, read listings. No publish or price-update tools.",
+  "type": "module",
+  "bin": {
+    "etsy-draft-mcp": "./dist/index.js",
+    "etsy-draft-mcp-http": "./dist/http.js",
+    "etsy-draft-mcp-auth": "./dist/auth-cli.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "start:http": "node dist/http.js",
+    "dev": "tsx src/index.ts",
+    "dev:http": "tsx src/http.ts",
+    "auth": "tsx src/auth-cli.ts",
+    "check-tools": "tsx src/check-tools.ts",
+    "test": "tsx --test src/*.test.ts"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.32.2",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "zod": "^3.24.2"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/node": "^22.13.10",
+    "tsx": "^4.19.3",
+    "typescript": "^5.8.2"
+  }
+}
